@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
-import { getPosts } from './actions'
+import { getPosts, voteBefore, voteAfter } from './actions'
 import { Loading, Container, SEO } from '../../components/common'
 import User from './components/User'
 import Posts from './components/Posts'
 import Empty from './components/Empty'
 
-const Feed = ({ user, posts }) => (
+const Feed = ({ user, posts, voteBefore, voteAfter }) => (
 	<Wrapper as={Container}>
 		<SEO
 			url="/feed"
@@ -16,7 +16,14 @@ const Feed = ({ user, posts }) => (
 			description="Feed"
 		/>
 		<User user={user} />
-		{posts.length > 0 ? <Posts posts={posts} /> : <Empty />}
+		{posts.length > 0 ? (
+			<Posts
+				posts={posts}
+				user={user}
+				voteBefore={voteBefore}
+				voteAfter={voteAfter}
+			/>
+		) : <Empty />}
 	</Wrapper>
 )
 
@@ -37,7 +44,7 @@ const mapStateToProps = ({ posts, auth }) => ({
 })
 
 const enhance = compose(
-	connect(mapStateToProps, { getPosts }),
+	connect(mapStateToProps, { getPosts, voteBefore, voteAfter }),
 	lifecycle({
 		componentWillMount() {
 			this.props.getPosts()

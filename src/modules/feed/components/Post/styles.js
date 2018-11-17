@@ -21,22 +21,21 @@ export const UserInfo = styled.div`
 export const Flex = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   align-items: center;
-  height: 400px;
 `
 
 export const Img = styled.div`
-  width: 100%;
-  max-width: 50%;
-  flex: 1 auto;
-  height: 100%;
-  align-self: stretch;
+  overflow: hidden;
+  flex: 1;
 
   .img {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    display: block;
   }
 `
 
@@ -51,12 +50,27 @@ export const Vote = styled.div`
 export const Btn = styled.div`
   width: 100%;
   max-width: 48%;
-  align-self: flex-start;
   text-align: left;
+  align-self: flex-start;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  p {
+    margin: 0 0 0 .5rem;
+  }
 
   ${({ before }) => before && `
     align-self: flex-end;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    flex-direction: row-reverse;
+
+    p {
+      margin: 0 .5rem 0 0;
+    }
   `}
 `
 

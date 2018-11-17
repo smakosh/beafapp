@@ -5203,6 +5203,11 @@ istanbul-reports@^1.5.1:
   dependencies:
     handlebars "^4.0.3"
 
+javascript-time-ago@^1.0.32:
+  version "1.0.32"
+  resolved "https://registry.yarnpkg.com/javascript-time-ago/-/javascript-time-ago-1.0.32.tgz#8c43a6f8ac8eb0eb438a1df337425c8370ef9097"
+  integrity sha512-EbQty2KmZVA6ZimGVVv/J3bD8jZiL3UR0uBiHdhYf2xcMAN0b/EIySFCDyZpxmusmsZtekj4tAnVxLPXNOuDaA==
+
 jest-changed-files@^23.4.2:
   version "23.4.2"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-23.4.2.tgz#1eed688370cd5eebafe4ae93d34bb3b64968fe83"

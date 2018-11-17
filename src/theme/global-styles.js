@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto';
         font-style: normal;
         font-display: fallback;
-        src: url('/fonts/roboto.ttf') format('truetype');
+        src: url('./fonts/roboto.ttf') format('ttf');
     }
     body {
         font-family: 'Roboto', sans-serif;

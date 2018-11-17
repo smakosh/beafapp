@@ -1,23 +1,39 @@
 import React from 'react'
 import ImageZoom from 'react-medium-image-zoom'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 import { Wrapper, UserInfo, Flex, Img, Content, Vote, Floating, Btn } from './styles'
 import beforeIcon from '../../assets/before.svg'
 import afterIcon from '../../assets/after.svg'
 
+TimeAgo.addLocale(en)
+
+const timeAgo = new TimeAgo('en-US')
+
 const Post = ({
+	_id,
 	title,
-	description
+	description,
+	before_img,
+	after_img,
+	date,
+	_creator,
+	userId,
+	voteBefore,
+	voteAfter,
+	before_votes,
+	after_votes
 }) => (
 	<Wrapper>
 		<UserInfo>
 			<h2>Smakosh</h2>
-			<p>10 mins ago</p>
+			<p>{timeAgo.format(Date.parse(date))}</p>
 		</UserInfo>
 		<Flex>
 			<Img>
 				<ImageZoom
 					image={{
-						src: 'https://images.unsplash.com/photo-1539640229250-1601290db72a',
+						src: before_img,
 						alt: 'before picture',
 						className: 'img'
 					}}
@@ -26,25 +42,29 @@ const Post = ({
 			<Img>
 				<ImageZoom
 					image={{
-						src: 'https://images.unsplash.com/photo-1539640764985-b833530fb7a0',
+						src: after_img,
 						alt: 'after picture',
 						className: 'img'
 					}}
 				/>
 			</Img>
 		</Flex>
-		<Vote>
-			<Btn before>
-				<Floating before>
-					<img src={beforeIcon} alt="vote before" />
-				</Floating>
-			</Btn>
-			<Btn>
-				<Floating>
-					<img src={afterIcon} alt="vote before" />
-				</Floating>
-			</Btn>
-		</Vote>
+		{_creator !== userId && (
+			<Vote>
+				<Btn before>
+					<Floating onClick={() => voteBefore(_id, userId)} before>
+						<img src={beforeIcon} alt="vote before" />
+					</Floating>
+					<p>{before_votes.length}</p>
+				</Btn>
+				<Btn>
+					<Floating onClick={() => voteAfter(_id, userId)}>
+						<img src={afterIcon} alt="vote before" />
+					</Floating>
+					<p>{after_votes.length}</p>
+				</Btn>
+			</Vote>
+		)}
 		<Content>
 			<h2>{title}</h2>
 			<p>{description}</p>

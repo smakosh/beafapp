@@ -47,7 +47,8 @@ module.exports = {
         'no-param-reassign': 0,
         'no-shadow': 0,
         'no-unused-expressions': 0,
-        'no-underscore-dangle': 0
+        'no-underscore-dangle': 0,
+        'no-confusing-arrow': 0
     },
     'parser': 'babel-eslint',
     'globals': {

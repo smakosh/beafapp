@@ -37,10 +37,9 @@ export const verifyToken = token => async dispatch => {
 
 export const register = (payload, setErrors, setSubmitting, resetForm) => async dispatch => {
 	try {
-		await dispatch({ type: 'LOADING_USER' })
-
 		const res = await axios.post(`${REACT_APP_PROD_API}/api/user/register`, payload)
 		const { token, user } = res.data
+		await dispatch({ type: 'LOADING_USER' })
 		localStorage.setItem('jwtToken', token)
 		setAuthToken(token)
 
@@ -49,20 +48,9 @@ export const register = (payload, setErrors, setSubmitting, resetForm) => async 
 		resetForm()
 		history.push('/profile')
 	} catch (err) {
-		if (err.response.data.email) {
-			setErrors({ email: err.response.data.email })
-		} else if (err.response.data.email) {
-			setErrors({ email: err.response.data.password })
-		} else if (err.response.data.email && err.response.data.email) {
-			setErrors({
-				email: err.response.data.email,
-				password: err.response.data.password
-			})
-		} else {
-			setErrors({
-				email: err.response.data.error
-			})
-		}
+		setErrors({
+			email: err.response.data.error
+		})
 		setSubmitting(false)
 		dispatch(authFailed(err.response.data))
 	}
@@ -70,14 +58,14 @@ export const register = (payload, setErrors, setSubmitting, resetForm) => async 
 
 export const login = (payload, setErrors, setSubmitting, resetForm) => async dispatch => {
 	try {
-		await dispatch({ type: 'LOADING_USER' })
-
 		const res = await axios.post(`${REACT_APP_PROD_API}/api/user/login`, payload)
 		const { token, user } = res.data
+		await dispatch({ type: 'LOADING_USER' })
 		localStorage.setItem('jwtToken', token)
-		setAuthToken(token)
+		await setAuthToken(token)
 
 		await dispatch({ type: 'SAVE_USER', payload: user })
+		setSubmitting(false)
 		resetForm()
 		history.push('/profile')
 	} catch (err) {

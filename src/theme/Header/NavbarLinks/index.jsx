@@ -6,12 +6,10 @@ import { Links } from './styles'
 const NavbarLinks = ({ desktop, logout }) => (
 	<Links desktop={desktop}>
 		<NavLink
-			as={NavLink}
 			to="/feed"
 			activeStyle={{ color: '#FF6347' }}
 		>Feed</NavLink>
 		<NavLink
-			as={NavLink}
 			to="/profile"
 			activeStyle={{ color: '#FF6347' }}
 		>Profile</NavLink>

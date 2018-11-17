@@ -25,4 +25,8 @@ export const Flex = styled.div`
 export const Item = styled.div`
     width: 100%;
     max-width: 48%;
+
+    img {
+        width: 100%;
+    }
 `
