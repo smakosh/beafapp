@@ -16,5 +16,13 @@ export const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         color: inherit;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button:focus {
+        outline: none;
     }
 `

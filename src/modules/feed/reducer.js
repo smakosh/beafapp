@@ -1,6 +1,5 @@
-import isEmpty from '../../utils/isEmpty'
-
 export default (state = { loading: false }, action) => {
+	console.log(state.date)
 	switch (action.type) {
 	case 'GET_POSTS':
 		return {
@@ -17,32 +16,28 @@ export default (state = { loading: false }, action) => {
 	case 'BEFORE_VOTE':
 		return {
 			...state,
-			data: state.data.map(item => (item._voter === action.payload._voter ? {
-				...item,
-				before_votes: isEmpty(item.before_votes)
-					? [...item.before_votes, action.payload]
-					: item.before_votes.map(item => item._id === action.payload._voter
-						? { ...item, voted: !item.voted } : item),
-				after_votes: isEmpty(item.after_votes)
-					? [...item.after_votes, { _voter: action.payload._voter, voted: false }]
-					: item.after_votes.map(item => item._id === action.payload._voter
-						? { ...item, voted: !item.voted } : item)
-			} : item))
+			data: state.data.map(item => item._id === action.payload.post_id ? (
+				{
+					...item,
+					before_votes: (item.before_votes
+						.includes(action.payload.user_id) || item.after_votes
+						.includes(action.payload.user_id))
+						? item.before_votes : [...item.before_votes, action.payload.user_id]
+				}
+			) : item)
 		}
 	case 'AFTER_VOTE':
 		return {
 			...state,
-			data: state.data.map(item => (item._voter === action.payload._voter ? {
-				...item,
-				after_votes: isEmpty(item.after_votes)
-					? [...item.after_votes, action.payload]
-					: item.after_votes.map(item => item._id === action.payload._voter
-						? { ...item, voted: !item.voted } : item),
-				before_votes: isEmpty(item.before_votes)
-					? [...item.before_votes, { _voter: action.payload._voter, voted: false }]
-					: item.before_votes.map(item => item._id === action.payload._voter
-						? { ...item, voted: !item.voted } : item)
-			} : item))
+			data: state.data.map(item => item._id === action.payload.post_id ? (
+				{
+					...item,
+					after_votes: (item.after_votes
+						.includes(action.payload.user_id) || item.before_votes
+						.includes(action.payload.user_id))
+						? item.after_votes : [...item.after_votes, action.payload.user_id]
+				}
+			) : item)
 		}
 	case 'LOADING_POSTS':
 		return {

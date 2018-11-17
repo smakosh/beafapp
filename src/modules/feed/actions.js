@@ -67,7 +67,7 @@ export const addPost = (
 export const voteBefore = (id, user_id) => async dispatch => {
 	try {
 		await axios.patch(`${REACT_APP_PROD_API}/api/post/vote/before/${id}`, { user_id })
-		await dispatch({ type: 'BEFORE_VOTE', payload: { _voter: user_id, voted: true } })
+		await dispatch({ type: 'BEFORE_VOTE', payload: { post_id: id, user_id } })
 	} catch (err) {
 		console.log(err)
 		dispatch(failedToGetPosts(err.response.data.error))
@@ -77,7 +77,7 @@ export const voteBefore = (id, user_id) => async dispatch => {
 export const voteAfter = (id, user_id) => async dispatch => {
 	try {
 		await axios.patch(`${REACT_APP_PROD_API}/api/post/vote/after/${id}`, { user_id })
-		dispatch({ type: 'AFTER_VOTE', payload: { _voter: user_id, voted: true } })
+		dispatch({ type: 'AFTER_VOTE', payload: { post_id: id, user_id } })
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))
 	}
