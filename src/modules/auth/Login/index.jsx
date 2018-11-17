@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { withFormik, Form, Field } from 'formik'
 import { login } from '../actions'
-import { Container, Button, InputField, Error, SEO } from '../../common'
+import { Container, Button, InputField, Error, SEO } from '../../../components/common'
 import { Card, Center } from '../styles'
 
 const Login = ({

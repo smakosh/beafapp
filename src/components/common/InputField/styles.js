@@ -1,14 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const InputField = ({ label, children }) => (
-	<Wrapper>
-		<Label>{label}</Label>
-		{children}
-	</Wrapper>
-)
-
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
     padding: 1rem 0;
 
     input {
@@ -19,16 +11,15 @@ const Wrapper = styled.div`
         text-align: left;
         -webkit-appearance: none;
         transition: all 0.2s ease 0s;
-        border-width: 1px;
-        border-color: rgb(33, 33, 33);
+        border-width: 2px;
+        border-color: #FF6347;
         border-style: solid;
-        border-radius: 2px;
-        padding: 0.6rem 1rem;
+        border-radius: 7px;
+        padding: .9rem 1rem;
+        font-size: 12pt;
     }
 `
 
-const Label = styled.label`
+export const Label = styled.label`
     margin-bottom: 1rem;
 `
-
-export { InputField }

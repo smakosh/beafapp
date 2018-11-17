@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+export const Center = styled.div`
+  text-align: center;
+`
+
 export const Card = styled.div`
     padding: 2rem;
     box-shadow: 3px 0px 20px 0 rgba(0, 0, 0, 0.1);
@@ -12,10 +16,13 @@ export const Card = styled.div`
     `}
 `
 
-export const Center = styled.div`
-    text-align: center;
+export const Flex = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `
 
-export const Wrapper = styled.div`
-    padding: 2rem 0;
+export const Item = styled.div`
+    width: 100%;
+    max-width: 48%;
 `

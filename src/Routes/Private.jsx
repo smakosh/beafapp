@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { compose, branch, renderComponent } from 'recompose'
-import { Loading } from '../modules/common'
-import { GlobalStyle } from './global-styles'
+import { Loading } from '../components/common'
+import { GlobalStyle } from '../theme/global-styles'
+import Header from '../theme/Header'
 
 const Private = ({ auth, component: Component, ...rest }) => (
 	<Route
@@ -11,6 +12,7 @@ const Private = ({ auth, component: Component, ...rest }) => (
 		render={props => (auth.isLoggedIn ? (
 			<>
 				<GlobalStyle />
+				<Header />
 				<Component {...props} />
 			</>
 		) : (

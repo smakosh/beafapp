@@ -5,9 +5,16 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto';
         font-style: normal;
         font-display: fallback;
-        src: url('fonts/roboto.ttf') format('truetype');
+        src: url('/fonts/roboto.ttf') format('truetype');
     }
     body {
-        font-family: 'Roboto', sans-serif
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
     }
 `

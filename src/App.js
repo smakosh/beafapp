@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Router, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import store from './store'
@@ -10,7 +10,9 @@ import { verifyToken } from './modules/auth/actions'
 import Login from './modules/auth/Login'
 import Register from './modules/auth/Register'
 import Profile from './modules/profile/Profile'
-import { NotFound } from './modules/common'
+import Feed from './modules/feed/Feed'
+import AddPost from './modules/feed/AddPost'
+import { NotFound } from './components/common'
 
 export const history = createHistory()
 
@@ -26,11 +28,13 @@ try {
 
 const AppRoutes = () => (
 	<Provider store={store}>
-		<Router>
+		<Router history={history}>
 			<Switch>
 				<Public path="/" exact component={Login} />
-				<Public path="/register" exact component={Register} />
-				<Private path="/profile" exact component={Profile} />
+				<Public path="/register" component={Register} />
+				<Private path="/profile" component={Profile} />
+				<Private path="/feed" component={Feed} />
+				<Private path="/add-post" component={AddPost} />
 				<Public component={NotFound} />
 			</Switch>
 		</Router>

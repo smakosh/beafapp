@@ -6,15 +6,15 @@ import { compose } from 'recompose'
 import * as Yup from 'yup'
 import { withFormik, Form, Field } from 'formik'
 import { register } from '../actions'
-import { Container, Button, InputField, Error, SEO } from '../../common'
-import { Card, Center } from '../styles'
+import { Container, Button, InputField, Error, SEO } from '../../../components/common'
+import { Card, Center, Wrapper } from '../styles'
 
 const Register = ({
 	errors,
 	touched,
 	isSubmitting
 }) => (
-	<Container>
+	<Wrapper as={Container}>
 		<SEO
 			url="/register"
 			title="Register"
@@ -56,7 +56,7 @@ const Register = ({
 				<p>Already registered? <Link to="/">Login</Link></p>
 			</Center>
 		</Card>
-	</Container>
+	</Wrapper>
 )
 
 const enhance = compose(

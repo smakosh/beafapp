@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch } from 'recompose'
-import { logout } from '../../auth/actions'
-import { Button, Container, Loading, SEO } from '../../common'
+import { logout } from '../auth/actions'
+import { Button, Container, Loading, SEO } from '../../components/common'
 
 const Profile = ({ user, logout }) => (
 	<Container>
@@ -13,6 +13,8 @@ const Profile = ({ user, logout }) => (
 			description="Profile"
 		/>
 		<h2>Welcome {`${user.firstName} ${user.lastName}`}</h2>
+		<p>Username: {user.username}</p>
+		<p>email: {user.email}</p>
 		<Center>
 			<Button onClick={() => logout()}>Logout</Button>
 		</Center>

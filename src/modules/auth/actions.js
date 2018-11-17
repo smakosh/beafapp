@@ -24,9 +24,14 @@ export const verifyToken = token => async dispatch => {
 
 		setAuthToken(token)
 		await dispatch({ type: 'SAVE_USER', payload: res.data })
-		history.push('/profile')
+		if (history.location.pathname === '/' || history.location.pathname === '/register') {
+			history.push('/feed')
+		}
 	} catch (err) {
 		dispatch({ type: 'SAVE_USER', payload: {} })
+		if (history.location.pathname !== '/' || history.location.pathname !== '/register') {
+			history.push('/')
+		}
 	}
 }
 

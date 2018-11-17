@@ -1,14 +1,15 @@
 import styled from 'styled-components'
 
 const Button = styled.button`
-    color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 196, 255, 0.9) 0px 13px 19px -6px;
+    color: #fff;
     text-decoration: none;
-    padding: 0.9rem 2rem;
-    background: rgb(0, 195, 255);
+    padding: 0.9rem 2.5rem;
+    background: #FF6347;
+    text-transform: uppercase;
     border-radius: 0.3rem;
     border: none;
     cursor: pointer;
+    font-size: 12pt;
 `
 
 export { Button }
