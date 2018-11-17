@@ -1,38 +1,46 @@
 import React from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { compose, renderComponent, branch } from 'recompose'
-import { logout } from '../auth/actions'
-import { Button, Container, Loading, SEO } from '../../components/common'
+import { compose, renderComponent, branch, lifecycle } from 'recompose'
+import { Container, Loading, SEO } from '../../components/common'
+import { Wrapper } from './styles'
+import { getMyPosts } from '../feed/actions'
+import Posts from './components/Posts'
+import Empty from '../feed/components/Empty'
 
-const Profile = ({ user, logout }) => (
+const Profile = ({ user, posts }) => (
 	<Container>
 		<SEO
 			url="/profile"
 			title="Profile"
 			description="Profile"
 		/>
-		<h2>Welcome {`${user.firstName} ${user.lastName}`}</h2>
-		<p>Username: {user.username}</p>
-		<p>email: {user.email}</p>
-		<Center>
-			<Button onClick={() => logout()}>Logout</Button>
-		</Center>
+		<Wrapper>
+			<h2>Welcome {`${user.firstName} ${user.lastName}`}</h2>
+			<p>@{user.username}</p>
+			{posts.length > 0 ? (
+				<Posts
+					posts={posts}
+					user={user}
+				/>
+			) : <Empty />}
+		</Wrapper>
 	</Container>
 )
 
-const Center = styled.div`
-    text-align: center;
-`
-
-const mapStateToProps = ({ auth }) => ({
-	user: auth.user
+const mapStateToProps = ({ auth, posts }) => ({
+	user: auth.user,
+	posts: posts.data
 })
 
 const enhance = compose(
-	connect(mapStateToProps, { logout }),
+	connect(mapStateToProps, { getMyPosts }),
+	lifecycle({
+		componentWillMount() {
+			this.props.getMyPosts()
+		}
+	}),
 	branch(
-		({ user }) => user === undefined,
+		({ posts, user }) => (posts === undefined || user === undefined) || posts.loading,
 		renderComponent(Loading)
 	)
 )

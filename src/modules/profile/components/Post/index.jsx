@@ -2,25 +2,20 @@ import React from 'react'
 import ImageZoom from 'react-medium-image-zoom'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
-import Tooltip from 'react-simple-tooltip'
 import { Wrapper, UserInfo, Flex, Img, Content, Vote, Floating, Btn } from './styles'
-import beforeIcon from '../../assets/before.svg'
-import afterIcon from '../../assets/after.svg'
+import beforeIcon from '../../../feed/assets/before.svg'
+import afterIcon from '../../../feed/assets/after.svg'
 
 TimeAgo.addLocale(en)
 
 const timeAgo = new TimeAgo('en-US')
 
 const Post = ({
-	_id,
 	title,
 	description,
 	before_img,
 	after_img,
 	date,
-	userId,
-	voteBefore,
-	voteAfter,
 	before_votes,
 	after_votes,
 	_creator_username
@@ -52,19 +47,15 @@ const Post = ({
 		</Flex>
 		<Vote>
 			<Btn before>
-				<Tooltip content="Before">
-					<Floating onClick={() => voteBefore(_id, userId)} before>
-						<img src={beforeIcon} alt="vote before" />
-					</Floating>
-				</Tooltip>
+				<Floating disabled before>
+					<img src={beforeIcon} alt="vote before" />
+				</Floating>
 				<p>{before_votes.length}</p>
 			</Btn>
 			<Btn>
-				<Tooltip content="After">
-					<Floating onClick={() => voteAfter(_id, userId)}>
-						<img src={afterIcon} alt="vote before" />
-					</Floating>
-				</Tooltip>
+				<Floating disabled>
+					<img src={afterIcon} alt="vote before" />
+				</Floating>
 				<p>{after_votes.length}</p>
 			</Btn>
 		</Vote>

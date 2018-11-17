@@ -20,6 +20,17 @@ export const getPosts = () => async dispatch => {
 	}
 }
 
+export const getMyPosts = () => async dispatch => {
+	try {
+		dispatch({ type: 'LOADING_POSTS' })
+
+		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/personal`)
+		dispatch({ type: 'GET_POSTS', payload: res.data })
+	} catch (err) {
+		dispatch(failedToGetPosts(err.response.data.error))
+	}
+}
+
 export const addPost = (
 	image,
 	image_2,

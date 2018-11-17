@@ -16,54 +16,51 @@ const AddPost = ({
 	uploadFileBefore,
 	preview,
 	preview_2
-}) => {
-	console.log(preview)
-	return (
-		<Container vertical>
-			<Card>
-				<Form>
-					<Flex>
-						<Item>
-							{preview && <img src={preview} alt="preview before" />}
-							<input
-								onChange={e => uploadFileBefore(e)}
-								type="file"
-								accept="image/*"
-								required
-							/>
-						</Item>
-						<Item>
-							{preview_2 && <img src={preview_2} alt="preview before" />}
-							<input
-								onChange={e => uploadFileAfter(e)}
-								type="file"
-								accept="image/*"
-								required
-							/>
-						</Item>
-					</Flex>
-					<InputField label="Title">
-						<Field type="text" name="title" />
-						{errors.title && touched.title && <Error>{errors.title}</Error>}
-					</InputField>
-					<InputField label="Description">
-						<Field type="text" name="description" />
-						{errors.description && touched.description && <Error>{errors.description}</Error>}
-					</InputField>
-					<Center>
-						<Button type="submit" disabled={isSubmitting}>
-							{isSubmitting ? (
-								<Spinner name="circle" color="white" />
-							) : (
-								<span>SUBMIT</span>
-							)}
-						</Button>
-					</Center>
-				</Form>
-			</Card>
-		</Container>
-	)
-}
+}) => (
+	<Container vertical>
+		<Card>
+			<Form>
+				<Flex>
+					<Item>
+						{preview && <img src={preview} alt="preview before" />}
+						<input
+							onChange={e => uploadFileBefore(e)}
+							type="file"
+							accept="image/*"
+							required
+						/>
+					</Item>
+					<Item>
+						{preview_2 && <img src={preview_2} alt="preview before" />}
+						<input
+							onChange={e => uploadFileAfter(e)}
+							type="file"
+							accept="image/*"
+							required
+						/>
+					</Item>
+				</Flex>
+				<InputField label="Title">
+					<Field type="text" name="title" />
+					{errors.title && touched.title && <Error>{errors.title}</Error>}
+				</InputField>
+				<InputField label="Description">
+					<Field type="text" name="description" />
+					{errors.description && touched.description && <Error>{errors.description}</Error>}
+				</InputField>
+				<Center>
+					<Button type="submit" disabled={isSubmitting}>
+						{isSubmitting ? (
+							<Spinner name="circle" color="white" />
+						) : (
+							<span>SUBMIT</span>
+						)}
+					</Button>
+				</Center>
+			</Form>
+		</Card>
+	</Container>
+)
 
 const enhance = compose(
 	connect(null, { addPost }),

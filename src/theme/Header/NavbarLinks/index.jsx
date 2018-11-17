@@ -10,6 +10,10 @@ const NavbarLinks = ({ desktop, logout }) => (
 			activeStyle={{ color: '#FF6347' }}
 		>Feed</NavLink>
 		<NavLink
+			to="/add-post"
+			activeStyle={{ color: '#FF6347' }}
+		>New Post</NavLink>
+		<NavLink
 			to="/profile"
 			activeStyle={{ color: '#FF6347' }}
 		>Profile</NavLink>

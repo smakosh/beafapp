@@ -41,7 +41,6 @@ export default (state = { loading: false }, action) => {
 		}
 	case 'LOADING_POSTS':
 		return {
-			...state,
 			loading: true
 		}
 	default:

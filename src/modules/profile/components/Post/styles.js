@@ -90,19 +90,9 @@ export const Floating = styled.button`
   cursor: pointer;
   transition: .3s;
 
-  &:hover {
-    box-shadow: 0 5px 10px 0 #536DFE;
-    transform: scale(1.1);
-    transition: .3s;
-
-    ${({ before }) => before && `
-      box-shadow: 0 5px 10px 0 #FF6347;
-    `}
+  &:disabled {
+    background: gray;
   }
-
-  ${({ before }) => before && `
-    background: #FF6347;
-  `}
 `
 
 export const Content = styled.div`

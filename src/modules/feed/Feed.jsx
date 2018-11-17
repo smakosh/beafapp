@@ -4,7 +4,6 @@ import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
 import { getPosts, voteBefore, voteAfter } from './actions'
 import { Loading, Container, SEO } from '../../components/common'
-import User from './components/User'
 import Posts from './components/Posts'
 import Empty from './components/Empty'
 
@@ -15,7 +14,6 @@ const Feed = ({ user, posts, voteBefore, voteAfter }) => (
 			title="Feed"
 			description="Feed"
 		/>
-		<User user={user} />
 		{posts.length > 0 ? (
 			<Posts
 				posts={posts}
@@ -51,7 +49,7 @@ const enhance = compose(
 		}
 	}),
 	branch(
-		({ posts, user }) => posts === undefined || user === undefined,
+		({ posts, user }) => (posts === undefined || user === undefined) || !!posts.loading,
 		renderComponent(Loading)
 	)
 )

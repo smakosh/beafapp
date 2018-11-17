@@ -46,7 +46,7 @@ export const register = (payload, setErrors, setSubmitting, resetForm) => async 
 		await dispatch({ type: 'SAVE_USER', payload: user })
 		setSubmitting(false)
 		resetForm()
-		history.push('/profile')
+		history.push('/feed')
 	} catch (err) {
 		setErrors({
 			email: err.response.data.error
@@ -67,7 +67,7 @@ export const login = (payload, setErrors, setSubmitting, resetForm) => async dis
 		await dispatch({ type: 'SAVE_USER', payload: user })
 		setSubmitting(false)
 		resetForm()
-		history.push('/profile')
+		history.push('/feed')
 	} catch (err) {
 		if (err.response.data.email) {
 			setErrors({ email: err.response.data.email })
