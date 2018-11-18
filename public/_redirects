@@ -1,1 +1,3 @@
 /*    /index.html   200
+# Redirect default Netlify subdomain to primary domain
+http://beafapp.netlify.com/* http://app.beafapp.com/:splat 301!
