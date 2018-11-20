@@ -3,6 +3,7 @@ import ImageZoom from 'react-medium-image-zoom'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import Tooltip from 'react-simple-tooltip'
+import { Link } from 'react-router-dom'
 import { Wrapper, UserInfo, Flex, Img, Content, Vote, Floating, Btn } from './styles'
 import beforeIcon from '../../assets/before.svg'
 import afterIcon from '../../assets/after.svg'
@@ -23,11 +24,14 @@ const Post = ({
 	voteAfter,
 	before_votes,
 	after_votes,
-	_creator_username
+	_creator_username,
+	_creator
 }) => (
 	<Wrapper>
 		<UserInfo>
-			<h2>{_creator_username}</h2>
+			<h2>
+				<Link to={`/profile/${_creator}`}>{_creator_username}</Link>
+			</h2>
 			<p>{timeAgo.format(Date.parse(date))}</p>
 		</UserInfo>
 		<Flex>

@@ -1,5 +1,4 @@
 export default (state = { loading: false }, action) => {
-	console.log(state.date)
 	switch (action.type) {
 	case 'GET_POSTS':
 		return {

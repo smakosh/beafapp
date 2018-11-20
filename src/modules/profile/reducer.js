@@ -1,20 +1,17 @@
-import isEmpty from '../../utils/isEmpty'
-
 export default (state = { loading: false }, action) => {
 	switch (action.type) {
-	case 'SAVE_USER':
+	case 'GET_PROFILE':
 		return {
 			...state,
-			isLoggedIn: !isEmpty(action.payload),
-			user: action.payload,
+			profile: action.payload,
 			loading: false
 		}
-	case 'AUTH_FAILED':
+	case 'FAILED_TO_GET_PROFILE':
 		return {
 			errors: action.payload,
 			loading: false
 		}
-	case 'LOADING_USER':
+	case 'LOADING_PROFILE':
 		return {
 			loading: true
 		}

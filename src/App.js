@@ -10,6 +10,7 @@ import { verifyToken } from './modules/auth/actions'
 import Login from './modules/auth/Login'
 import Register from './modules/auth/Register'
 import Profile from './modules/profile/Profile'
+import PublicProfile from './modules/profile/PublicProfile'
 import Feed from './modules/feed/Feed'
 import AddPost from './modules/feed/AddPost'
 import { NotFound } from './components/common'
@@ -32,7 +33,8 @@ const AppRoutes = () => (
 			<Switch>
 				<Public path="/" exact component={Login} />
 				<Public path="/register" component={Register} />
-				<Private path="/profile" component={Profile} />
+				<Private path="/profile" exact component={Profile} />
+				<Private path="/profile/:user_id" component={PublicProfile} />
 				<Private path="/feed" component={Feed} />
 				<Private path="/add-post" component={AddPost} />
 				<Public component={NotFound} />
