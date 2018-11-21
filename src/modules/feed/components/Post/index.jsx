@@ -1,6 +1,7 @@
 import React from 'react'
 import ImageZoom from 'react-medium-image-zoom'
 import TimeAgo from 'javascript-time-ago'
+import LazyImage from 'react-lazy-progressive-image'
 import en from 'javascript-time-ago/locale/en'
 import Tooltip from 'react-simple-tooltip'
 import { Link } from 'react-router-dom'
@@ -36,22 +37,36 @@ const Post = ({
 		</UserInfo>
 		<Flex>
 			<Img>
-				<ImageZoom
-					image={{
-						src: before_img,
-						alt: 'before picture',
-						className: 'img'
-					}}
-				/>
+				<LazyImage
+					placeholder="https://placeholder.pics/svg/300"
+					src={before_img}
+				>
+					{(src, loading, isVisible) => (
+						<ImageZoom
+							image={{
+								src,
+								alt: 'before picture',
+								className: 'img'
+							}}
+						/>
+					)}
+				</LazyImage>
 			</Img>
 			<Img>
-				<ImageZoom
-					image={{
-						src: after_img,
-						alt: 'after picture',
-						className: 'img'
-					}}
-				/>
+				<LazyImage
+					placeholder="https://placeholder.pics/svg/300"
+					src={after_img}
+				>
+					{(src, loading, isVisible) => (
+						<ImageZoom
+							image={{
+								src,
+								alt: 'after picture',
+								className: 'img'
+							}}
+						/>
+					)}
+				</LazyImage>
 			</Img>
 		</Flex>
 		<Vote>
