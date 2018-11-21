@@ -2,13 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch, lifecycle } from 'recompose'
 import { Container, Loading, SEO } from '../../components/common'
-import { Wrapper } from './styles'
-import { getMyPosts } from '../feed/actions'
+import { Wrapper, StyledContainer } from './styles'
+import { getMyPosts, voteBefore, voteAfter } from '../feed/actions'
 import Posts from './components/Posts'
 import Empty from '../feed/components/Empty'
 
-const Profile = ({ user, posts }) => (
-	<Container>
+const Profile = ({ user, posts, voteBefore, voteAfter }) => (
+	<StyledContainer as={Container}>
 		<SEO
 			url="/profile"
 			title="Profile"
@@ -21,10 +21,12 @@ const Profile = ({ user, posts }) => (
 				<Posts
 					posts={posts}
 					user={user}
+					voteBefore={voteBefore}
+					voteAfter={voteAfter}
 				/>
 			) : <Empty />}
 		</Wrapper>
-	</Container>
+	</StyledContainer>
 )
 
 const mapStateToProps = ({ auth, posts }) => ({
@@ -33,7 +35,7 @@ const mapStateToProps = ({ auth, posts }) => ({
 })
 
 const enhance = compose(
-	connect(mapStateToProps, { getMyPosts }),
+	connect(mapStateToProps, { getMyPosts, voteBefore, voteAfter }),
 	lifecycle({
 		componentWillMount() {
 			this.props.getMyPosts()

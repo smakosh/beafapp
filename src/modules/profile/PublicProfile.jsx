@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch, lifecycle } from 'recompose'
 import { Container, Loading, SEO } from '../../components/common'
-import { Wrapper } from './styles'
-import { getPostsByUserId } from '../feed/actions'
+import { StyledContainer, Wrapper } from './styles'
+import { getPostsByUserId, voteBefore, voteAfter } from '../feed/actions'
 import { getUserById } from './actions'
 import Posts from './components/Posts'
 import Empty from '../feed/components/Empty'
 
-const PublicProfile = ({ profile, posts }) => (
-	<Container>
+const PublicProfile = ({ profile, posts, voteBefore, voteAfter }) => (
+	<StyledContainer as={Container}>
 		<SEO
 			url="/profile"
 			title="Profile"
@@ -22,10 +22,12 @@ const PublicProfile = ({ profile, posts }) => (
 				<Posts
 					posts={posts}
 					user={profile}
+					voteBefore={voteBefore}
+					voteAfter={voteAfter}
 				/>
 			) : <Empty />}
 		</Wrapper>
-	</Container>
+	</StyledContainer>
 )
 
 const mapStateToProps = ({ profile, posts }) => ({
@@ -34,7 +36,7 @@ const mapStateToProps = ({ profile, posts }) => ({
 })
 
 const enhance = compose(
-	connect(mapStateToProps, { getPostsByUserId, getUserById }),
+	connect(mapStateToProps, { getPostsByUserId, getUserById, voteBefore, voteAfter }),
 	lifecycle({
 		async componentWillMount() {
 			await this.props.getUserById(this.props.match.params.user_id)

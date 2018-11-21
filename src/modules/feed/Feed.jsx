@@ -1,11 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
 import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
 import { getPosts, voteBefore, voteAfter } from './actions'
 import { Loading, Container, SEO } from '../../components/common'
 import Posts from './components/Posts'
 import Empty from './components/Empty'
+import { Wrapper } from './styles'
 
 const Feed = ({ user, posts, voteBefore, voteAfter }) => (
 	<Wrapper as={Container}>
@@ -24,17 +24,6 @@ const Feed = ({ user, posts, voteBefore, voteAfter }) => (
 		) : <Empty />}
 	</Wrapper>
 )
-
-const Wrapper = styled.div`
-	display: flex;
-	padding: 2rem 0;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	
-	@media (max-width: 960px) {
-		flex-direction: column;	
-	}
-`
 
 const mapStateToProps = ({ posts, auth }) => ({
 	posts: posts.data,

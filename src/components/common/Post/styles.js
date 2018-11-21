@@ -3,7 +3,8 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   width: 70%;
   margin: 0 auto;
-  box-shadow: 2px 0 20px 0 rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
+  box-shadow: 0 1px 10px 0 rgba(5,5,5,.13);
   margin-bottom: 2rem;
 
   @media (max-width: 960px) {
@@ -17,12 +18,14 @@ export const UserInfo = styled.div`
 
   h2 {
     margin-top: unset;
-    margin-bottom: 0.05rem;
+    margin-bottom: 0.5rem;
+    font-size: 14pt;
   }
 
   p {
     margin: 0;
     color: #A7A6A6;
+    font-size: 10pt;
   }
 `
 
@@ -85,28 +88,51 @@ export const Btn = styled.div`
 export const Floating = styled.button`
   border: none;
   background: #536DFE;
-  padding: .9rem 1rem;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
   transition: .3s;
 
-  &:disabled {
-    background: gray;
+  @media (max-width: 680px) {
+    width: 40px;
+    height: 40px;
+
+    img {
+      width: 16px;
+    }
   }
+
+  &:hover {
+    box-shadow: 0 5px 10px 0 #536DFE;
+    transform: scale(1.1);
+    transition: .3s;
+
+    ${({ before }) => before && `
+      box-shadow: 0 5px 10px 0 #FF6347;
+    `}
+  }
+
+  ${({ before }) => before && `
+    background: #FF6347;
+  `}
 `
 
 export const Content = styled.div`
-  padding: 2rem 1rem;
-  background: #f9f7f7;
+  padding: 1rem;
+  background: #fff;
   text-align: left;
+  border-bottom: 1px solid #eee;
 
   h2 {
     margin-top: unset;
     margin-bottom: 0.5rem;
+    font-size: 14pt;
   }
 
   p {
     margin: 0;
     color: #A7A6A6;
+    font-size: 12pt;
   }
 `

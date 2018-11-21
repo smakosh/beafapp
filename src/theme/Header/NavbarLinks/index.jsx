@@ -15,6 +15,7 @@ const NavbarLinks = ({ desktop, logout }) => (
 		>New Post</NavLink>
 		<NavLink
 			to="/profile"
+			exact
 			activeStyle={{ color: '#FF6347' }}
 		>Profile</NavLink>
 		<Button type="button" onClick={logout}>

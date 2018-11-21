@@ -6,8 +6,8 @@ import en from 'javascript-time-ago/locale/en'
 import Tooltip from 'react-simple-tooltip'
 import { Link } from 'react-router-dom'
 import { Wrapper, UserInfo, Flex, Img, Content, Vote, Floating, Btn } from './styles'
-import beforeIcon from '../../assets/before.svg'
-import afterIcon from '../../assets/after.svg'
+import beforeIcon from './assets/before.svg'
+import afterIcon from './assets/after.svg'
 
 TimeAgo.addLocale(en)
 
@@ -69,6 +69,10 @@ const Post = ({
 				</LazyImage>
 			</Img>
 		</Flex>
+		<Content>
+			<h2>{title}</h2>
+			<p>{description}</p>
+		</Content>
 		<Vote>
 			<Btn before>
 				<Tooltip content="Before">
@@ -87,11 +91,7 @@ const Post = ({
 				<p>{after_votes.length}</p>
 			</Btn>
 		</Vote>
-		<Content>
-			<h2>{title}</h2>
-			<p>{description}</p>
-		</Content>
 	</Wrapper>
 )
 
-export default Post
+export { Post }

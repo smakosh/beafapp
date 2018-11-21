@@ -8,6 +8,10 @@ export const Content = styled.div`
   text-align: center;
   padding: 1rem;
   background: #fff;
+
+  @media (max-width: 680px) {
+    padding: unset;
+  }
 `
 
 export const Center = styled.div`
