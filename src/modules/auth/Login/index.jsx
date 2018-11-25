@@ -16,7 +16,7 @@ const Login = ({
 }) => (
 	<Container vertical>
 		<SEO
-			url="/"
+			url="/login"
 			title="Login"
 			description="Login"
 		/>

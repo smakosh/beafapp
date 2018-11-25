@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import store from './store'
@@ -7,6 +7,8 @@ import Private from './Routes/Private'
 import Public from './Routes/Public'
 import { verifyToken } from './modules/auth/actions'
 
+import Header from './theme/Header'
+import { GlobalStyle } from './theme/global-styles'
 import Login from './modules/auth/Login'
 import Register from './modules/auth/Register'
 import Profile from './modules/profile/Profile'
@@ -23,22 +25,26 @@ try {
 	}
 } catch (e) {
 	if (history.location.pathname !== '/') {
-		history.push('/')
+		history.push('/login')
 	}
 }
 
 const AppRoutes = () => (
 	<Provider store={store}>
 		<Router history={history}>
-			<Switch>
-				<Public path="/" exact component={Login} />
-				<Public path="/register" component={Register} />
-				<Private path="/profile" exact component={Profile} />
-				<Private path="/profile/:user_id" component={PublicProfile} />
-				<Private path="/feed" component={Feed} />
-				<Private path="/add-post" component={AddPost} />
-				<Public component={NotFound} />
-			</Switch>
+			<>
+				<GlobalStyle />
+				<Header />
+				<Switch>
+					<Route path="/" exact component={Feed} />
+					<Route path="/login" component={Login} />
+					<Route path="/register" component={Register} />
+					<Private path="/profile" exact component={Profile} />
+					<Route path="/profile/:user_id" component={PublicProfile} />
+					<Private path="/add-post" component={AddPost} />
+					<Public component={NotFound} />
+				</Switch>
+			</>
 		</Router>
 	</Provider>
 )

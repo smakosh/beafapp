@@ -1,29 +1,37 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { compose, withStateHandlers } from 'recompose'
+import { compose, withStateHandlers, branch, renderNothing } from 'recompose'
 import Navbar from './Navbar'
 import Hamburger from './Hamburger'
 import Sidebar from './Sidebar'
 import { StyledHeader, Overlay } from './styles'
 import { logout } from '../../modules/auth/actions'
 
-const Header = ({ sidebar, toggle, logout }) => (
+const Header = ({ sidebar, toggle, logout, auth }) => (
 	<StyledHeader>
 		<Overlay sidebar={sidebar} onClick={toggle} />
-		<Navbar logout={logout} />
+		<Navbar auth={auth} logout={logout} />
 		<Hamburger sidebar={sidebar} toggle={toggle} />
-		<Sidebar logout={logout} sidebar={sidebar} toggle={toggle} />
+		<Sidebar auth={auth} logout={logout} sidebar={sidebar} toggle={toggle} />
 	</StyledHeader>
 )
 
+const mapStateToProps = ({ auth }) => ({
+	auth
+})
+
 const enhance = compose(
-	connect(null, { logout }, null, { pure: false }),
+	connect(mapStateToProps, { logout }, null, { pure: false }),
 	withStateHandlers(
 		() => ({ sidebar: false, isHomePage: false }),
 		{
 			toggle: ({ sidebar }) => () => ({ sidebar: !sidebar }),
 			setHomePage: ({ isHomePage }) => () => ({ isHomePage: !isHomePage })
 		}
+	),
+	branch(
+		({ auth }) => !auth || auth.loading,
+		renderNothing
 	)
 )
 

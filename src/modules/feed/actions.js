@@ -70,7 +70,7 @@ export const addPost = (
 		await axios.post(`${REACT_APP_PROD_API}/api/post`, { ...payload, before_img, after_img })
 		resetForm()
 		setSubmitting(false)
-		history.push('/feed')
+		history.push('/')
 	} catch (err) {
 		setSubmitting(false)
 		if (err.response.data.error.message) {

@@ -8,7 +8,7 @@ import { getUserById } from './actions'
 import Posts from './components/Posts'
 import Empty from '../feed/components/Empty'
 
-const PublicProfile = ({ profile, posts, voteBefore, voteAfter }) => (
+const PublicProfile = ({ profile, auth, posts, voteBefore, voteAfter }) => (
 	<StyledContainer as={Container}>
 		<SEO
 			url="/profile"
@@ -16,12 +16,13 @@ const PublicProfile = ({ profile, posts, voteBefore, voteAfter }) => (
 			description="Profile"
 		/>
 		<Wrapper>
-			<h2>{`${profile.firstName} ${profile.lastName}`}</h2>
+			<h2>{auth.user && auth.user._id === profile._id && 'Welcome'} {`${profile.firstName} ${profile.lastName}`}</h2>
 			<p>@{profile.username}</p>
 			{posts.length > 0 ? (
 				<Posts
 					posts={posts}
 					user={profile}
+					isLoggedIn={auth.isLoggedIn}
 					voteBefore={voteBefore}
 					voteAfter={voteAfter}
 				/>
@@ -30,7 +31,8 @@ const PublicProfile = ({ profile, posts, voteBefore, voteAfter }) => (
 	</StyledContainer>
 )
 
-const mapStateToProps = ({ profile, posts }) => ({
+const mapStateToProps = ({ profile, posts, auth }) => ({
+	auth,
 	profile: profile.profile,
 	posts: posts.data
 })
@@ -44,7 +46,7 @@ const enhance = compose(
 		}
 	}),
 	branch(
-		({ posts, profile }) => (posts === undefined || profile === undefined) || posts.loading,
+		({ posts, profile, auth }) => (!posts || !profile || !auth) || posts.loading,
 		renderComponent(Loading)
 	)
 )

@@ -26,7 +26,8 @@ const Post = ({
 	before_votes,
 	after_votes,
 	_creator_username,
-	_creator
+	_creator,
+	isLoggedIn
 }) => (
 	<Wrapper>
 		<UserInfo>
@@ -76,17 +77,29 @@ const Post = ({
 		<Vote>
 			<Btn before>
 				<Tooltip content="Before">
-					<Floating onClick={() => voteBefore(_id, userId)} before>
-						<img src={beforeIcon} alt="vote before" />
-					</Floating>
+					{isLoggedIn ? (
+						<Floating onClick={() => voteBefore(_id, userId)} before="true">
+							<img src={beforeIcon} alt="vote before" />
+						</Floating>
+					) : (
+						<Floating as={Link} to="/login" isLink="true" before="true">
+							<img src={beforeIcon} alt="vote before" />
+						</Floating>
+					)}
 				</Tooltip>
 				<p>{before_votes.length}</p>
 			</Btn>
 			<Btn>
 				<Tooltip content="After">
-					<Floating onClick={() => voteAfter(_id, userId)}>
-						<img src={afterIcon} alt="vote before" />
-					</Floating>
+					{isLoggedIn ? (
+						<Floating onClick={() => voteAfter(_id, userId)}>
+							<img src={afterIcon} alt="vote before" />
+						</Floating>
+					) : (
+						<Floating as={Link} isLink="true" to="/login">
+							<img src={afterIcon} alt="vote after" />
+						</Floating>
+					)}
 				</Tooltip>
 				<p>{after_votes.length}</p>
 			</Btn>

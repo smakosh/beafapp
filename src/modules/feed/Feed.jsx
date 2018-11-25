@@ -7,17 +7,18 @@ import Posts from './components/Posts'
 import Empty from './components/Empty'
 import { Wrapper } from './styles'
 
-const Feed = ({ user, posts, voteBefore, voteAfter }) => (
+const Feed = ({ auth, posts, voteBefore, voteAfter }) => (
 	<Wrapper as={Container}>
 		<SEO
-			url="/feed"
+			url="/"
 			title="Feed"
 			description="Feed"
 		/>
 		{posts.length > 0 ? (
 			<Posts
 				posts={posts}
-				user={user}
+				user={auth.user}
+				isLoggedIn={auth.isLoggedIn}
 				voteBefore={voteBefore}
 				voteAfter={voteAfter}
 			/>
@@ -27,7 +28,7 @@ const Feed = ({ user, posts, voteBefore, voteAfter }) => (
 
 const mapStateToProps = ({ posts, auth }) => ({
 	posts: posts.data,
-	user: auth.user
+	auth
 })
 
 const enhance = compose(
@@ -38,7 +39,7 @@ const enhance = compose(
 		}
 	}),
 	branch(
-		({ posts, user }) => (posts === undefined || user === undefined) || !!posts.loading,
+		({ posts, auth }) => (!posts || !auth) || !!posts.loading,
 		renderComponent(Loading)
 	)
 )

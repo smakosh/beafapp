@@ -25,7 +25,7 @@ export const verifyToken = token => async dispatch => {
 		setAuthToken(token)
 		await dispatch({ type: 'SAVE_USER', payload: res.data })
 		if (history.location.pathname === '/' || history.location.pathname === '/register') {
-			history.push('/feed')
+			history.push('/')
 		}
 	} catch (err) {
 		dispatch({ type: 'SAVE_USER', payload: {} })
@@ -46,7 +46,7 @@ export const register = (payload, setErrors, setSubmitting, resetForm) => async 
 		await dispatch({ type: 'SAVE_USER', payload: user })
 		setSubmitting(false)
 		resetForm()
-		history.push('/feed')
+		history.push('/')
 	} catch (err) {
 		setErrors({
 			email: err.response.data.error
@@ -67,7 +67,7 @@ export const login = (payload, setErrors, setSubmitting, resetForm) => async dis
 		await dispatch({ type: 'SAVE_USER', payload: user })
 		setSubmitting(false)
 		resetForm()
-		history.push('/feed')
+		history.push('/')
 	} catch (err) {
 		if (err.response.data.email) {
 			setErrors({ email: err.response.data.email })

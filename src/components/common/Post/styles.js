@@ -94,6 +94,11 @@ export const Floating = styled.button`
   cursor: pointer;
   transition: .3s;
 
+  ${({ isLink }) => isLink && `
+    display: flex;
+    justify-content: center;
+  `}
+
   @media (max-width: 680px) {
     width: 40px;
     height: 40px;
