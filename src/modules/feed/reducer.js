@@ -38,6 +38,16 @@ export default (state = { loading: false }, action) => {
 				}
 			) : item)
 		}
+	case 'ADD_COMMENT':
+		return {
+			...state,
+			data: state.data.map(item => item._id === action.payload.post_id ? (
+				{
+					...item,
+					comments: [...item.comments, action.payload.newComment]
+				}
+			) : item)
+		}
 	case 'LOADING_POSTS':
 		return {
 			loading: true

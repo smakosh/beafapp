@@ -1,17 +1,13 @@
 import React from 'react'
-import ImageZoom from 'react-medium-image-zoom'
-import TimeAgo from 'javascript-time-ago'
-import LazyImage from 'react-lazy-progressive-image'
-import en from 'javascript-time-ago/locale/en'
-import Tooltip from 'react-simple-tooltip'
-import { Link } from 'react-router-dom'
-import { Wrapper, UserInfo, Flex, Img, Content, Vote, Floating, Btn } from './styles'
-import beforeIcon from './assets/before.svg'
-import afterIcon from './assets/after.svg'
+import { Wrapper } from './styles'
+import { PostHeader, Pictures, Content, Vote, Comments } from './components'
 
-TimeAgo.addLocale(en)
-
-const timeAgo = new TimeAgo('en-US')
+const comments = {
+	creator_id: 0,
+	creator_username: 'Username',
+	comment: 'A dummy comment!',
+	date: '2018-11-17T23:43:23.396Z'
+}
 
 const Post = ({
 	_id,
@@ -27,83 +23,35 @@ const Post = ({
 	after_votes,
 	_creator_username,
 	_creator,
-	isLoggedIn
+	isLoggedIn,
+	// postNewComment,
+	// comments
 }) => (
 	<Wrapper>
-		<UserInfo>
-			<h2>
-				<Link to={`/profile/${_creator}`}>{_creator_username}</Link>
-			</h2>
-			<p>{timeAgo.format(Date.parse(date))}</p>
-		</UserInfo>
-		<Flex>
-			<Img>
-				<LazyImage
-					placeholder="https://placeholder.pics/svg/300"
-					src={before_img}
-				>
-					{(src, loading, isVisible) => (
-						<ImageZoom
-							image={{
-								src,
-								alt: 'before picture',
-								className: 'img'
-							}}
-						/>
-					)}
-				</LazyImage>
-			</Img>
-			<Img>
-				<LazyImage
-					placeholder="https://placeholder.pics/svg/300"
-					src={after_img}
-				>
-					{(src, loading, isVisible) => (
-						<ImageZoom
-							image={{
-								src,
-								alt: 'after picture',
-								className: 'img'
-							}}
-						/>
-					)}
-				</LazyImage>
-			</Img>
-		</Flex>
-		<Content>
-			<h2>{title}</h2>
-			<p>{description}</p>
-		</Content>
-		<Vote>
-			<Btn before>
-				<Tooltip content="Before">
-					{isLoggedIn ? (
-						<Floating onClick={() => voteBefore(_id, userId)} before="true">
-							<img src={beforeIcon} alt="vote before" />
-						</Floating>
-					) : (
-						<Floating as={Link} to="/login" isLink="true" before="true">
-							<img src={beforeIcon} alt="vote before" />
-						</Floating>
-					)}
-				</Tooltip>
-				<p>{before_votes.length}</p>
-			</Btn>
-			<Btn>
-				<Tooltip content="After">
-					{isLoggedIn ? (
-						<Floating onClick={() => voteAfter(_id, userId)}>
-							<img src={afterIcon} alt="vote before" />
-						</Floating>
-					) : (
-						<Floating as={Link} isLink="true" to="/login">
-							<img src={afterIcon} alt="vote after" />
-						</Floating>
-					)}
-				</Tooltip>
-				<p>{after_votes.length}</p>
-			</Btn>
-		</Vote>
+		<PostHeader
+			date={date}
+			_creator={_creator}
+			_creator_username={_creator_username}
+		/>
+		<Pictures
+			before_img={before_img}
+			after_img={after_img}
+		/>
+		<Content
+			title={title}
+			description={description}
+		/>
+		<Vote
+			_id={_id}
+			userId={userId}
+			voteBefore={voteBefore}
+			voteAfter={voteAfter}
+			before_votes={before_votes}
+			after_votes={after_votes}
+			isLoggedIn={isLoggedIn}
+		/>
+		<Comments comments={comments} />
+		{/* <AddComment postNewComment={postNewComment} /> */}
 	</Wrapper>
 )
 

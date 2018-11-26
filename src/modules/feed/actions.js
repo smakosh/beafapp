@@ -104,3 +104,15 @@ export const voteAfter = (id, user_id) => async dispatch => {
 		dispatch(failedToGetPosts(err.response.data.error))
 	}
 }
+
+export const postNewComment = (id, creator_id, creator_username, comment) => async dispatch => {
+	try {
+		await axios.post(`${REACT_APP_PROD_API}/post/comment/${id}`, { comment })
+		dispatch({ type: 'ADD_COMMENT',
+			payload: {
+				post_id: id, newComment: { creator_id, creator_username, date: Date.now(), comment }
+			} })
+	} catch (err) {
+		dispatch(failedToGetPosts(err.response.error))
+	}
+}
