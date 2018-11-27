@@ -17,6 +17,7 @@ const PostPage = ({
 		<Post
 			{...posts.post}
 			userId={auth.user && auth.user._id}
+			userName={auth.user && auth.user.username}
 			isLoggedIn={auth.isLoggedIn}
 			voteBefore={voteBefore}
 			voteAfter={voteAfter}

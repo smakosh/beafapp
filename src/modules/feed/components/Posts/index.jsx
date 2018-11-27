@@ -11,6 +11,7 @@ const Posts = ({ posts, user, voteBefore, voteAfter, isLoggedIn, postNewComment 
 					{...post}
 					key={post._id}
 					userId={user && user._id}
+					userName={user && user.username}
 					isLoggedIn={isLoggedIn}
 					voteBefore={voteBefore}
 					voteAfter={voteAfter}

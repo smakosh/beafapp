@@ -118,6 +118,28 @@ export const voteAfter = (id, user_id) => async dispatch => {
 }
 
 export const postNewComment = (
+	id, creator_id, username, comment, resetForm, setSubmitting
+) => async dispatch => {
+	try {
+		const today = new Date()
+		await axios.post(`${REACT_APP_PROD_API}/api/post/comment/${id}`, { comment })
+		await dispatch({ type: 'ADD_COMMENT',
+			payload: {
+				post_id: id,
+				newComment: {
+					_id: uuidv1(), creator_id, username, date: today.toISOString(), comment
+				}
+			}
+		})
+		resetForm()
+		setSubmitting(false)
+	} catch (err) {
+		setSubmitting(false)
+		dispatch(failedToGetPosts(err.response.error))
+	}
+}
+
+/* export const deleteComment = (
 	id, creator_id, creator_username, comment, resetForm, setSubmitting
 ) => async dispatch => {
 	try {
@@ -137,4 +159,4 @@ export const postNewComment = (
 		setSubmitting(false)
 		dispatch(failedToGetPosts(err.response.error))
 	}
-}
+} */

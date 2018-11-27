@@ -15,6 +15,7 @@ const Post = ({
 	before_votes,
 	after_votes,
 	_creator_username,
+	userName,
 	_creator,
 	isLoggedIn,
 	postNewComment,
@@ -53,7 +54,7 @@ const Post = ({
 			<AddComment
 				_id={_id}
 				_creator={_creator}
-				_creator_username={_creator_username}
+				userName={userName}
 				postNewComment={postNewComment}
 			/>
 		)}
