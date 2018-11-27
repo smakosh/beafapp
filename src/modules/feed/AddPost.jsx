@@ -109,7 +109,7 @@ const enhance = compose(
 				.required(),
 			description: Yup.string()
 				.min(2, 'Description has to be longer than 2 characters!')
-				.max(20, 'Description has to be smaller than 20 characters!')
+				.max(40, 'Description has to be smaller than 40 characters!')
 				.required()
 		}),
 		handleSubmit: (values, {

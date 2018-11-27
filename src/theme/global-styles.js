@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
         }
     }
 
-    button:focus {
+    input:focus, textarea:focus, button:focus {
         outline: none;
     }
 `

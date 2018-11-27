@@ -1,13 +1,6 @@
 import React from 'react'
 import { Wrapper } from './styles'
-import { PostHeader, Pictures, Content, Vote, Comments } from './components'
-
-const comments = {
-	creator_id: 0,
-	creator_username: 'Username',
-	comment: 'A dummy comment!',
-	date: '2018-11-17T23:43:23.396Z'
-}
+import { PostHeader, Pictures, Content, Vote, Comments, AddComment } from './components'
 
 const Post = ({
 	_id,
@@ -24,8 +17,9 @@ const Post = ({
 	_creator_username,
 	_creator,
 	isLoggedIn,
-	// postNewComment,
-	// comments
+	postNewComment,
+	comments,
+	showComments
 }) => (
 	<Wrapper>
 		<PostHeader
@@ -50,8 +44,19 @@ const Post = ({
 			after_votes={after_votes}
 			isLoggedIn={isLoggedIn}
 		/>
-		<Comments comments={comments} />
-		{/* <AddComment postNewComment={postNewComment} /> */}
+		<Comments
+			post_id={_id}
+			comments={comments}
+			showComments={showComments}
+		/>
+		{isLoggedIn && (
+			<AddComment
+				_id={_id}
+				_creator={_creator}
+				_creator_username={_creator_username}
+				postNewComment={postNewComment}
+			/>
+		)}
 	</Wrapper>
 )
 

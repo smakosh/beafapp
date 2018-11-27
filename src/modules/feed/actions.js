@@ -1,4 +1,5 @@
 import axios from 'axios'
+import uuidv1 from 'uuid/v1'
 import { history } from '../../App'
 import setAuthToken from '../../utils/setAuthToken'
 
@@ -37,6 +38,17 @@ export const getPostsByUserId = id => async dispatch => {
 
 		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/user/${id}`)
 		dispatch({ type: 'GET_POSTS', payload: res.data })
+	} catch (err) {
+		dispatch(failedToGetPosts(err.response.data.error))
+	}
+}
+
+export const getPostById = id => async dispatch => {
+	try {
+		await dispatch({ type: 'LOADING_POSTS' })
+
+		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/${id}`)
+		dispatch({ type: 'GET_POST_BY_ID', payload: res.data })
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))
 	}
@@ -105,14 +117,24 @@ export const voteAfter = (id, user_id) => async dispatch => {
 	}
 }
 
-export const postNewComment = (id, creator_id, creator_username, comment) => async dispatch => {
+export const postNewComment = (
+	id, creator_id, creator_username, comment, resetForm, setSubmitting
+) => async dispatch => {
 	try {
-		await axios.post(`${REACT_APP_PROD_API}/post/comment/${id}`, { comment })
-		dispatch({ type: 'ADD_COMMENT',
+		const today = new Date()
+		await axios.post(`${REACT_APP_PROD_API}/api/post/comment/${id}`, { comment })
+		await dispatch({ type: 'ADD_COMMENT',
 			payload: {
-				post_id: id, newComment: { creator_id, creator_username, date: Date.now(), comment }
-			} })
+				post_id: id,
+				newComment: {
+					_id: uuidv1(), creator_id, creator_username, date: today.toISOString(), comment
+				}
+			}
+		})
+		resetForm()
+		setSubmitting(false)
 	} catch (err) {
+		setSubmitting(false)
 		dispatch(failedToGetPosts(err.response.error))
 	}
 }

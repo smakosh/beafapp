@@ -10,7 +10,7 @@ const Pictures = ({
 	<Flex>
 		<Img>
 			<LazyImage
-				placeholder="https://placeholder.pics/svg/300"
+				placeholder="https://placeholder.pics/svg/500"
 				src={before_img}
 			>
 				{(src, loading, isVisible) => (
@@ -26,7 +26,7 @@ const Pictures = ({
 		</Img>
 		<Img>
 			<LazyImage
-				placeholder="https://placeholder.pics/svg/300"
+				placeholder="https://placeholder.pics/svg/500"
 				src={after_img}
 			>
 				{(src, loading, isVisible) => (

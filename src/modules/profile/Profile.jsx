@@ -7,7 +7,7 @@ import { getMyPosts, voteBefore, voteAfter } from '../feed/actions'
 import Posts from './components/Posts'
 import Empty from '../feed/components/Empty'
 
-const Profile = ({ auth, posts, voteBefore, voteAfter }) => (
+const Profile = ({ auth, posts: { data }, voteBefore, voteAfter }) => (
 	<StyledContainer as={Container}>
 		<SEO
 			url="/profile"
@@ -17,9 +17,9 @@ const Profile = ({ auth, posts, voteBefore, voteAfter }) => (
 		<Wrapper>
 			<h2>Welcome {`${auth.user.firstName} ${auth.user.lastName}`}</h2>
 			<p>@{auth.user.username}</p>
-			{posts.length > 0 ? (
+			{data.length > 0 ? (
 				<Posts
-					posts={posts}
+					posts={data}
 					user={auth.user}
 					isLoggedIn={auth.isLoggedIn}
 					voteBefore={voteBefore}
@@ -32,7 +32,7 @@ const Profile = ({ auth, posts, voteBefore, voteAfter }) => (
 
 const mapStateToProps = ({ auth, posts }) => ({
 	auth,
-	posts: posts.data
+	posts
 })
 
 const enhance = compose(
@@ -43,7 +43,7 @@ const enhance = compose(
 		}
 	}),
 	branch(
-		({ posts, auth }) => (!posts || !auth) || posts.loading,
+		({ posts, auth }) => !auth || !posts || !posts.data || posts.loading,
 		renderComponent(Loading)
 	)
 )

@@ -6,6 +6,12 @@ export default (state = { loading: false }, action) => {
 			data: action.payload,
 			loading: false
 		}
+	case 'GET_POST_BY_ID':
+		return {
+			...state,
+			post: action.payload,
+			loading: false
+		}
 	case 'FAILED_TO_GET_POSTS':
 		return {
 			...state,
@@ -44,7 +50,7 @@ export default (state = { loading: false }, action) => {
 			data: state.data.map(item => item._id === action.payload.post_id ? (
 				{
 					...item,
-					comments: [...item.comments, action.payload.newComment]
+					comments: [action.payload.newComment, ...item.comments]
 				}
 			) : item)
 		}
