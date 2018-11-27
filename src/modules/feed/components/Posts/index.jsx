@@ -2,7 +2,7 @@ import React from 'react'
 import { Post } from '../../../../components/common'
 import { Wrapper, Content } from './styles'
 
-const Posts = ({ posts, user, voteBefore, voteAfter, isLoggedIn }) => (
+const Posts = ({ posts, user, voteBefore, voteAfter, isLoggedIn, postNewComment }) => (
 	<Wrapper>
 		<Content>
 			<h2>Posts</h2>
@@ -14,6 +14,7 @@ const Posts = ({ posts, user, voteBefore, voteAfter, isLoggedIn }) => (
 					isLoggedIn={isLoggedIn}
 					voteBefore={voteBefore}
 					voteAfter={voteAfter}
+					postNewComment={postNewComment}
 				/>
 			))}
 		</Content>

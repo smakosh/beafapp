@@ -8,21 +8,23 @@ import { getUserById } from './actions'
 import Posts from './components/Posts'
 import Empty from '../feed/components/Empty'
 
-const PublicProfile = ({ profile, auth, posts, voteBefore, voteAfter }) => (
+const PublicProfile = ({
+	profile: { profile }, auth: { user, isLoggedIn }, posts: { data }, voteBefore, voteAfter
+}) => (
 	<StyledContainer as={Container}>
 		<SEO
-			url="/profile"
-			title="Profile"
-			description="Profile"
+			url={`/profile/${profile._id}`}
+			title={profile.username}
+			description={`Profile of ${profile.firstName} ${profile.lastName}`}
 		/>
 		<Wrapper>
-			<h2>{auth.user && auth.user._id === profile._id && 'Welcome'} {`${profile.firstName} ${profile.lastName}`}</h2>
+			<h2>{user && user._id === profile._id && 'Welcome'} {`${profile.firstName} ${profile.lastName}`}</h2>
 			<p>@{profile.username}</p>
-			{posts.length > 0 ? (
+			{data.length > 0 ? (
 				<Posts
-					posts={posts}
+					posts={data}
 					user={profile}
-					isLoggedIn={auth.isLoggedIn}
+					isLoggedIn={isLoggedIn}
 					voteBefore={voteBefore}
 					voteAfter={voteAfter}
 				/>
@@ -33,8 +35,8 @@ const PublicProfile = ({ profile, auth, posts, voteBefore, voteAfter }) => (
 
 const mapStateToProps = ({ profile, posts, auth }) => ({
 	auth,
-	profile: profile.profile,
-	posts: posts.data
+	profile,
+	posts
 })
 
 const enhance = compose(
@@ -46,7 +48,8 @@ const enhance = compose(
 		}
 	}),
 	branch(
-		({ posts, profile, auth }) => (!posts || !profile || !auth) || posts.loading,
+		({ posts, profile, auth }) => !auth
+			|| !profile || !profile.profile || !posts || !posts.data || posts.loading,
 		renderComponent(Loading)
 	)
 )
