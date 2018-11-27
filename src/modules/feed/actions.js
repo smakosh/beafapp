@@ -118,7 +118,7 @@ export const voteAfter = (id, user_id) => async dispatch => {
 }
 
 export const postNewComment = (
-	id, creator_id, username, comment, resetForm, setSubmitting
+	id, creator_id, creator_username, comment, resetForm, setSubmitting
 ) => async dispatch => {
 	try {
 		const today = new Date()
@@ -127,7 +127,7 @@ export const postNewComment = (
 			payload: {
 				post_id: id,
 				newComment: {
-					_id: uuidv1(), creator_id, username, date: today.toISOString(), comment
+					_id: uuidv1(), creator_id, creator_username, date: today.toISOString(), comment
 				}
 			}
 		})

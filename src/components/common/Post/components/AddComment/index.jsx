@@ -51,7 +51,7 @@ const enhance = compose(
 				postNewComment,
 				_id,
 				_creator,
-				userName
+				creator_username
 			},
 			setSubmitting,
 			resetForm
@@ -59,7 +59,7 @@ const enhance = compose(
 			postNewComment(
 				_id,
 				_creator,
-				userName,
+				creator_username,
 				comment,
 				setSubmitting,
 				resetForm

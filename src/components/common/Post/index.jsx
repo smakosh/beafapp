@@ -54,7 +54,7 @@ const Post = ({
 			<AddComment
 				_id={_id}
 				_creator={_creator}
-				userName={userName}
+				creator_username={userName}
 				postNewComment={postNewComment}
 			/>
 		)}
