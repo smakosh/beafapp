@@ -43,17 +43,6 @@ export const getPostsByUserId = id => async dispatch => {
 	}
 }
 
-export const getPostById = id => async dispatch => {
-	try {
-		await dispatch({ type: 'LOADING_POSTS' })
-
-		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/${id}`)
-		dispatch({ type: 'GET_POST_BY_ID', payload: res.data })
-	} catch (err) {
-		dispatch(failedToGetPosts(err.response.data.error))
-	}
-}
-
 export const addPost = (
 	image,
 	image_2,
@@ -122,12 +111,14 @@ export const postNewComment = (
 ) => async dispatch => {
 	try {
 		const today = new Date()
-		await axios.post(`${REACT_APP_PROD_API}/api/post/comment/${id}`, { comment })
+		const generatedID = uuidv1()
+
+		await axios.post(`${REACT_APP_PROD_API}/api/post/comment/${id}`, { comment, generatedID })
 		await dispatch({ type: 'ADD_COMMENT',
 			payload: {
 				post_id: id,
 				newComment: {
-					_id: uuidv1(), creator_id, creator_username, date: today.toISOString(), comment
+					_id: generatedID, creator_id, creator_username, date: today.toISOString(), comment
 				}
 			}
 		})
@@ -139,24 +130,16 @@ export const postNewComment = (
 	}
 }
 
-/* export const deleteComment = (
-	id, creator_id, creator_username, comment, resetForm, setSubmitting
-) => async dispatch => {
+export const deleteComment = (post_id, comment_id) => async dispatch => {
 	try {
-		const today = new Date()
-		await axios.post(`${REACT_APP_PROD_API}/api/post/comment/${id}`, { comment })
-		await dispatch({ type: 'ADD_COMMENT',
+		await axios.delete(`${REACT_APP_PROD_API}/api/post/comment/${post_id}/${comment_id}`)
+		dispatch({ type: 'DELETE_COMMENT',
 			payload: {
-				post_id: id,
-				newComment: {
-					_id: uuidv1(), creator_id, creator_username, date: today.toISOString(), comment
-				}
+				post_id,
+				comment_id
 			}
 		})
-		resetForm()
-		setSubmitting(false)
 	} catch (err) {
-		setSubmitting(false)
 		dispatch(failedToGetPosts(err.response.error))
 	}
-} */
+}

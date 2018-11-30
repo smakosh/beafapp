@@ -49,16 +49,16 @@ const enhance = compose(
 		handleSubmit: ({ comment }, {
 			props: {
 				postNewComment,
-				_id,
-				_creator,
-				creator_username
+				creator_id,
+				creator_username,
+				_id
 			},
 			setSubmitting,
 			resetForm
 		}) => {
 			postNewComment(
 				_id,
-				_creator,
+				creator_id,
 				creator_username,
 				comment,
 				setSubmitting,

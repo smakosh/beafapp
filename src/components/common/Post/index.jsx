@@ -15,16 +15,18 @@ const Post = ({
 	before_votes,
 	after_votes,
 	_creator_username,
-	userName,
 	_creator,
 	isLoggedIn,
+	userName,
 	postNewComment,
 	comments,
-	showComments
+	showComments,
+	deleteComment
 }) => (
 	<Wrapper>
 		<PostHeader
 			date={date}
+			post_id={_id}
 			_creator={_creator}
 			_creator_username={_creator_username}
 		/>
@@ -48,12 +50,14 @@ const Post = ({
 		<Comments
 			post_id={_id}
 			comments={comments}
+			userId={userId}
+			deleteComment={deleteComment}
 			showComments={showComments}
 		/>
 		{isLoggedIn && (
 			<AddComment
 				_id={_id}
-				_creator={_creator}
+				creator_id={userId}
 				creator_username={userName}
 				postNewComment={postNewComment}
 			/>

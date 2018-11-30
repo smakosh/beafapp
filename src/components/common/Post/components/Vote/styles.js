@@ -44,7 +44,7 @@ export const Floating = styled.button`
   cursor: pointer;
   transition: .3s;
 
-  ${({ isLink }) => isLink && `
+  ${({ islink }) => islink && `
     display: flex;
     justify-content: center;
   `}

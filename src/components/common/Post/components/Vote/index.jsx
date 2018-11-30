@@ -22,7 +22,7 @@ const Vote = ({
 						<img src={beforeIcon} alt="vote before" />
 					</Floating>
 				) : (
-					<Floating as={Link} to="/login" isLink="true" before="true">
+					<Floating as={Link} to="/login" islink="true" before="true">
 						<img src={beforeIcon} alt="vote before" />
 					</Floating>
 				)}
@@ -36,7 +36,7 @@ const Vote = ({
 						<img src={afterIcon} alt="vote before" />
 					</Floating>
 				) : (
-					<Floating as={Link} isLink="true" to="/login">
+					<Floating as={Link} islink="true" to="/login">
 						<img src={afterIcon} alt="vote after" />
 					</Floating>
 				)}

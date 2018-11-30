@@ -2,7 +2,15 @@ import React from 'react'
 import { Post } from '../../../../components/common'
 import { Wrapper, Content } from './styles'
 
-const Posts = ({ posts, user, voteBefore, voteAfter, isLoggedIn }) => (
+const Posts = ({
+	posts,
+	isLoggedIn,
+	user,
+	voteBefore,
+	voteAfter,
+	deleteComment,
+	postNewComment
+}) => (
 	<Wrapper>
 		<Content>
 			<h2>Posts</h2>
@@ -10,11 +18,13 @@ const Posts = ({ posts, user, voteBefore, voteAfter, isLoggedIn }) => (
 				<Post
 					{...post}
 					key={post._id}
-					userId={user._id}
+					userId={user && user._id}
 					userName={user && user.username}
 					isLoggedIn={isLoggedIn}
 					voteBefore={voteBefore}
 					voteAfter={voteAfter}
+					postNewComment={postNewComment}
+					deleteComment={deleteComment}
 				/>
 			))}
 		</Content>

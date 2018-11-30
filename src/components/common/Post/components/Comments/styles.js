@@ -9,6 +9,9 @@ export const Wrapper = styled.div`
 export const SingleComment = styled.div`
   border-bottom: 1px solid #eee;
   padding: .8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   &:last-child {
     border-bottom: unset;
@@ -19,6 +22,25 @@ export const SingleComment = styled.div`
     font-size: 8pt;
     font-weight: lighter;
   }
+`
+
+export const CommentDetails = styled.div`
+  flex: 1 auto;
+  width: 100%;
+  max-width: 88%;
+`
+
+export const Delete = styled.div`
+  flex: 1 auto;
+  width: 100%;
+  max-width: 10%;
+`
+
+export const DeleteBtn = styled.div`
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
 `
 
 export const Flex = styled.div`

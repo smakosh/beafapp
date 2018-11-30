@@ -3,13 +3,19 @@ import { connect } from 'react-redux'
 import { compose, renderComponent, branch, lifecycle } from 'recompose'
 import { Container, Loading, SEO } from '../../components/common'
 import { StyledContainer, Wrapper } from './styles'
-import { getPostsByUserId, voteBefore, voteAfter } from '../feed/actions'
+import { getPostsByUserId, voteBefore, voteAfter, postNewComment, deleteComment } from '../feed/actions'
 import { getUserById } from './actions'
 import Posts from './components/Posts'
 import Empty from '../feed/components/Empty'
 
 const PublicProfile = ({
-	profile: { profile }, auth: { user, isLoggedIn }, posts: { data }, voteBefore, voteAfter
+	profile: { profile },
+	auth: { user, isLoggedIn },
+	posts: { data },
+	voteBefore,
+	voteAfter,
+	deleteComment,
+	postNewComment
 }) => (
 	<StyledContainer as={Container}>
 		<SEO
@@ -23,10 +29,12 @@ const PublicProfile = ({
 			{data.length > 0 ? (
 				<Posts
 					posts={data}
-					user={profile}
+					user={user}
 					isLoggedIn={isLoggedIn}
 					voteBefore={voteBefore}
 					voteAfter={voteAfter}
+					postNewComment={postNewComment}
+					deleteComment={deleteComment}
 				/>
 			) : <Empty />}
 		</Wrapper>
@@ -40,7 +48,14 @@ const mapStateToProps = ({ profile, posts, auth }) => ({
 })
 
 const enhance = compose(
-	connect(mapStateToProps, { getPostsByUserId, getUserById, voteBefore, voteAfter }),
+	connect(mapStateToProps, {
+		getPostsByUserId,
+		getUserById,
+		voteBefore,
+		voteAfter,
+		postNewComment,
+		deleteComment
+	}),
 	lifecycle({
 		async componentWillMount() {
 			await this.props.getUserById(this.props.match.params.user_id)

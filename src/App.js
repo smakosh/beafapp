@@ -14,7 +14,7 @@ import Register from './modules/auth/Register'
 import Profile from './modules/profile/Profile'
 import PublicProfile from './modules/profile/PublicProfile'
 import Feed from './modules/feed/Feed'
-import PostPage from './modules/feed/PostPage'
+import PostPage from './modules/post/PostPage'
 import AddPost from './modules/feed/AddPost'
 import { NotFound } from './components/common'
 

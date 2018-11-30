@@ -8,12 +8,14 @@ TimeAgo.addLocale(en)
 
 const timeAgo = new TimeAgo('en-US')
 
-const PostHeader = ({ _creator, _creator_username, date }) => (
+const PostHeader = ({ _creator, _creator_username, date, post_id }) => (
 	<UserInfo>
 		<h2>
 			<Link to={`/profile/${_creator}`}>{_creator_username}</Link>
 		</h2>
-		<p>{timeAgo.format(Date.parse(date))}</p>
+		<Link to={`/post/${post_id}`}>
+			<p>{timeAgo.format(Date.parse(date))}</p>
+		</Link>
 	</UserInfo>
 )
 

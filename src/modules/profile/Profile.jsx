@@ -3,15 +3,17 @@ import { connect } from 'react-redux'
 import { compose, renderComponent, branch, lifecycle } from 'recompose'
 import { Container, Loading, SEO } from '../../components/common'
 import { Wrapper, StyledContainer } from './styles'
-import { getMyPosts, voteBefore, voteAfter } from '../feed/actions'
+import { getMyPosts, voteBefore, voteAfter, postNewComment, deleteComment } from '../feed/actions'
 import Posts from './components/Posts'
 import Empty from '../feed/components/Empty'
 
-const Profile = ({ auth, posts: { data }, voteBefore, voteAfter }) => (
+const Profile = ({
+	auth, posts: { data }, voteBefore, voteAfter, deleteComment, postNewComment
+}) => (
 	<StyledContainer as={Container}>
 		<SEO
 			url="/profile"
-			title="Profile"
+			title={auth.user.username}
 			description="Profile"
 		/>
 		<Wrapper>
@@ -24,6 +26,8 @@ const Profile = ({ auth, posts: { data }, voteBefore, voteAfter }) => (
 					isLoggedIn={auth.isLoggedIn}
 					voteBefore={voteBefore}
 					voteAfter={voteAfter}
+					postNewComment={postNewComment}
+					deleteComment={deleteComment}
 				/>
 			) : <Empty />}
 		</Wrapper>
@@ -36,7 +40,13 @@ const mapStateToProps = ({ auth, posts }) => ({
 })
 
 const enhance = compose(
-	connect(mapStateToProps, { getMyPosts, voteBefore, voteAfter }),
+	connect(mapStateToProps, {
+		getMyPosts,
+		voteBefore,
+		voteAfter,
+		postNewComment,
+		deleteComment
+	}),
 	lifecycle({
 		componentWillMount() {
 			this.props.getMyPosts()

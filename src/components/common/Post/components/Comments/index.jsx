@@ -2,13 +2,14 @@ import React from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import { Link } from 'react-router-dom'
-import { Wrapper, SingleComment, Flex, More } from './styles'
+import { Wrapper, SingleComment, Flex, More, CommentDetails, Delete, DeleteBtn } from './styles'
+import deleteIcon from '../../assets/delete.svg'
 
 TimeAgo.addLocale(en)
 
 const timeAgo = new TimeAgo('en-US')
 
-const Comments = ({ post_id, comments, showComments }) => {
+const Comments = ({ post_id, comments, showComments, userId, deleteComment }) => {
 	const replies = showComments ? comments : comments.slice(0, 3)
 	return (
 		<Wrapper>
@@ -16,11 +17,26 @@ const Comments = ({ post_id, comments, showComments }) => {
 				.sort((a, b) => (a.date < b.date ? 1 : -1))
 				.map(({ _id, creator_id, creator_username, comment, date }) => (
 					<SingleComment key={_id}>
-						<Flex>
-							<Link to={`/profile/${creator_id}`}>{creator_username}</Link>
-							<p>{comment}</p>
-						</Flex>
-						<i>{timeAgo.format(Date.parse(date))}</i>
+						<CommentDetails>
+							<Flex>
+								<Link to={`/profile/${creator_id}`}>{creator_username}</Link>
+								<p>{comment}</p>
+							</Flex>
+							<i>{timeAgo.format(Date.parse(date))}</i>
+						</CommentDetails>
+						{userId === creator_id && (
+							<Delete>
+								<DeleteBtn
+									type="button"
+									onClick={() => deleteComment(post_id, _id)}
+								>
+									<img
+										src={deleteIcon}
+										alt="delete post"
+									/>
+								</DeleteBtn>
+							</Delete>
+						)}
 					</SingleComment>
 				))}
 			{!showComments && comments.length > 3 && (
