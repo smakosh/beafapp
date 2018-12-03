@@ -21,6 +21,15 @@ export const getPosts = () => async dispatch => {
 	}
 }
 
+export const deletePost = id => async dispatch => {
+	try {
+		await axios.delete(`${REACT_APP_PROD_API}/api/post/${id}`)
+		window.location.reload()
+	} catch (err) {
+		dispatch(failedToGetPosts(err.response.data.error))
+	}
+}
+
 export const getMyPosts = () => async dispatch => {
 	try {
 		await dispatch({ type: 'LOADING_POSTS' })

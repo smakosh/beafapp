@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { compose, renderComponent, branch, lifecycle } from 'recompose'
 import { Container, Loading, SEO } from '../../components/common'
 import { StyledContainer, Wrapper } from './styles'
-import { getPostsByUserId, voteBefore, voteAfter, postNewComment, deleteComment } from '../feed/actions'
+import { getPostsByUserId, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from '../feed/actions'
 import { getUserById } from './actions'
 import Posts from './components/Posts'
 import Empty from '../feed/components/Empty'
@@ -15,7 +15,8 @@ const PublicProfile = ({
 	voteBefore,
 	voteAfter,
 	deleteComment,
-	postNewComment
+	postNewComment,
+	deletePost
 }) => (
 	<StyledContainer as={Container}>
 		<SEO
@@ -35,6 +36,7 @@ const PublicProfile = ({
 					voteAfter={voteAfter}
 					postNewComment={postNewComment}
 					deleteComment={deleteComment}
+					deletePost={deletePost}
 				/>
 			) : <Empty />}
 		</Wrapper>
@@ -54,7 +56,8 @@ const enhance = compose(
 		voteBefore,
 		voteAfter,
 		postNewComment,
-		deleteComment
+		deleteComment,
+		deletePost
 	}),
 	lifecycle({
 		async componentWillMount() {

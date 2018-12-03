@@ -41,6 +41,10 @@ export const DeleteBtn = styled.div`
   background: none;
   border: none;
   cursor: pointer;
+
+  ${({ right }) => right && `
+    text-align: right;
+  `}
 `
 
 export const Flex = styled.div`

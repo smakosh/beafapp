@@ -1,6 +1,8 @@
 import React from 'react'
 import { Wrapper } from './styles'
-import { PostHeader, Pictures, Content, Vote, Comments, AddComment } from './components'
+import { Pictures, Content, Vote, AddComment } from './components'
+import Comments from './components/Comments'
+import PostHeader from './components/PostHeader'
 
 const Post = ({
 	_id,
@@ -21,14 +23,17 @@ const Post = ({
 	postNewComment,
 	comments,
 	showComments,
-	deleteComment
+	deleteComment,
+	deletePost
 }) => (
 	<Wrapper>
 		<PostHeader
 			date={date}
 			post_id={_id}
 			_creator={_creator}
+			userId={userId}
 			_creator_username={_creator_username}
+			deletePost={deletePost}
 		/>
 		<Pictures
 			before_img={before_img}
