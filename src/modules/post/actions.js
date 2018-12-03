@@ -1,5 +1,6 @@
 import axios from 'axios'
 import uuidv1 from 'uuid/v1'
+import { history } from '../../App'
 
 const { REACT_APP_PROD_API } = process.env
 
@@ -14,6 +15,15 @@ export const getPostById = id => async dispatch => {
 
 		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/${id}`)
 		dispatch({ type: 'GET_POST_BY_ID', payload: res.data })
+	} catch (err) {
+		dispatch(failedToGetPosts(err.response.data.error))
+	}
+}
+
+export const deletePost = id => async dispatch => {
+	try {
+		await axios.delete(`${REACT_APP_PROD_API}/api/post/${id}`)
+		history.push('/')
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))
 	}

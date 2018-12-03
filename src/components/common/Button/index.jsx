@@ -10,6 +10,16 @@ const Button = styled.button`
     border: none;
     cursor: pointer;
     font-size: 12pt;
+
+    ${({ confirm }) => confirm && `
+        background-color: #2291cc;
+    `}
+
+    ${({ cancel }) => cancel && `
+        border: none;
+        color: gray;
+        background: unset;
+    `}
 `
 
 export { Button }

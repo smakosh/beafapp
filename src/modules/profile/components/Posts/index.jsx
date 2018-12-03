@@ -9,7 +9,8 @@ const Posts = ({
 	voteBefore,
 	voteAfter,
 	deleteComment,
-	postNewComment
+	postNewComment,
+	deletePost
 }) => (
 	<Wrapper>
 		<Content>
@@ -25,6 +26,7 @@ const Posts = ({
 					voteAfter={voteAfter}
 					postNewComment={postNewComment}
 					deleteComment={deleteComment}
+					deletePost={deletePost}
 				/>
 			))}
 		</Content>

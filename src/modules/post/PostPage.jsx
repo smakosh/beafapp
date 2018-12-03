@@ -1,12 +1,18 @@
 import React from 'react'
 import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
-import { getPostById, voteBefore, voteAfter, postNewComment, deleteComment } from './actions'
+import { getPostById, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from './actions'
 import { Loading, Container, SEO, Post } from '../../components/common'
 import { Wrapper } from './styles'
 
 const PostPage = ({
-	auth, singlePost, voteBefore, voteAfter, postNewComment, deleteComment
+	auth,
+	singlePost,
+	voteBefore,
+	voteAfter,
+	postNewComment,
+	deleteComment,
+	deletePost
 }) => (
 	<Wrapper as={Container}>
 		<SEO
@@ -23,6 +29,7 @@ const PostPage = ({
 			voteAfter={voteAfter}
 			postNewComment={postNewComment}
 			deleteComment={deleteComment}
+			deletePost={deletePost}
 			showComments
 		/>
 	</Wrapper>
@@ -34,7 +41,14 @@ const mapStateToProps = ({ singlePost, auth }) => ({
 })
 
 const enhance = compose(
-	connect(mapStateToProps, { getPostById, voteBefore, voteAfter, postNewComment, deleteComment }),
+	connect(mapStateToProps, {
+		getPostById,
+		voteBefore,
+		voteAfter,
+		postNewComment,
+		deleteComment,
+		deletePost
+	}),
 	lifecycle({
 		componentWillMount() {
 			this.props.getPostById(this.props.match.params.post_id)

@@ -1,13 +1,20 @@
 import React from 'react'
 import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
-import { getPosts, voteBefore, voteAfter, postNewComment, deleteComment } from './actions'
+import { getPosts, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from './actions'
 import { Loading, Container, SEO } from '../../components/common'
 import Posts from './components/Posts'
 import Empty from './components/Empty'
 import { Wrapper } from './styles'
 
-const Feed = ({ auth, posts: { data }, voteBefore, voteAfter, postNewComment, deleteComment }) => (
+const Feed = ({
+	auth, posts: { data },
+	voteBefore,
+	voteAfter,
+	postNewComment,
+	deleteComment,
+	deletePost
+}) => (
 	<Wrapper as={Container}>
 		<SEO
 			url="/"
@@ -23,6 +30,7 @@ const Feed = ({ auth, posts: { data }, voteBefore, voteAfter, postNewComment, de
 				voteAfter={voteAfter}
 				postNewComment={postNewComment}
 				deleteComment={deleteComment}
+				deletePost={deletePost}
 			/>
 		) : <Empty />}
 	</Wrapper>
@@ -34,7 +42,7 @@ const mapStateToProps = ({ posts, auth }) => ({
 })
 
 const enhance = compose(
-	connect(mapStateToProps, { getPosts, voteBefore, voteAfter, postNewComment, deleteComment }),
+	connect(mapStateToProps, { getPosts, voteBefore, voteAfter, postNewComment, deleteComment, deletePost }),
 	lifecycle({
 		componentWillMount() {
 			this.props.getPosts()
