@@ -1,5 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import ReactGA from 'react-ga'
 
 const { REACT_APP_URL, REACT_APP_NAME } = process.env
 
@@ -7,6 +8,11 @@ const SEO = ({
 	url,
 	title,
 	description }) => {
+	const initializeReactGA = () => {
+		ReactGA.initialize('UA-88875900-3')
+		ReactGA.pageview(url)
+	}
+	initializeReactGA()
 	return (
 		<Helmet>
 			{/* TODO: Add structured data <script type="application/ld+json">{structuredData}</script> */}
