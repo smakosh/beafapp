@@ -19,6 +19,7 @@ const PostPage = ({
 			url={`/post/${singlePost.post._id}`}
 			title={singlePost.post.title}
 			description={singlePost.post.description}
+			cover={singlePost.post.before_img}
 		/>
 		<Post
 			{...singlePost.post}

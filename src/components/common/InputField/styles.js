@@ -12,12 +12,21 @@ export const Wrapper = styled.div`
         -webkit-appearance: none;
         transition: all 0.2s ease 0s;
         border-width: 2px;
-        border-color: #FF6347;
+        border-color: #191847;
         border-style: solid;
         border-radius: 7px;
         padding: .9rem 1rem;
         font-size: 12pt;
     }
+
+    ${({ flex }) => flex && `
+        width: 100%;
+        max-width: 48%;
+
+        @media (max-width: 960px) {
+            max-width: 100%;
+        }
+    `}
 `
 
 export const Label = styled.label`

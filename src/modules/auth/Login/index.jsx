@@ -41,7 +41,7 @@ const Login = ({
 				</Center>
 			</Form>
 			<Center>
-				<p>Don't have an account? no worries! <Link to="/register">Create one</Link></p>
+				<p>Don't have an account? no worries! <Link style={{ color: '#2B85FF', textDecoration: 'underline' }} to="/register">Create one</Link></p>
 			</Center>
 		</Card>
 	</Container>

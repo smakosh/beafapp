@@ -26,47 +26,47 @@ const Comments = ({
 	const replies = showComments ? comments : comments.slice(0, 3)
 	return (
 		<>
-		<Wrapper>
-			{replies
-				.sort((a, b) => (a.date < b.date ? 1 : -1))
-				.map(({ _id, creator_id, creator_username, comment, date }) => (
-					<SingleComment key={_id}>
-						<CommentDetails>
-							<Flex>
-								<Link to={`/profile/${creator_id}`}>{creator_username}</Link>
-								<p>{comment}</p>
-							</Flex>
-							<i>{timeAgo.format(Date.parse(date))}</i>
-						</CommentDetails>
-						{userId === creator_id && (
-							<Delete>
-								<DeleteBtn
-									type="button"
-									onClick={() => setComment(post_id, _id)}
-								>
-									<img
-										src={deleteIcon}
-										alt="delete post"
-									/>
-								</DeleteBtn>
-							</Delete>
-						)}
-					</SingleComment>
-				))}
-			{!showComments && comments.length > 3 && (
-				<More>
-					<Link to={`/post/${post_id}`}>More comments</Link>
-				</More>
+			<Wrapper>
+				{replies
+					.sort((a, b) => (a.date < b.date ? 1 : -1))
+					.map(({ _id, creator_id, creator_username, comment, date }) => (
+						<SingleComment key={_id}>
+							<CommentDetails>
+								<Flex>
+									<Link to={`/profile/${creator_id}`}>{creator_username}</Link>
+									<p>{comment}</p>
+								</Flex>
+								<i>{timeAgo.format(Date.parse(date))}</i>
+							</CommentDetails>
+							{userId === creator_id && (
+								<Delete>
+									<DeleteBtn
+										type="button"
+										onClick={() => setComment(post_id, _id)}
+									>
+										<img
+											src={deleteIcon}
+											alt="delete post"
+										/>
+									</DeleteBtn>
+								</Delete>
+							)}
+						</SingleComment>
+					))}
+				{!showComments && comments.length > 3 && (
+					<More>
+						<Link to={`/post/${post_id}`}>More comments</Link>
+					</More>
+				)}
+			</Wrapper>
+			{isVisible && (
+				<Modal
+					title="Are you sure you want to delete this comment?"
+					action="Confirm"
+					onPress={() => confirm(state_post_id, state_id, showModal)}
+					cancel={showModal}
+				/>
 			)}
-		</Wrapper>
-		{isVisible && (
-			<Modal
-				title="Are you sure you want to delete this comment?"
-				action="Confirm"
-				onPress={() => confirm(state_post_id, state_id, showModal)}
-				cancel={showModal}
-			/>
-		)}
 		</>
 	)
 }

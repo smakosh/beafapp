@@ -30,18 +30,27 @@ export const Content = styled.div`
   background: #fff;
 
   @media screen {
-    padding: 1rem;
+    padding: .5rem;
   }
 `
 
 export const Actions = styled.div`
   display: flex;
   align-items: center;
-  padding: 1rem 0;
+  padding: .5rem 0;
   border-top: 1px solid #eee;
   flex-direction: row-reverse;
 
   button:first-child {
     margin-left: 1rem;
+  }
+`
+
+export const Message = styled.div`
+  padding: 2rem 1rem;
+  text-align: left;
+
+  p {
+    color: #888787;
   }
 `

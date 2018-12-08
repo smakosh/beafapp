@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import { withFormik, Form, Field } from 'formik'
 import { register } from '../actions'
 import { Container, Button, InputField, Error, SEO } from '../../../components/common'
-import { Card, Center, Wrapper } from '../styles'
+import { Card, Center, Wrapper, Flex } from '../styles'
 
 const Register = ({
 	errors,
@@ -22,19 +22,21 @@ const Register = ({
 		/>
 		<Card register>
 			<Form>
-				<InputField label="firstName">
-					<Field type="text" name="firstName" />
-					{errors.firstName && touched.firstName && <Error>{errors.firstName}</Error>}
-				</InputField>
-				<InputField label="lastName">
-					<Field type="text" name="lastName" />
-					{errors.lastName && touched.lastName && <Error>{errors.lastName}</Error>}
-				</InputField>
-				<InputField label="username">
+				<Flex>
+					<InputField flex label="First name">
+						<Field type="text" name="firstName" />
+						{errors.firstName && touched.firstName && <Error>{errors.firstName}</Error>}
+					</InputField>
+					<InputField flex label="Surname">
+						<Field type="text" name="lastName" />
+						{errors.lastName && touched.lastName && <Error>{errors.lastName}</Error>}
+					</InputField>
+				</Flex>
+				<InputField label="Username">
 					<Field type="text" name="username" />
 					{errors.username && touched.username && <Error>{errors.username}</Error>}
 				</InputField>
-				<InputField label="Email">
+				<InputField label="Email address">
 					<Field type="email" name="email" />
 					{errors.email && touched.email && <Error>{errors.email}</Error>}
 				</InputField>
@@ -53,7 +55,7 @@ const Register = ({
 				</Center>
 			</Form>
 			<Center>
-				<p>Already registered? <Link to="/">Login</Link></p>
+				<p>Already registered? <Link style={{ color: '#2B85FF', textDecoration: 'underline' }} to="/login">Login</Link></p>
 			</Center>
 		</Card>
 	</Wrapper>

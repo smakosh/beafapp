@@ -19,3 +19,13 @@ export const Center = styled.div`
 export const Wrapper = styled.div`
     padding: 2rem 0;
 `
+
+export const Flex = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 960px) {
+        flex-direction: column;   
+    }
+`

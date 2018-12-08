@@ -1,5 +1,5 @@
 import React from 'react'
-import { Overlay, Wrapper, Content, Actions } from './styles'
+import { Overlay, Wrapper, Content, Actions, Message } from './styles'
 import { Button } from '../../common'
 
 const Modal = ({
@@ -12,8 +12,10 @@ const Modal = ({
 	<Overlay>
 		<Wrapper>
 			<Content>
-				<h2>{title}</h2>
-				{description && <p>{description}</p>}
+				<Message>
+					<p>{title}</p>
+					{description && <p>{description}</p>}
+				</Message>
 				<Actions>
 					<Button type="button" onClick={onPress} confirm>{action}</Button>
 					<Button type="button" onClick={cancel} cancel>Cancel</Button>
