@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
     padding: 1rem 0;
 
-    input {
+    input, textarea {
         width: 100%;
         margin-top: 1rem;
         margin-bottom: 1rem;
@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
         border-radius: 7px;
         padding: .9rem 1rem;
         font-size: 12pt;
+        resize: unset;
     }
 
     ${({ flex }) => flex && `

@@ -62,7 +62,7 @@ const AddPost = ({
 					{errors.title && touched.title && <Error>{errors.title}</Error>}
 				</InputField>
 				<InputField label="Description">
-					<Field type="text" name="description" />
+					<Field component="textarea" rows="8" type="text" name="description" />
 					{errors.description && touched.description && <Error>{errors.description}</Error>}
 				</InputField>
 				<Center>
