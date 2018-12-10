@@ -49,6 +49,18 @@ export const Floating = styled.button`
     justify-content: center;
   `}
 
+  ${({ voted, before }) => voted && !before && `
+    box-shadow: 0 5px 10px 0 #536DFE;
+    transform: scale(1.1);
+    transition: .3s;
+  `}
+
+  ${({ voted, before }) => voted && before && `
+    box-shadow: 0 5px 10px 0 #FF6347;
+    transform: scale(1.1);
+    transition: .3s;
+  `}
+
   @media (max-width: 680px) {
     width: 40px;
     height: 40px;
