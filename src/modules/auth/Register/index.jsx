@@ -2,7 +2,7 @@ import React from 'react'
 import Spinner from 'react-spinkit'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose, lifecycle } from 'recompose'
 import * as Yup from 'yup'
 import { withFormik, Form, Field } from 'formik'
 import { register } from '../actions'
@@ -12,7 +12,8 @@ import { Card, Center, Wrapper, Flex } from '../styles'
 const Register = ({
 	errors,
 	touched,
-	isSubmitting
+	isSubmitting,
+	values
 }) => (
 	<Wrapper as={Container}>
 		<SEO
@@ -37,7 +38,7 @@ const Register = ({
 					{errors.username && touched.username && <Error>{errors.username}</Error>}
 				</InputField>
 				<InputField label="Email address">
-					<Field type="email" name="email" />
+					<Field value={values.email} type="email" name="email" />
 					{errors.email && touched.email && <Error>{errors.email}</Error>}
 				</InputField>
 				<InputField label="Password">
@@ -63,13 +64,21 @@ const Register = ({
 
 const enhance = compose(
 	connect(null, { register }),
+	lifecycle({
+		componentDidMount() {
+			const url = new URL(window.location.href)
+			const email = url.searchParams.get('email')
+			this.setState({ email })
+		}
+	}),
 	withFormik({
-		mapPropsToValues() {
+		enableReinitialize: true,
+		mapPropsToValues: ({ email }) => {
 		  return {
 				firstName: '',
 				lastName: '',
 				username: '',
-				email: '',
+				email: email || '',
 				password: ''
 		  }
 		},
