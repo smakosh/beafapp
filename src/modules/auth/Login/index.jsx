@@ -55,8 +55,10 @@ const enhance = compose(
 			password: ''
 		}),
 		validationSchema: () => Yup.object().shape({
-			email: Yup.string().email('E-mail is invalid!').required(),
-			password: Yup.string().min(6, 'Password has to be longer than 6 characters!').required()
+			email: Yup.string().email('Invalid email')
+				.required('Required field'),
+			password: Yup.string().min(6, 'Password has to be longer than 6 characters!')
+				.required('Required field')
 		}),
 		handleSubmit: (values, { props, setErrors, setSubmitting, resetForm }) => {
 			const payload = {

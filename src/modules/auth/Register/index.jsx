@@ -25,24 +25,24 @@ const Register = ({
 			<Form>
 				<Flex>
 					<InputField flex label="First name">
-						<Field type="text" name="firstName" />
+						<Field autoComplete="off" type="text" name="firstName" />
 						{errors.firstName && touched.firstName && <Error>{errors.firstName}</Error>}
 					</InputField>
 					<InputField flex label="Surname">
-						<Field type="text" name="lastName" />
+						<Field autoComplete="off" type="text" name="lastName" />
 						{errors.lastName && touched.lastName && <Error>{errors.lastName}</Error>}
 					</InputField>
 				</Flex>
 				<InputField label="Username">
-					<Field type="text" name="username" />
+					<Field autoComplete="off" type="text" name="username" />
 					{errors.username && touched.username && <Error>{errors.username}</Error>}
 				</InputField>
 				<InputField label="Email address">
-					<Field value={values.email} type="email" name="email" />
+					<Field autoComplete="off" value={values.email} type="email" name="email" />
 					{errors.email && touched.email && <Error>{errors.email}</Error>}
 				</InputField>
 				<InputField label="Password">
-					<Field type="password" name="password" />
+					<Field autoComplete="off" type="password" name="password" />
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
 				</InputField>
 				<Center>
@@ -83,11 +83,16 @@ const enhance = compose(
 		  }
 		},
 		validationSchema: () => Yup.object().shape({
-			firstName: Yup.string().min(2, 'Password has to be longer than 2 characters!').required(),
-			lastName: Yup.string().min(2, 'Password has to be longer than 2 characters!').required(),
-			username: Yup.string().min(2, 'Password has to be longer than 2 characters!').required(),
-			email: Yup.string().email('E-mail is not valid!').required(),
-			password: Yup.string().min(6, 'Password has to be longer than 6 characters!').required()
+			firstName: Yup.string().min(2, 'Password has to be longer than 2 characters!')
+				.required('Required field'),
+			lastName: Yup.string().min(2, 'Password has to be longer than 2 characters!')
+				.required('Required field'),
+			username: Yup.string().min(2, 'Password has to be longer than 2 characters!')
+				.required('Required field'),
+			email: Yup.string().email('E-mail is not valid!')
+				.required('Required field'),
+			password: Yup.string().min(6, 'Password has to be longer than 6 characters!')
+				.required('Required field')
 		}),
 		handleSubmit(values, { props: { register }, setErrors, setSubmitting, resetForm }) {
 			register(values, setErrors, setSubmitting, resetForm)

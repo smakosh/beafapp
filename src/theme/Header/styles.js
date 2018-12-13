@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const StyledHeader = styled.div`
 	background: #fff;
 	width: 100%;
-	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.03);
+	box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 `
 
 export const Overlay = styled.div`
