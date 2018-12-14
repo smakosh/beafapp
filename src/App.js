@@ -38,13 +38,13 @@ const AppRoutes = () => (
 				<Header />
 				<Switch>
 					<Route path="/" exact component={Feed} />
-					<Route path="/login" component={Login} />
-					<Route path="/register" component={Register} />
+					<Public path="/login" component={Login} />
+					<Public path="/register" component={Register} />
 					<Private path="/profile" exact component={Profile} />
 					<Route path="/profile/:user_id" component={PublicProfile} />
 					<Route path="/post/:post_id" component={PostPage} />
 					<Private path="/add-post" component={AddPost} />
-					<Public component={NotFound} />
+					<Route component={NotFound} />
 				</Switch>
 			</>
 		</Router>

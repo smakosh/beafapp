@@ -1,11 +1,31 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Route, Redirect } from 'react-router-dom'
+import { compose, branch, renderComponent } from 'recompose'
+import { Loading } from '../components/common'
 
-const Public = ({ component: Component, ...rest }) => (
+const Public = ({ auth, component: Component, ...rest }) => (
 	<Route
 		{...rest}
-		render={props => <Component {...props} />}
+		render={props => (auth.isLoggedIn ? (
+			<Redirect to="/" />
+		) : (
+			<Component {...props} />
+		))
+		}
 	/>
 )
 
-export default Public
+const mapStateToProps = ({ auth }) => ({
+	auth
+})
+
+const enhance = compose(
+	connect(mapStateToProps),
+	branch(
+		({ auth }) => (auth.loading === undefined || auth.loading),
+		renderComponent(Loading)
+	)
+)
+
+export default enhance(Public)
