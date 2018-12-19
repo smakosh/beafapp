@@ -2,18 +2,20 @@ import React from 'react'
 import Spinner from 'react-spinkit'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { compose, lifecycle } from 'recompose'
+import { compose, lifecycle, withState } from 'recompose'
 import * as Yup from 'yup'
 import { withFormik, Form, Field } from 'formik'
 import { register } from '../actions'
 import { Container, Button, InputField, Error, SEO } from '../../../components/common'
-import { Card, Center, Wrapper, Flex } from '../styles'
+import { Card, Center, Wrapper, Show } from '../styles'
 
 const Register = ({
 	errors,
 	touched,
 	isSubmitting,
-	values
+	values,
+	visible,
+	showPassword
 }) => (
 	<Wrapper as={Container}>
 		<SEO
@@ -23,26 +25,51 @@ const Register = ({
 		/>
 		<Card register>
 			<Form>
-				<Flex>
-					<InputField flex label="First name">
-						<Field autoComplete="off" type="text" name="firstName" />
-						{errors.firstName && touched.firstName && <Error>{errors.firstName}</Error>}
-					</InputField>
-					<InputField flex label="Surname">
-						<Field autoComplete="off" type="text" name="lastName" />
-						{errors.lastName && touched.lastName && <Error>{errors.lastName}</Error>}
-					</InputField>
-				</Flex>
-				<InputField label="Username">
-					<Field autoComplete="off" type="text" name="username" />
+				<InputField error={errors.firstName && touched.firstName} label="First name">
+					<Field
+						autoComplete="off"
+						type="text"
+						placeholder="First name"
+						name="firstName"
+					/>
+					{errors.firstName && touched.firstName && <Error>{errors.firstName}</Error>}
+				</InputField>
+				<InputField error={errors.lastName && touched.lastName} label="Surname">
+					<Field
+						autoComplete="off"
+						type="text"
+						placeholder="Last name"
+						name="lastName"
+					/>
+					{errors.lastName && touched.lastName && <Error>{errors.lastName}</Error>}
+				</InputField>
+				<InputField error={errors.username && touched.username} label="Username">
+					<Field
+						autoComplete="off"
+						type="text"
+						placeholder="Username"
+						name="username"
+					/>
 					{errors.username && touched.username && <Error>{errors.username}</Error>}
 				</InputField>
-				<InputField label="Email address">
-					<Field autoComplete="off" value={values.email} type="email" name="email" />
+				<InputField error={errors.email && touched.email} label="Email address">
+					<Field
+						autoComplete="off"
+						value={values.email}
+						placeholder="Your email address"
+						type="email"
+						name="email"
+					/>
 					{errors.email && touched.email && <Error>{errors.email}</Error>}
 				</InputField>
-				<InputField label="Password">
-					<Field autoComplete="off" type="password" name="password" />
+				<InputField relative error={errors.password && touched.password} label="Password">
+					{values.password.length > 2 && <Show type="button" onClick={() => showPassword(!visible)}>Show</Show>}
+					<Field
+						autoComplete="off"
+						type={visible ? 'text' : 'password'}
+						placeholder="Password must contain more than 6 characters"
+						name="password"
+					/>
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
 				</InputField>
 				<Center>
@@ -64,6 +91,7 @@ const Register = ({
 
 const enhance = compose(
 	connect(null, { register }),
+	withState('visible', 'showPassword', false),
 	lifecycle({
 		componentDidMount() {
 			const url = new URL(window.location.href)

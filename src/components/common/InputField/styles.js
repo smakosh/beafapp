@@ -3,6 +3,10 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
     padding: 1rem 0;
 
+    ${({ relative }) => relative && `
+        position: relative;
+    `}
+
     input, textarea {
         width: 100%;
         margin-top: 1rem;
@@ -18,16 +22,11 @@ export const Wrapper = styled.div`
         padding: .9rem 1rem;
         font-size: 12pt;
         resize: unset;
+        
+        ${({ error }) => error && `
+            border-color: red;
+        `}
     }
-
-    ${({ flex }) => flex && `
-        width: 100%;
-        max-width: 48%;
-
-        @media (max-width: 960px) {
-            max-width: 100%;
-        }
-    `}
 `
 
 export const Label = styled.label`

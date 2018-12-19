@@ -1,8 +1,8 @@
 import React from 'react'
 import { Wrapper, Label } from './styles'
 
-const InputField = ({ label, children, flex }) => (
-	<Wrapper flex={flex}>
+const InputField = ({ label, children, error, relative }) => (
+	<Wrapper error={error} relative={relative}>
 		<Label>{label}</Label>
 		{children}
 	</Wrapper>

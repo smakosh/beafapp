@@ -1,18 +1,21 @@
 import React from 'react'
 import Spinner from 'react-spinkit'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
+import { compose, withState } from 'recompose'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { withFormik, Form, Field } from 'formik'
 import { login } from '../actions'
 import { Container, Button, InputField, Error, SEO } from '../../../components/common'
-import { Card, Center } from '../styles'
+import { Card, Center, Show } from '../styles'
 
 const Login = ({
 	errors,
 	touched,
-	isSubmitting
+	isSubmitting,
+	showPassword,
+	visible,
+	values
 }) => (
 	<Container vertical>
 		<SEO
@@ -22,12 +25,13 @@ const Login = ({
 		/>
 		<Card>
 			<Form>
-				<InputField label="Email">
-					<Field type="email" name="email" />
+				<InputField label="Email" error={errors.email && touched.email}>
+					<Field type="email" name="email" placeholder="Email" />
 					{errors.email && touched.email && <Error>{errors.email}</Error>}
 				</InputField>
-				<InputField label="Password">
-					<Field type="password" name="password" />
+				<InputField relative label="Password" error={errors.password && touched.password}>
+					{values.password.length > 2 && <Show type="button" onClick={() => showPassword(!visible)}>Show</Show>}
+					<Field type={visible ? 'text' : 'password'} name="password" placeholder="Password" />
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
 				</InputField>
 				<Center>
@@ -49,6 +53,7 @@ const Login = ({
 
 const enhance = compose(
 	connect(null, { login }),
+	withState('visible', 'showPassword', false),
 	withFormik({
 		mapPropsToValues: () => ({
 			email: '',
