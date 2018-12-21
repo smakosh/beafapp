@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Entertainment",
+    "value": "entertainment"
+  },
+  {
+    "label": "Sports",
+    "value": "sports"
+  },
+  {
+    "label": "Politics",
+    "value": "politics"
+  },
+  {
+    "label": "Gaming",
+    "value": "gaming"
+  },
+  {
+    "label": "Movies",
+    "value": "movies"
+  },
+  {
+    "label": "Memes",
+    "value": "memes"
+  }
+]
