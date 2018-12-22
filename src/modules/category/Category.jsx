@@ -1,13 +1,14 @@
 import React from 'react'
 import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
-import { getPosts, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from './actions'
+import { getPostsByCategory, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from '../feed/actions'
 import { Loading, Container, SEO } from '../../components/common'
-import Posts from './components/Posts'
-import Empty from './components/Empty'
+import Posts from '../feed/components/Posts'
+import Empty from '../feed/components/Empty'
 import { Wrapper } from './styles'
 
-const Feed = ({
+const Category = ({
+	match,
 	auth,
 	posts: { data },
 	voteBefore,
@@ -18,9 +19,9 @@ const Feed = ({
 }) => (
 	<Wrapper as={Container}>
 		<SEO
-			url="/"
-			title="Feed"
-			description="Feed"
+			url={`/category/${match.params.category}`}
+			title={match.params.category}
+			description="Category"
 		/>
 		{data.length > 0 ? (
 			<Posts
@@ -44,11 +45,20 @@ const mapStateToProps = ({ posts, auth }) => ({
 
 const enhance = compose(
 	connect(mapStateToProps,
-		{ getPosts, voteBefore, voteAfter, postNewComment, deleteComment, deletePost }
+		{ getPostsByCategory, voteBefore, voteAfter, postNewComment, deleteComment, deletePost }
 	),
 	lifecycle({
 		componentWillMount() {
-			this.props.getPosts()
+			this.props.getPostsByCategory(this.props.match.params.category)
+		},
+		componentWillReceiveProps(nextProps) {
+			if (nextProps.posts.errors === 'Invalid category') {
+				this.props.history.push('/404')
+			}
+
+			if (nextProps.match.params.category !== this.props.match.params.category) {
+				this.props.getPostsByCategory(nextProps.match.params.category)
+			}
 		}
 	}),
 	branch(
@@ -57,4 +67,4 @@ const enhance = compose(
 	)
 )
 
-export default enhance(Feed)
+export default enhance(Category)

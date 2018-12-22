@@ -7,12 +7,12 @@ import Sidebar from './Sidebar'
 import { StyledHeader, Overlay } from './styles'
 import { logout } from '../../modules/auth/actions'
 
-const Header = ({ sidebar, toggle, logout, auth }) => (
+const Header = ({ sidebar, toggle, logout, auth, history }) => (
 	<StyledHeader>
 		<Overlay sidebar={sidebar} onClick={toggle} />
-		<Navbar auth={auth} logout={logout} />
+		<Navbar history={history} auth={auth} logout={logout} />
 		<Hamburger sidebar={sidebar} toggle={toggle} />
-		<Sidebar auth={auth} logout={logout} sidebar={sidebar} toggle={toggle} />
+		<Sidebar history={history} auth={auth} logout={logout} sidebar={sidebar} toggle={toggle} />
 	</StyledHeader>
 )
 

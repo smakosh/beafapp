@@ -14,6 +14,7 @@ import Register from './modules/auth/Register'
 import Profile from './modules/profile/Profile'
 import PublicProfile from './modules/profile/PublicProfile'
 import Feed from './modules/feed/Feed'
+import Category from './modules/category/Category'
 import PostPage from './modules/post/PostPage'
 import AddPost from './modules/feed/AddPost'
 import { NotFound } from './components/common'
@@ -35,9 +36,10 @@ const AppRoutes = () => (
 		<Router history={history}>
 			<>
 				<GlobalStyle />
-				<Header />
+				<Header history={history} />
 				<Switch>
 					<Route path="/" exact component={Feed} />
+					<Route path="/category/:category" component={Category} />
 					<Public path="/login" component={Login} />
 					<Public path="/register" component={Register} />
 					<Private path="/profile" exact component={Profile} />

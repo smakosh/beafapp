@@ -20,8 +20,7 @@ const AddPost = ({
 	preview,
 	preview_2,
 	setFieldValue,
-	setFieldTouched,
-	values
+	setFieldTouched
 }) => (
 	<Wrapper as={Container}>
 		<Card>

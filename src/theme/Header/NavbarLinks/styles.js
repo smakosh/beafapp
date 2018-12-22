@@ -1,30 +1,42 @@
 import styled from 'styled-components'
 
 export const Links = styled.div`
+	${({ desktop }) => (desktop ? `
+		display: flex;
+		align-items: center;
 
-    ${({ desktop }) => (desktop ? `
-        @media (max-width: 960px) {
-            display: none;
-        }
+		.css-vj8t7z, .css-2o5izw {
+				width: 150px;
+				margin: 0 .5rem;
+		}
 
-        a {
-            margin-right: 1rem;
+		@media (max-width: 960px) {
+				display: none;
+		}
 
-            &:last-child {
-                margin-right: unset;
-            }
-        }
-    ` : `
-        padding: 3rem;
-        display: flex;
-        flex-direction: column;
+		a {
+				margin-right: 1rem;
 
-        a {
-            margin-bottom: 1rem;
+				&:last-child {
+						margin-right: unset;
+				}
+		}
+	` : `
+		padding: 3rem;
+		display: flex;
+		flex-direction: column;
 
-            &:last-child {
-                margin-bottom: unset;
-            }
-        }
-    `)}
+		.css-vj8t7z, .css-2o5izw {
+				width: 100%;
+				margin: 0 0 1rem 0;
+		}
+
+		a {
+				margin-bottom: 1rem;
+
+				&:last-child {
+						margin-bottom: unset;
+				}
+		}
+	`)}
 `
