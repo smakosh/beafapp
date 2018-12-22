@@ -4,10 +4,12 @@ import * as Yup from 'yup'
 import { Field, Form, withFormik } from 'formik'
 import { compose, withStateHandlers } from 'recompose'
 import { connect } from 'react-redux'
+import Select from 'react-select'
 import { addPost } from '../actions'
 import { InputField, Error, Container, Button } from '../../../components/common'
-import { Card, Center, Flex, Item, Wrapper, Label } from './styles'
+import { Card, Center, Flex, Item, Wrapper, Label, CustomSelect } from './styles'
 import UploadIcon from '../assets/upload.svg'
+import categories from './categories.json'
 
 const AddPost = ({
 	touched,
@@ -16,7 +18,9 @@ const AddPost = ({
 	uploadFileAfter,
 	uploadFileBefore,
 	preview,
-	preview_2
+	preview_2,
+	setFieldValue,
+	setFieldTouched
 }) => (
 	<Wrapper as={Container}>
 		<Card>
@@ -61,6 +65,17 @@ const AddPost = ({
 					<Field type="text" name="title" />
 					{errors.title && touched.title && <Error>{errors.title}</Error>}
 				</InputField>
+				<InputField label="Category">
+					<CustomSelect
+						as={Field}
+						component={Select}
+						options={categories}
+						onChange={({ value }) => setFieldValue('category', value)}
+						onBlur={() => setFieldTouched('category')}
+						name="category"
+					/>
+					{errors.category && touched.category && <Error>{errors.category}</Error>}
+				</InputField>
 				<InputField label="Description">
 					<Field component="textarea" rows="8" type="text" name="description" />
 					{errors.description && touched.description && <Error>{errors.description}</Error>}
@@ -78,6 +93,7 @@ const AddPost = ({
 		</Card>
 	</Wrapper>
 )
+
 
 const enhance = compose(
 	connect(null, { addPost }),
@@ -130,7 +146,8 @@ const enhance = compose(
 	withFormik({
 		mapPropsToValues: () => ({
 			title: '',
-			description: ''
+			description: '',
+			category: ''
 		}),
 		validationSchema: () => Yup.object().shape({
 			title: Yup.string()
@@ -139,7 +156,8 @@ const enhance = compose(
 			description: Yup.string()
 				.min(2, 'Description has to be longer than 2 characters!')
 				.max(40, 'Description has to be smaller than 40 characters!')
-				.required()
+				.required(),
+			category: Yup.string().required('You must select a category')
 		}),
 		handleSubmit: (values, {
 			props: {

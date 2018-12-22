@@ -53,6 +53,15 @@ const enhance = compose(
 	lifecycle({
 		componentWillMount() {
 			this.props.getPostById(this.props.match.params.post_id)
+		},
+		componentWillReceiveProps(nextProps) {
+			if (nextProps.singlePost.errors === 'Invalid ID') {
+				this.props.history.push('/404')
+			}
+
+			if (nextProps.match.params.post_id !== this.props.match.params.post_id) {
+				this.props.getPostById(nextProps.match.params.post_id)
+			}
 		}
 	}),
 	branch(

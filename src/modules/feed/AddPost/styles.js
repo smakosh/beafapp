@@ -119,3 +119,7 @@ export const Label = styled.label`
 		}
 	`}
 `
+
+export const CustomSelect = styled.div`
+	margin-top: 1rem;
+`

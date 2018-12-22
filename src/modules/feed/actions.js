@@ -21,6 +21,17 @@ export const getPosts = () => async dispatch => {
 	}
 }
 
+export const getPostsByCategory = category => async dispatch => {
+	try {
+		dispatch({ type: 'LOADING_POSTS' })
+
+		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/category/${category}`)
+		dispatch({ type: 'GET_POSTS', payload: res.data })
+	} catch (err) {
+		dispatch(failedToGetPosts(err.response.data.error))
+	}
+}
+
 export const deletePost = id => async dispatch => {
 	try {
 		await axios.delete(`${REACT_APP_PROD_API}/api/post/${id}`)
@@ -62,6 +73,29 @@ export const addPost = (
 ) => async dispatch => {
 	try {
 		dispatch({ type: 'LOADING_POSTS' })
+
+		const categories = [
+			'entertainment',
+			'sports',
+			'politics',
+			'gaming',
+			'movies',
+			'memes',
+			'automotive',
+			'fashion',
+			'food',
+			'tech',
+			'science',
+			'animals',
+			'photography',
+			'travel'
+		]
+
+		if (!categories.includes(payload.category)) {
+			return setErrors({
+				category: 'Invalid category'
+			})
+		}
 
 		const config = {
 			headers: {
