@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { compose, withState } from 'recompose'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
-import { withFormik, Form, Field } from 'formik'
+import { withFormik, Form, FastField } from 'formik'
+import Recaptcha from 'react-google-recaptcha'
 import { login } from '../actions'
 import { Container, Button, InputField, Error, SEO } from '../../../components/common'
 import { Card, Center, Show } from '../styles'
@@ -15,7 +16,8 @@ const Login = ({
 	isSubmitting,
 	showPassword,
 	visible,
-	values
+	values,
+	setFieldValue
 }) => (
 	<Container vertical>
 		<SEO
@@ -26,13 +28,22 @@ const Login = ({
 		<Card>
 			<Form>
 				<InputField label="Email" error={errors.email && touched.email}>
-					<Field type="email" name="email" placeholder="Email" />
+					<FastField type="email" name="email" placeholder="Email" />
 					{errors.email && touched.email && <Error>{errors.email}</Error>}
 				</InputField>
 				<InputField relative label="Password" error={errors.password && touched.password}>
 					{values.password.length > 2 && <Show type="button" onClick={() => showPassword(!visible)}>Show</Show>}
-					<Field type={visible ? 'text' : 'password'} name="password" placeholder="Password" />
+					<FastField type={visible ? 'text' : 'password'} name="password" placeholder="Password" />
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
+				</InputField>
+				<InputField>
+					<FastField
+						component={Recaptcha}
+						sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
+						name="recaptcha"
+						onChange={value => setFieldValue('recaptcha', value)}
+					/>
+					{errors.recaptcha && touched.recaptcha && <Error>{errors.recaptcha}</Error>}
 				</InputField>
 				<Center>
 					<Button type="submit" disabled={isSubmitting}>
@@ -57,13 +68,15 @@ const enhance = compose(
 	withFormik({
 		mapPropsToValues: () => ({
 			email: '',
-			password: ''
+			password: '',
+			recaptcha: ''
 		}),
 		validationSchema: () => Yup.object().shape({
 			email: Yup.string().email('Invalid email')
 				.required('Required field'),
 			password: Yup.string().min(6, 'Password has to be longer than 6 characters!')
-				.required('Required field')
+				.required('Required field'),
+			recaptcha: Yup.string().required('Robots are not welcome yet! maybe soon 😊')
 		}),
 		handleSubmit: (values, { props, setErrors, setSubmitting, resetForm }) => {
 			const payload = {

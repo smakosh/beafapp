@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, lifecycle, withState } from 'recompose'
 import * as Yup from 'yup'
-import { withFormik, Form, Field } from 'formik'
+import { withFormik, Form, FastField } from 'formik'
+import Recaptcha from 'react-google-recaptcha'
 import { register } from '../actions'
 import { Container, Button, InputField, Error, SEO } from '../../../components/common'
 import { Card, Center, Wrapper, Show } from '../styles'
@@ -15,7 +16,8 @@ const Register = ({
 	isSubmitting,
 	values,
 	visible,
-	showPassword
+	showPassword,
+	setFieldValue
 }) => (
 	<Wrapper as={Container}>
 		<SEO
@@ -26,7 +28,7 @@ const Register = ({
 		<Card register>
 			<Form>
 				<InputField error={errors.firstName && touched.firstName} label="First name">
-					<Field
+					<FastField
 						autoComplete="off"
 						type="text"
 						placeholder="First name"
@@ -35,7 +37,7 @@ const Register = ({
 					{errors.firstName && touched.firstName && <Error>{errors.firstName}</Error>}
 				</InputField>
 				<InputField error={errors.lastName && touched.lastName} label="Surname">
-					<Field
+					<FastField
 						autoComplete="off"
 						type="text"
 						placeholder="Last name"
@@ -44,7 +46,7 @@ const Register = ({
 					{errors.lastName && touched.lastName && <Error>{errors.lastName}</Error>}
 				</InputField>
 				<InputField error={errors.username && touched.username} label="Username">
-					<Field
+					<FastField
 						autoComplete="off"
 						type="text"
 						placeholder="Username"
@@ -53,7 +55,7 @@ const Register = ({
 					{errors.username && touched.username && <Error>{errors.username}</Error>}
 				</InputField>
 				<InputField error={errors.email && touched.email} label="Email address">
-					<Field
+					<FastField
 						autoComplete="off"
 						value={values.email}
 						placeholder="Your email address"
@@ -64,13 +66,22 @@ const Register = ({
 				</InputField>
 				<InputField relative error={errors.password && touched.password} label="Password">
 					{values.password.length > 2 && <Show type="button" onClick={() => showPassword(!visible)}>Show</Show>}
-					<Field
+					<FastField
 						autoComplete="off"
 						type={visible ? 'text' : 'password'}
 						placeholder="Password must contain more than 6 characters"
 						name="password"
 					/>
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
+				</InputField>
+				<InputField>
+					<FastField
+						component={Recaptcha}
+						sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
+						name="recaptcha"
+						onChange={value => setFieldValue('recaptcha', value)}
+					/>
+					{errors.recaptcha && touched.recaptcha && <Error>{errors.recaptcha}</Error>}
 				</InputField>
 				<Center>
 					<Button type="submit" disabled={isSubmitting}>
@@ -107,7 +118,8 @@ const enhance = compose(
 				lastName: '',
 				username: '',
 				email: email || '',
-				password: ''
+				password: '',
+				recaptcha: ''
 		  }
 		},
 		validationSchema: () => Yup.object().shape({
@@ -120,7 +132,8 @@ const enhance = compose(
 			email: Yup.string().email('E-mail is not valid!')
 				.required('Required field'),
 			password: Yup.string().min(6, 'Password has to be longer than 6 characters!')
-				.required('Required field')
+				.required('Required field'),
+			recaptcha: Yup.string().required('Robots are not welcome yet! maybe soon 😊')
 		}),
 		handleSubmit(values, { props: { register }, setErrors, setSubmitting, resetForm }) {
 			register(values, setErrors, setSubmitting, resetForm)
