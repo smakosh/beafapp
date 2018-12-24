@@ -78,12 +78,14 @@ const enhance = compose(
 				.required('Required field'),
 			recaptcha: Yup.string().required('Robots are not welcome yet! maybe soon 😊')
 		}),
-		handleSubmit: (values, { props, setErrors, setSubmitting, resetForm }) => {
+		handleSubmit: (
+			{ email, password },
+			{ props: { login }, setErrors, setSubmitting, resetForm }) => {
 			const payload = {
-				email: values.email,
-				password: values.password
+				email,
+				password
 			}
-			props.login(payload, setErrors, setSubmitting, resetForm)
+			login(payload, setErrors, setSubmitting, resetForm)
 		}
 	})
 )
