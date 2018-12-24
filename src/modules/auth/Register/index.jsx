@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, lifecycle, withState } from 'recompose'
 import * as Yup from 'yup'
-import { withFormik, Form, FastField } from 'formik'
+import { withFormik, Form, Field } from 'formik'
 import Recaptcha from 'react-google-recaptcha'
 import { register } from '../actions'
 import { Container, Button, InputField, Error, SEO } from '../../../components/common'
@@ -28,7 +28,7 @@ const Register = ({
 		<Card register>
 			<Form>
 				<InputField error={errors.firstName && touched.firstName} label="First name">
-					<FastField
+					<Field
 						autoComplete="off"
 						type="text"
 						placeholder="First name"
@@ -37,7 +37,7 @@ const Register = ({
 					{errors.firstName && touched.firstName && <Error>{errors.firstName}</Error>}
 				</InputField>
 				<InputField error={errors.lastName && touched.lastName} label="Surname">
-					<FastField
+					<Field
 						autoComplete="off"
 						type="text"
 						placeholder="Last name"
@@ -46,7 +46,7 @@ const Register = ({
 					{errors.lastName && touched.lastName && <Error>{errors.lastName}</Error>}
 				</InputField>
 				<InputField error={errors.username && touched.username} label="Username">
-					<FastField
+					<Field
 						autoComplete="off"
 						type="text"
 						placeholder="Username"
@@ -55,7 +55,7 @@ const Register = ({
 					{errors.username && touched.username && <Error>{errors.username}</Error>}
 				</InputField>
 				<InputField error={errors.email && touched.email} label="Email address">
-					<FastField
+					<Field
 						autoComplete="off"
 						value={values.email}
 						placeholder="Your email address"
@@ -66,7 +66,7 @@ const Register = ({
 				</InputField>
 				<InputField relative error={errors.password && touched.password} label="Password">
 					{values.password.length > 2 && <Show type="button" onClick={() => showPassword(!visible)}>Show</Show>}
-					<FastField
+					<Field
 						autoComplete="off"
 						type={visible ? 'text' : 'password'}
 						placeholder="Password must contain more than 6 characters"
@@ -75,7 +75,7 @@ const Register = ({
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
 				</InputField>
 				<InputField>
-					<FastField
+					<Field
 						component={Recaptcha}
 						sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
 						name="recaptcha"

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { compose, withState } from 'recompose'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
-import { withFormik, Form, FastField } from 'formik'
+import { withFormik, Form, Field } from 'formik'
 import Recaptcha from 'react-google-recaptcha'
 import { login } from '../actions'
 import { Container, Button, InputField, Error, SEO } from '../../../components/common'
@@ -28,16 +28,16 @@ const Login = ({
 		<Card>
 			<Form>
 				<InputField label="Email" error={errors.email && touched.email}>
-					<FastField type="email" name="email" placeholder="Email" />
+					<Field type="email" name="email" placeholder="Email" />
 					{errors.email && touched.email && <Error>{errors.email}</Error>}
 				</InputField>
 				<InputField relative label="Password" error={errors.password && touched.password}>
 					{values.password.length > 2 && <Show type="button" onClick={() => showPassword(!visible)}>Show</Show>}
-					<FastField type={visible ? 'text' : 'password'} name="password" placeholder="Password" />
+					<Field type={visible ? 'text' : 'password'} name="password" placeholder="Password" />
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
 				</InputField>
 				<InputField>
-					<FastField
+					<Field
 						component={Recaptcha}
 						sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
 						name="recaptcha"
