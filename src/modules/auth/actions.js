@@ -58,7 +58,6 @@ export const register = (payload, setErrors, setSubmitting, resetForm) => async 
 
 export const login = (payload, setErrors, setSubmitting, resetForm) => async dispatch => {
 	try {
-		console.log(payload)
 		const res = await axios.post(`${REACT_APP_PROD_API}/api/user/login`, payload)
 		const { token, user } = res.data
 		await dispatch({ type: 'LOADING_USER' })
@@ -85,7 +84,7 @@ export const login = (payload, setErrors, setSubmitting, resetForm) => async dis
 			})
 		}
 		setSubmitting(false)
-		resetForm()
+		resetForm(false)
 		dispatch(authFailed(err.response.data))
 	}
 }

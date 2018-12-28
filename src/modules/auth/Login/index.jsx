@@ -36,17 +36,15 @@ const Login = ({
 					<Field type={visible ? 'text' : 'password'} name="password" placeholder="Password" />
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
 				</InputField>
-				{values.email && values.password && (
-					<InputField>
-						<Field
-							component={Recaptcha}
-							sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
-							name="recaptcha"
-							onChange={value => setFieldValue('recaptcha', value)}
-						/>
-						{errors.recaptcha && touched.recaptcha && <Error>{errors.recaptcha}</Error>}
-					</InputField>
-				)}
+				<InputField>
+					<Field
+						component={Recaptcha}
+						sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
+						name="recaptcha"
+						onChange={value => setFieldValue('recaptcha', value)}
+					/>
+					{errors.recaptcha && touched.recaptcha && <Error>{errors.recaptcha}</Error>}
+				</InputField>
 				<Center>
 					<Button type="submit" disabled={isSubmitting}>
 						{isSubmitting ? (
@@ -69,10 +67,10 @@ const enhance = compose(
 	withState('visible', 'showPassword', false),
 	withFormik({
 		enableReinitialize: true,
-		mapPropsToValues: () => ({
+		mapPropsToValues: ({ recaptcha }) => ({
 			email: '',
 			password: '',
-			recaptcha: ''
+			recaptcha: recaptcha || ''
 		}),
 		validationSchema: () => Yup.object().shape({
 			email: Yup.string().email('Invalid email').required('Required field'),
