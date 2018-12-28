@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import Select from 'react-select'
 import { Button } from '../../../components/common'
-import { Links } from './styles'
+import { Links, Avatar } from './styles'
 import categories from './categories.json'
 
 const NavbarLinks = ({ desktop, logout, auth, history }) => (
@@ -12,6 +12,12 @@ const NavbarLinks = ({ desktop, logout, auth, history }) => (
 			exact
 			activeStyle={{ color: '#FF6347' }}
 		>Feed</NavLink>
+		{auth && auth.isLoggedIn && (
+			<NavLink
+				to="/add-post"
+				activeStyle={{ color: '#FF6347' }}
+			>New Post</NavLink>
+		)}
 		<Select
 			placeholder="Categories"
 			component={Select}
@@ -20,17 +26,17 @@ const NavbarLinks = ({ desktop, logout, auth, history }) => (
 			name="category"
 		/>
 		{auth && auth.isLoggedIn && (
-			<NavLink
-				to="/add-post"
-				activeStyle={{ color: '#FF6347' }}
-			>New Post</NavLink>
-		)}
-		{auth && auth.isLoggedIn && (
-			<NavLink
+			<Avatar
+				as={NavLink}
 				to="/profile"
 				exact
-				activeStyle={{ color: '#FF6347' }}
-			>Profile</NavLink>
+				activeStyle={{ borderColor: '#FF6347' }}
+			>
+				<img
+					src={auth.user.avatar}
+					alt={auth.user.username}
+				/>
+			</Avatar>
 		)}
 		{auth && auth.isLoggedIn ? (
 			<Button type="button" onClick={logout}>

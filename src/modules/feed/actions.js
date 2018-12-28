@@ -72,7 +72,7 @@ export const addPost = (
 	resetForm
 ) => async dispatch => {
 	try {
-		dispatch({ type: 'LOADING_POSTS' })
+		await dispatch({ type: 'LOADING_POSTS' })
 
 		const categories = [
 			'entertainment',

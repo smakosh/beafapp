@@ -36,15 +36,17 @@ const Login = ({
 					<Field type={visible ? 'text' : 'password'} name="password" placeholder="Password" />
 					{errors.password && touched.password && <Error>{errors.password}</Error>}
 				</InputField>
-				<InputField>
-					<Field
-						component={Recaptcha}
-						sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
-						name="recaptcha"
-						onChange={value => setFieldValue('recaptcha', value)}
-					/>
-					{errors.recaptcha && touched.recaptcha && <Error>{errors.recaptcha}</Error>}
-				</InputField>
+				{values.email && values.password && (
+					<InputField>
+						<Field
+							component={Recaptcha}
+							sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
+							name="recaptcha"
+							onChange={value => setFieldValue('recaptcha', value)}
+						/>
+						{errors.recaptcha && touched.recaptcha && <Error>{errors.recaptcha}</Error>}
+					</InputField>
+				)}
 				<Center>
 					<Button type="submit" disabled={isSubmitting}>
 						{isSubmitting ? (
@@ -66,24 +68,25 @@ const enhance = compose(
 	connect(null, { login }),
 	withState('visible', 'showPassword', false),
 	withFormik({
+		enableReinitialize: true,
 		mapPropsToValues: () => ({
 			email: '',
 			password: '',
 			recaptcha: ''
 		}),
 		validationSchema: () => Yup.object().shape({
-			email: Yup.string().email('Invalid email')
-				.required('Required field'),
-			password: Yup.string().min(6, 'Password has to be longer than 6 characters!')
-				.required('Required field'),
+			email: Yup.string().email('Invalid email').required('Required field'),
+			password: Yup.string().required('Required field'),
 			recaptcha: Yup.string().required('Robots are not welcome yet! maybe soon 😊')
 		}),
-		handleSubmit: (values, { props, setErrors, setSubmitting, resetForm }) => {
+		handleSubmit: (
+			{ email, password },
+			{ props: { login }, setErrors, setSubmitting, resetForm }) => {
 			const payload = {
-				email: values.email,
-				password: values.password
+				email,
+				password
 			}
-			props.login(payload, setErrors, setSubmitting, resetForm)
+			login(payload, setErrors, setSubmitting, resetForm)
 		}
 	})
 )

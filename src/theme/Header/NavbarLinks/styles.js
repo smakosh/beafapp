@@ -40,3 +40,18 @@ export const Links = styled.div`
 		}
 	`)}
 `
+
+export const Avatar = styled.a`
+	border: 2px solid #eee;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+
+	img {
+		width: 40px;
+		height: 40px;
+		object-fit: contain;
+		border-radius: 50%;
+	}
+`
