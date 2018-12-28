@@ -19,6 +19,8 @@ const Profile = ({
 		<Wrapper>
 			<ProfileDetails
 				loggedIn={auth.isLoggedIn}
+				userId={auth.user._id}
+				profileId={auth.user._id}
 				avatar={auth.user.avatar}
 				firstName={auth.user.firstName}
 				lastName={auth.user.lastName}

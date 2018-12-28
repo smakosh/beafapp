@@ -27,6 +27,8 @@ const PublicProfile = ({
 		<Wrapper>
 			<ProfileDetails
 				loggedIn={user && isLoggedIn}
+				userId={user && user._id}
+				profileId={profile._id}
 				avatar={profile.avatar}
 				firstName={profile.firstName}
 				lastName={profile.lastName}
