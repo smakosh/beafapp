@@ -13,6 +13,7 @@ import Login from './modules/auth/Login'
 import Register from './modules/auth/Register'
 import Profile from './modules/profile/Profile'
 import PublicProfile from './modules/profile/PublicProfile'
+import EditProfile from './modules/profile/EditProfile'
 import Feed from './modules/feed/Feed'
 import Category from './modules/category/Category'
 import PostPage from './modules/post/PostPage'
@@ -43,6 +44,7 @@ const AppRoutes = () => (
 					<Public path="/login" component={Login} />
 					<Public path="/register" component={Register} />
 					<Private path="/profile" exact component={Profile} />
+					<Private path="/profile/edit" exact component={EditProfile} />
 					<Route path="/profile/:user_id" component={PublicProfile} />
 					<Route path="/post/:post_id" component={PostPage} />
 					<Private path="/add-post" component={AddPost} />

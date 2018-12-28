@@ -14,12 +14,11 @@ const Profile = ({
 		<SEO
 			url="/profile"
 			title={auth.user.username}
-			description="Profile"
+			description={auth.user.bio}
 		/>
 		<Wrapper>
 			<ProfileDetails
 				loggedIn={auth.isLoggedIn}
-				profileId={auth.user._id}
 				avatar={auth.user.avatar}
 				firstName={auth.user.firstName}
 				lastName={auth.user.lastName}

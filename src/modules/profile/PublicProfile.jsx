@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch, lifecycle } from 'recompose'
-import { Container, Loading, SEO } from '../../components/common'
+import { Container, Loading, SEO, ProfileDetails } from '../../components/common'
 import { StyledContainer, Wrapper } from './styles'
 import { getPostsByUserId, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from '../feed/actions'
 import { getUserById } from './actions'
@@ -22,11 +22,17 @@ const PublicProfile = ({
 		<SEO
 			url={`/profile/${profile._id}`}
 			title={profile.username}
-			description={`Profile of ${profile.firstName} ${profile.lastName}`}
+			description={profile.bio}
 		/>
 		<Wrapper>
-			<h2>{user && user._id === profile._id && 'Welcome'} {`${profile.firstName} ${profile.lastName}`}</h2>
-			<p>@{profile.username}</p>
+			<ProfileDetails
+				loggedIn={user && isLoggedIn}
+				avatar={profile.avatar}
+				firstName={profile.firstName}
+				lastName={profile.lastName}
+				username={profile.username}
+				bio={profile.bio}
+			/>
 			{data.length > 0 ? (
 				<Posts
 					posts={data}

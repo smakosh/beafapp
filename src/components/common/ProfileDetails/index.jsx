@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Wrapper, Flex, Avatar, Details } from './styles'
 import { Button } from '../../common'
 
-export const ProfileDetails = ({ loggedIn, profileId, avatar, firstName, lastName, username, bio = '404 Bio not found!' }) => (
+export const ProfileDetails = ({ loggedIn, avatar, firstName, lastName, username, bio = '404 Bio not found!' }) => (
 	<Wrapper>
 		<Flex>
 			<Details>
@@ -18,7 +18,7 @@ export const ProfileDetails = ({ loggedIn, profileId, avatar, firstName, lastNam
 			/>
 		</Flex>
 		{loggedIn && (
-			<Button as={Link} to={`/profile/edit/${profileId}`}>Edit Profile</Button>
+			<Button as={Link} to="/profile/edit">Edit Profile</Button>
 		)}
 	</Wrapper>
 )

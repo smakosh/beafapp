@@ -152,10 +152,11 @@ const enhance = compose(
 		validationSchema: () => Yup.object().shape({
 			title: Yup.string()
 				.min(2, 'Title has to be longer than 2 characters!')
+				.max(40, 'Title has to be less than 40 characters!')
 				.required(),
 			description: Yup.string()
 				.min(2, 'Description has to be longer than 2 characters!')
-				.max(40, 'Description has to be smaller than 40 characters!')
+				.max(120, 'Description has to be less than 120 characters!')
 				.required(),
 			category: Yup.string().required('You must select a category')
 		}),

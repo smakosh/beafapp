@@ -123,15 +123,18 @@ const enhance = compose(
 		  }
 		},
 		validationSchema: () => Yup.object().shape({
-			firstName: Yup.string().min(2, 'Password has to be longer than 2 characters!')
+			firstName: Yup.string().min(2, 'First name has to be longer than 2 characters!')
+				.max(20, 'First name has to be less than 20 characters')
 				.required('Required field'),
-			lastName: Yup.string().min(2, 'Password has to be longer than 2 characters!')
+			lastName: Yup.string().min(2, 'Last name has to be longer than 2 characters!')
+				.max(20, 'Last name has to be less than 20 characters')
 				.required('Required field'),
-			username: Yup.string().min(2, 'Password has to be longer than 2 characters!')
+			username: Yup.string().min(5, 'Username has to be longer than 5 characters!')
+				.max(20, 'Username has to be less than 20 characters')
 				.required('Required field'),
 			email: Yup.string().email('E-mail is not valid!')
 				.required('Required field'),
-			password: Yup.string().min(6, 'Password has to be longer than 6 characters!')
+			password: Yup.string().min(6, 'Password has to be longer than 6 characters!').max(20, 'Password has to be less than 20 characters!')
 				.required('Required field'),
 			recaptcha: Yup.string().required('Robots are not welcome yet! maybe soon 😊')
 		}),

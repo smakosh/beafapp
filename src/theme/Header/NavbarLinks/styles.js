@@ -42,7 +42,7 @@ export const Links = styled.div`
 `
 
 export const Avatar = styled.a`
-	border: 1px solid #eee;
+	border: 2px solid #eee;
 	border-radius: 50%;
 	width: 40px;
 	height: 40px;
@@ -50,8 +50,7 @@ export const Avatar = styled.a`
 
 	img {
 		width: 40px;
-		height: 41px;
-		padding-top: .3rem;
+		height: 40px;
 		object-fit: contain;
 		border-radius: 50%;
 	}

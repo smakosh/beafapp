@@ -8,6 +8,10 @@ export const Wrapper = styled.div`
   @media (max-width: 960px) {
     width: 90%;
   }
+
+  @media (max-width: 680px) {
+   text-align: center;
+  }
 `
 
 export const Flex = styled.div`
@@ -15,6 +19,10 @@ export const Flex = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
+
+  @media (max-width: 680px) {
+   flex-direction: column; 
+  }
 `
 
 export const Avatar = styled.a`
@@ -25,6 +33,10 @@ export const Avatar = styled.a`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+
+  @media (max-width: 680px) {
+   order: 1;
+  }
   
   ${({ avatar }) => avatar && `
     background-image: url('${avatar}');
@@ -33,6 +45,11 @@ export const Avatar = styled.a`
 
 export const Details = styled.div`
   padding-right: 1rem;
+
+  @media (max-width: 680px) {
+   order: 2;
+   text-align: center;
+  }
 
   h2 {
     margin-bottom: .2rem;
