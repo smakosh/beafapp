@@ -28,6 +28,9 @@ export const getPostsByCategory = category => async dispatch => {
 	try {
 		dispatch({ type: 'LOADING_POSTS' })
 
+		if (localStorage.jwtToken) {
+			axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
+		}
 		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/category/${category}`)
 		dispatch({ type: 'GET_POSTS', payload: res.data })
 	} catch (err) {
