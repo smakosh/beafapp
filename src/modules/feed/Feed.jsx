@@ -22,7 +22,7 @@ const Feed = ({
 			title="Feed"
 			description="Feed"
 		/>
-		{data.length > 0 ? (
+		 {data.length > 0 ? (
 			<Posts
 				posts={data}
 				user={auth.user}
@@ -47,7 +47,7 @@ const enhance = compose(
 		{ getPosts, voteBefore, voteAfter, postNewComment, deleteComment, deletePost }
 	),
 	lifecycle({
-		componentWillMount() {
+		componentDidMount() {
 			this.props.getPosts()
 		}
 	}),

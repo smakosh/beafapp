@@ -123,3 +123,12 @@ export const Label = styled.label`
 export const CustomSelect = styled.div`
 	margin-top: 1rem;
 `
+
+export const CustomSwitch = styled.div`
+	vertical-align: middle;
+  margin-left: 4px;
+`
+
+export const MacroWrapper = styled.div`
+	margin-top: 1rem;
+`

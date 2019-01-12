@@ -97,7 +97,7 @@ export const logout = () => async dispatch => {
 		localStorage.removeItem('jwtToken')
 		setAuthToken(false)
 		dispatch(({ type: 'SAVE_USER', payload: {} }))
-		history.push('/')
+		history.push('/login')
 	} catch (err) {
 		console.log(err)
 	}

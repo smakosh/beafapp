@@ -58,6 +58,11 @@ export default (state = { loading: false }, action) => {
 				}
 			) : item)
 		}
+	case 'DELETE_POST':
+		return {
+			...state,
+			data: state.data.filter(item => item._id !== action.payload.post_id)
+		}
 	case 'LOADING_POSTS':
 		return {
 			loading: true

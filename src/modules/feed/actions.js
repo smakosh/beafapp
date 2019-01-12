@@ -14,6 +14,9 @@ export const getPosts = () => async dispatch => {
 	try {
 		dispatch({ type: 'LOADING_POSTS' })
 
+		if (localStorage.jwtToken) {
+			axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
+		}
 		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/all`)
 		dispatch({ type: 'GET_POSTS', payload: res.data })
 	} catch (err) {
@@ -35,7 +38,7 @@ export const getPostsByCategory = category => async dispatch => {
 export const deletePost = id => async dispatch => {
 	try {
 		await axios.delete(`${REACT_APP_PROD_API}/api/post/${id}`)
-		window.location.reload()
+		dispatch({ type: 'DELETE_POST', payload: { post_id: id } })
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))
 	}

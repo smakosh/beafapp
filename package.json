@@ -19,6 +19,7 @@
     "react-select": "^2.1.2",
     "react-simple-tooltip": "^2.3.3",
     "react-spinkit": "^3.0.0",
+    "react-switch": "^3.0.4",
     "recompose": "^0.30.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
