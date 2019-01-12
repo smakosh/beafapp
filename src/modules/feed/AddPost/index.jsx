@@ -1,19 +1,19 @@
 import React from 'react'
 import Spinner from 'react-spinkit'
 import * as Yup from 'yup'
-import { Field, Form, withFormik } from 'formik'
+import { Field, Form, withFormik, ErrorMessage } from 'formik'
 import { compose, withStateHandlers } from 'recompose'
 import { connect } from 'react-redux'
 import Select from 'react-select'
+import Switch from 'react-switch'
 import { addPost } from '../actions'
 import { InputField, Error, Container, Button } from '../../../components/common'
-import { Card, Center, Flex, Item, Wrapper, Label, CustomSelect } from './styles'
+import { Card, Center, Flex, Item, Wrapper, Label, CustomSelect, CustomSwitch, MacroWrapper } from './styles'
 import UploadIcon from '../assets/upload.svg'
 import categories from './categories.json'
 
 const AddPost = ({
-	touched,
-	errors,
+	values,
 	isSubmitting,
 	uploadFileAfter,
 	uploadFileBefore,
@@ -63,7 +63,7 @@ const AddPost = ({
 				</Flex>
 				<InputField label="Title">
 					<Field type="text" name="title" />
-					{errors.title && touched.title && <Error>{errors.title}</Error>}
+					<ErrorMessage component={Error} name="title" />
 				</InputField>
 				<InputField label="Category">
 					<CustomSelect
@@ -74,11 +74,27 @@ const AddPost = ({
 						onBlur={() => setFieldTouched('category')}
 						name="category"
 					/>
-					{errors.category && touched.category && <Error>{errors.category}</Error>}
+					<ErrorMessage component={Error} name="category" />
 				</InputField>
 				<InputField label="Description">
 					<Field component="textarea" rows="8" type="text" name="description" />
-					{errors.description && touched.description && <Error>{errors.description}</Error>}
+					<ErrorMessage component={Error} name="description" />
+				</InputField>
+				<InputField label={!values.private ? 'Public' : 'Private'}>
+					<MacroWrapper>
+						<CustomSwitch
+							as={Field}
+							component={Switch}
+							onChange={() => setFieldValue('private', !values.private)}
+							onBlur={() => setFieldTouched('private')}
+							name="private"
+							uncheckedIcon={false}
+							checkedIcon={false}
+							checked={values.private}
+							id="normal-switch"
+						/>
+					</MacroWrapper>
+					<ErrorMessage component={Error} name="private" />
 				</InputField>
 				<Center>
 					<Button type="submit" disabled={isSubmitting}>
@@ -147,7 +163,8 @@ const enhance = compose(
 		mapPropsToValues: () => ({
 			title: '',
 			description: '',
-			category: ''
+			category: '',
+			private: false
 		}),
 		validationSchema: () => Yup.object().shape({
 			title: Yup.string()
@@ -158,7 +175,8 @@ const enhance = compose(
 				.min(2, 'Description has to be longer than 2 characters!')
 				.max(120, 'Description has to be less than 120 characters!')
 				.required(),
-			category: Yup.string().required('You must select a category')
+			category: Yup.string().required('You must select a category'),
+			private: Yup.bool().required('Required field')
 		}),
 		handleSubmit: (values, {
 			props: {
