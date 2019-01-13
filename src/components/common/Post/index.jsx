@@ -38,6 +38,7 @@ const Post = ({
 		<Pictures
 			before_img={before_img}
 			after_img={after_img}
+			title={title}
 		/>
 		<Content
 			title={title}

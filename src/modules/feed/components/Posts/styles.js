@@ -8,6 +8,9 @@ export const Content = styled.div`
   text-align: center;
   padding: 1rem;
   background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   @media (max-width: 680px) {
     padding: unset;

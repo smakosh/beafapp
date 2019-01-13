@@ -17,7 +17,7 @@ export const getPosts = () => async dispatch => {
 		if (localStorage.jwtToken) {
 			axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
 		}
-		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/all`)
+		const res = await axios.post(`${REACT_APP_PROD_API}/api/post/all`)
 		dispatch({ type: 'GET_POSTS', payload: res.data })
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))
@@ -31,7 +31,7 @@ export const getPostsByCategory = category => async dispatch => {
 		if (localStorage.jwtToken) {
 			axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
 		}
-		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/category/${category}`)
+		const res = await axios.post(`${REACT_APP_PROD_API}/api/post/category/${category}`)
 		dispatch({ type: 'GET_POSTS', payload: res.data })
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))
@@ -51,7 +51,7 @@ export const getMyPosts = () => async dispatch => {
 	try {
 		await dispatch({ type: 'LOADING_POSTS' })
 
-		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/personal`)
+		const res = await axios.post(`${REACT_APP_PROD_API}/api/post/personal`)
 		dispatch({ type: 'GET_POSTS', payload: res.data })
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))
@@ -62,7 +62,7 @@ export const getPostsByUserId = id => async dispatch => {
 	try {
 		await dispatch({ type: 'LOADING_POSTS' })
 
-		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/user/${id}`)
+		const res = await axios.post(`${REACT_APP_PROD_API}/api/post/user/${id}`)
 		dispatch({ type: 'GET_POSTS', payload: res.data })
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))

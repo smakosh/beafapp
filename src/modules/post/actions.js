@@ -13,7 +13,7 @@ export const getPostById = id => async dispatch => {
 	try {
 		await dispatch({ type: 'LOADING_POSTS' })
 
-		const res = await axios.get(`${REACT_APP_PROD_API}/api/post/${id}`)
+		const res = await axios.post(`${REACT_APP_PROD_API}/api/post/${id}`)
 		dispatch({ type: 'GET_POST_BY_ID', payload: res.data })
 	} catch (err) {
 		dispatch(failedToGetPosts(err.response.data.error))

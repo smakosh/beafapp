@@ -2,13 +2,15 @@ import styled from 'styled-components'
 
 export const Flex = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 `
 
 export const Img = styled.div`
   overflow: hidden;
-  flex: 1;
+  width: 100%;
+  max-width: 50%;
 
   .img {
     position: relative;

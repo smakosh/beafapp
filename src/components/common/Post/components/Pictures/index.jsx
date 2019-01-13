@@ -5,7 +5,8 @@ import { Flex, Img } from './styles'
 
 const Pictures = ({
 	before_img,
-	after_img
+	after_img,
+	title
 }) => (
 	<Flex>
 		<Img>
@@ -17,7 +18,7 @@ const Pictures = ({
 					<ImageZoom
 						image={{
 							src,
-							alt: 'before picture',
+							alt: title,
 							className: 'img'
 						}}
 					/>
@@ -33,7 +34,7 @@ const Pictures = ({
 					<ImageZoom
 						image={{
 							src,
-							alt: 'after picture',
+							alt: title,
 							className: 'img'
 						}}
 					/>
