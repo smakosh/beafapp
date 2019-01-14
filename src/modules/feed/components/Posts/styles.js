@@ -1,13 +1,16 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding: 1rem 0;
+  width: 100%;
+  max-width: 68%;
+
+  @media (max-width: 960px) {
+    max-width: 100%;
+  }
 `
 
 export const Content = styled.div`
-  text-align: center;
-  padding: 1rem;
-  background: #fff;
+  text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: center;

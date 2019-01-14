@@ -23,7 +23,6 @@ const Wrapper = styled.div`
 const Content = styled.div`
   text-align: center;
   padding: 1rem;
-  background: #fff;
 
   h2 {
     margin-bottom: 2rem;

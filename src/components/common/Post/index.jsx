@@ -24,9 +24,11 @@ const Post = ({
 	comments,
 	showComments,
 	deleteComment,
-	deletePost
+	deletePost,
+	flex,
+	profile
 }) => (
-	<Wrapper>
+	<Wrapper flex={flex}>
 		<PostHeader
 			date={date}
 			post_id={_id}
@@ -44,23 +46,27 @@ const Post = ({
 			title={title}
 			description={description}
 		/>
-		<Vote
-			_id={_id}
-			userId={userId}
-			voteBefore={voteBefore}
-			voteAfter={voteAfter}
-			before_votes={before_votes}
-			after_votes={after_votes}
-			isLoggedIn={isLoggedIn}
-		/>
-		<Comments
-			post_id={_id}
-			comments={comments}
-			userId={userId}
-			deleteComment={deleteComment}
-			showComments={showComments}
-		/>
-		{isLoggedIn && (
+		{!profile && (
+			<Vote
+				_id={_id}
+				userId={userId}
+				voteBefore={voteBefore}
+				voteAfter={voteAfter}
+				before_votes={before_votes}
+				after_votes={after_votes}
+				isLoggedIn={isLoggedIn}
+			/>
+		)}
+		{!profile && (
+			<Comments
+				post_id={_id}
+				comments={comments}
+				userId={userId}
+				deleteComment={deleteComment}
+				showComments={showComments}
+			/>
+		)}
+		{!profile && isLoggedIn && (
 			<AddComment
 				_id={_id}
 				creator_id={userId}
