@@ -62,6 +62,10 @@ export const getPostsByUserId = id => async dispatch => {
 	try {
 		await dispatch({ type: 'LOADING_POSTS' })
 
+		if (localStorage.jwtToken) {
+			axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
+		}
+
 		const res = await axios.post(`${REACT_APP_PROD_API}/api/post/user/${id}`)
 		dispatch({ type: 'GET_POSTS', payload: res.data })
 	} catch (err) {

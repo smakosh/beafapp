@@ -5,6 +5,7 @@ import { withFormik, Form, Field } from 'formik'
 import { compose } from 'recompose'
 import { Wrapper, InputField, Column, Button, Flex } from './styles'
 import { Error } from '../../../../common'
+import submitIcon from '../../assets/submit.svg'
 
 const AddNewComment = ({
 	isSubmitting,
@@ -27,7 +28,7 @@ const AddNewComment = ({
 						{isSubmitting ? (
 							<Spinner name="circle" color="white" />
 						) : (
-							<span>SUBMIT</span>
+							<img src={submitIcon} alt="Submit" />
 						)}
 					</Button>
 				</Column>

@@ -17,6 +17,10 @@ export const Btn = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
+  
+  .jAfIlk {
+    border-radius: 10px;
+  }
 
   p {
     margin: 0 0 0 .5rem;

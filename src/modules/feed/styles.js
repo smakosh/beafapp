@@ -7,6 +7,6 @@ export const Wrapper = styled.div`
 	flex-wrap: wrap;
 	
 	@media (max-width: 960px) {
-    width: 100%;
+    	width: 100%;
 	}
 `

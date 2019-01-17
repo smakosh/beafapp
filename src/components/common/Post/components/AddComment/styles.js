@@ -38,11 +38,14 @@ export const InputField = styled.div`
 
 export const Button = styled.button`
   color: #fff;
-  padding: 0.9rem 2.5rem;
   background: #FF6347;
   text-transform: uppercase;
   border-radius: 0.3rem;
   border: none;
   cursor: pointer;
   font-size: 12pt;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  line-height: 36px;
 `

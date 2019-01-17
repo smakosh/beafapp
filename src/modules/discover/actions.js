@@ -11,6 +11,10 @@ export const getUsers = () => async dispatch => {
 	try {
 		dispatch({ type: 'LOADING_USERS' })
 
+		if (localStorage.jwtToken) {
+			axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
+		}
+
 		const res = await axios.post(`${REACT_APP_PROD_API}/api/user/users/all`)
 		dispatch({ type: 'GET_USERS', payload: res.data })
 	} catch (err) {

@@ -9,7 +9,7 @@ import {
 	deleteComment,
 	deletePost
 } from './actions'
-import { 	getUsers, followUser, unFollowUser } from '../discover/actions'
+import { 	getUsers } from '../discover/actions'
 import { Loading, Container, SEO } from '../../components/common'
 import Posts from './components/Posts'
 import Empty from './components/Empty'
@@ -25,8 +25,8 @@ const Feed = ({
 	deleteComment,
 	deletePost,
 	users,
-	followUser,
-	unFollowUser
+	// followUser,
+	// unFollowUser
 }) => (
 	<Wrapper as={Container}>
 		<SEO
@@ -48,9 +48,9 @@ const Feed = ({
 		) : <Empty />}
 		 <Discover
 		 	users={users.data}
-			followUser={followUser}
-			unFollowUser={unFollowUser}
-			following={auth.user.following}
+			// followUser={followUser}
+			// unFollowUser={unFollowUser}
+			// following={auth.user.following}
 		 />
 	</Wrapper>
 )
@@ -70,9 +70,7 @@ const enhance = compose(
 			postNewComment,
 			deleteComment,
 			deletePost,
-			getUsers,
-			followUser,
-			unFollowUser
+			getUsers
 		}
 	),
 	lifecycle({
@@ -82,8 +80,8 @@ const enhance = compose(
 		}
 	}),
 	branch(
-		({ posts, auth, users }) => !auth || !auth.user
-		|| !posts || !posts.data || posts.loading || !users || !users.data,
+		({ posts, auth, users }) => !auth || !posts
+		|| !posts.data || posts.loading || !users || !users.data,
 		renderComponent(Loading)
 	)
 )

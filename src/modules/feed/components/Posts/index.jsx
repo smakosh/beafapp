@@ -14,7 +14,7 @@ const Posts = ({
 }) => (
 	<Wrapper>
 		<Content>
-			<h2>Posts</h2>
+			<h2>Recent posts</h2>
 			{posts.map(post => (
 				<Post
 					{...post}

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Wrapper, Fixed, Block, User, Avatar, Details } from './styles'
-import { Button } from '../../../../components/common'
+// import { Button } from '../../../../components/common'
 
-export default ({ users, followUser, unFollowUser, following }) => (
+export default ({ users /* , followUser, unFollowUser, following */ }) => (
 	<Wrapper>
 		<Fixed>
 			<h2>Discover people</h2>
@@ -20,7 +20,7 @@ export default ({ users, followUser, unFollowUser, following }) => (
 								<h4>{`${firstName} ${lastName}`}</h4>
 								<p>{`@${username}`}</p>
 							</Link>
-							{following.includes(_id)
+							{/* following.includes(_id)
 								? (
 									<Button onClick={() => unFollowUser(_id)} type="button">
                 Unfollow
@@ -30,7 +30,7 @@ export default ({ users, followUser, unFollowUser, following }) => (
                   Follow
 									</Button>
 								)
-							}
+							 */}
 						</Details>
 					</User>
 				))}

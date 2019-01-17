@@ -5,10 +5,7 @@ export const Wrapper = styled.div`
   box-shadow: 0 1px 10px 0 rgba(5,5,5,.13);
   margin-bottom: 4rem;
   background: #fff;
-
-  @media (max-width: 960px) {
-    max-width: 90%;
-  }
+  overflow: hidden;
 
   ${({ flex }) => flex && `
     width: 100%;

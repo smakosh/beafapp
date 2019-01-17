@@ -16,7 +16,7 @@ const Vote = ({
 }) => (
 	<Wrapper>
 		<Btn before>
-			<Tooltip content="Before">
+			<Tooltip content="Vote!">
 				{isLoggedIn ? (
 					<Floating voted={before_votes.includes(userId)} onClick={() => voteBefore(_id, userId)} before="true">
 						<img src={beforeIcon} alt="vote before" />
@@ -30,7 +30,7 @@ const Vote = ({
 			<p>{before_votes.length}</p>
 		</Btn>
 		<Btn>
-			<Tooltip content="After">
+			<Tooltip content="Vote!">
 				{isLoggedIn ? (
 					<Floating voted={after_votes.includes(userId)} onClick={() => voteAfter(_id, userId)}>
 						<img src={afterIcon} alt="vote before" />

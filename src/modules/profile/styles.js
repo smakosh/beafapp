@@ -8,4 +8,9 @@ export const StyledContainer = styled.div`
 
 export const Wrapper = styled.div`
   padding: 4rem 0;
+
+  @media (max-width: 960px) {
+    width: 90%;
+    margin: 0 auto;
+	}
 `
