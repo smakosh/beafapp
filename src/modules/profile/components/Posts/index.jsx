@@ -1,35 +1,32 @@
 import React from 'react'
 import { Post } from '../../../../components/common'
-import { Wrapper, Content } from './styles'
+import { Wrapper, Flex } from './styles'
 
 const Posts = ({
 	posts,
 	isLoggedIn,
-	user,
-	voteBefore,
-	voteAfter,
-	deleteComment,
-	postNewComment,
-	deletePost
+	user
 }) => (
 	<Wrapper>
-		<Content>
-			<h2>Posts</h2>
+		<h2>Posts</h2>
+		<Flex>
 			{posts.map(post => (
 				<Post
+					flex
+					profile
 					{...post}
 					key={post._id}
 					userId={user && user._id}
 					userName={user && user.username}
 					isLoggedIn={isLoggedIn}
-					voteBefore={voteBefore}
+					/* voteBefore={voteBefore}
 					voteAfter={voteAfter}
 					postNewComment={postNewComment}
 					deleteComment={deleteComment}
-					deletePost={deletePost}
+					deletePost={deletePost} */
 				/>
 			))}
-		</Content>
+		</Flex>
 	</Wrapper>
 )
 

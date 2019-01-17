@@ -1,10 +1,19 @@
 import React from 'react'
 import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
-import { getPosts, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from './actions'
+import {
+	getPosts,
+	voteBefore,
+	voteAfter,
+	postNewComment,
+	deleteComment,
+	deletePost
+} from './actions'
+import { 	getUsers } from '../discover/actions'
 import { Loading, Container, SEO } from '../../components/common'
 import Posts from './components/Posts'
 import Empty from './components/Empty'
+import Discover from './components/Discover'
 import { Wrapper } from './styles'
 
 const Feed = ({
@@ -14,7 +23,10 @@ const Feed = ({
 	voteAfter,
 	postNewComment,
 	deleteComment,
-	deletePost
+	deletePost,
+	users,
+	// followUser,
+	// unFollowUser
 }) => (
 	<Wrapper as={Container}>
 		<SEO
@@ -34,25 +46,42 @@ const Feed = ({
 				deletePost={deletePost}
 			/>
 		) : <Empty />}
+		 <Discover
+		 	users={users.data}
+			// followUser={followUser}
+			// unFollowUser={unFollowUser}
+			// following={auth.user.following}
+		 />
 	</Wrapper>
 )
 
-const mapStateToProps = ({ posts, auth }) => ({
+const mapStateToProps = ({ posts, auth, users }) => ({
 	posts,
-	auth
+	auth,
+	users
 })
 
 const enhance = compose(
 	connect(mapStateToProps,
-		{ getPosts, voteBefore, voteAfter, postNewComment, deleteComment, deletePost }
+		{
+			getPosts,
+			voteBefore,
+			voteAfter,
+			postNewComment,
+			deleteComment,
+			deletePost,
+			getUsers
+		}
 	),
 	lifecycle({
-		componentDidMount() {
-			this.props.getPosts()
+		async componentDidMount() {
+			await this.props.getPosts()
+			this.props.getUsers()
 		}
 	}),
 	branch(
-		({ posts, auth }) => !auth || !posts || !posts.data || posts.loading,
+		({ posts, auth, users }) => !auth || !posts
+		|| !posts.data || posts.loading || !users || !users.data,
 		renderComponent(Loading)
 	)
 )

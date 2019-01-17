@@ -1,9 +1,10 @@
 import React from 'react'
 import { compose, branch, renderComponent, lifecycle } from 'recompose'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getPostById, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from './actions'
-import { Loading, Container, SEO, Post } from '../../components/common'
-import { Wrapper } from './styles'
+import { Loading, SEO, Post, Container, Button } from '../../components/common'
+import { Wrapper, Overlay } from './styles'
 
 const PostPage = ({
 	auth,
@@ -12,29 +13,42 @@ const PostPage = ({
 	voteAfter,
 	postNewComment,
 	deleteComment,
-	deletePost
-}) => (
-	<Wrapper as={Container}>
-		<SEO
-			url={`/post/${singlePost.post._id}`}
-			title={singlePost.post.title}
-			description={singlePost.post.description}
-			cover={singlePost.post.before_img}
-		/>
-		<Post
-			{...singlePost.post}
-			userId={auth.user && auth.user._id}
-			isLoggedIn={auth.isLoggedIn}
-			userName={auth.user && auth.user.username}
-			voteBefore={voteBefore}
-			voteAfter={voteAfter}
-			postNewComment={postNewComment}
-			deleteComment={deleteComment}
-			deletePost={deletePost}
-			showComments
-		/>
-	</Wrapper>
-)
+	deletePost,
+	history
+}) => {
+	console.log(history)
+	return (
+		<Wrapper>
+			<SEO
+				url={`/post/${singlePost.post._id}`}
+				title={singlePost.post.title}
+				description={singlePost.post.description}
+				cover={singlePost.post.before_img}
+			/>
+			<Overlay as={Container}>
+				<Button confirm="true"
+					onClick={() => {
+						if (history.action === 'PUSH') history.goBack()
+						else history.push('/')
+					}}
+				>Go back</Button>
+				<Post
+					{...singlePost.post}
+					userId={auth.user && auth.user._id}
+					isLoggedIn={auth.isLoggedIn}
+					userName={auth.user && auth.user.username}
+					voteBefore={voteBefore}
+					voteAfter={voteAfter}
+					postNewComment={postNewComment}
+					deleteComment={deleteComment}
+					deletePost={deletePost}
+					showComments
+				/>
+				{!auth.isLoggedIn && <Button confirm="true" as={Link} to={`/register/?from=${singlePost.post.title}`}>Sign Up to vote!</Button>}
+			</Overlay>
+		</Wrapper>
+	)
+}
 
 const mapStateToProps = ({ singlePost, auth }) => ({
 	singlePost,

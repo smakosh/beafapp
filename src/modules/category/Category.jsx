@@ -2,8 +2,10 @@ import React from 'react'
 import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
 import { getPostsByCategory, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from '../feed/actions'
+import { getUsers } from '../discover/actions'
 import { Loading, Container, SEO } from '../../components/common'
 import Posts from '../feed/components/Posts'
+import Discover from '../feed/components/Discover'
 import Empty from '../feed/components/Empty'
 import { Wrapper } from './styles'
 
@@ -15,7 +17,8 @@ const Category = ({
 	voteAfter,
 	postNewComment,
 	deleteComment,
-	deletePost
+	deletePost,
+	users
 }) => (
 	<Wrapper as={Container}>
 		<SEO
@@ -35,21 +38,34 @@ const Category = ({
 				deletePost={deletePost}
 			/>
 		) : <Empty />}
+		<Discover
+		 	users={users.data}
+		/>
 	</Wrapper>
 )
 
-const mapStateToProps = ({ posts, auth }) => ({
+const mapStateToProps = ({ posts, auth, users }) => ({
 	posts,
-	auth
+	auth,
+	users
 })
 
 const enhance = compose(
 	connect(mapStateToProps,
-		{ getPostsByCategory, voteBefore, voteAfter, postNewComment, deleteComment, deletePost }
+		{
+			getPostsByCategory,
+			voteBefore,
+			voteAfter,
+			postNewComment,
+			deleteComment,
+			deletePost,
+			getUsers
+		}
 	),
 	lifecycle({
-		componentWillMount() {
-			this.props.getPostsByCategory(this.props.match.params.category)
+		async componentWillMount() {
+			await this.props.getPostsByCategory(this.props.match.params.category)
+			this.props.getUsers()
 		},
 		componentWillReceiveProps(nextProps) {
 			if (nextProps.posts.errors === 'Invalid category') {
@@ -62,7 +78,8 @@ const enhance = compose(
 		}
 	}),
 	branch(
-		({ posts, auth }) => !auth || !posts || !posts.data || posts.loading,
+		({ posts, auth, users }) => !auth || !posts
+		|| !posts.data || posts.loading || !users || !users.data,
 		renderComponent(Loading)
 	)
 )

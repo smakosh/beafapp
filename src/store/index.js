@@ -4,6 +4,7 @@ import AuthReducer from '../modules/auth/reducer'
 import FeedReducer from '../modules/feed/reducer'
 import ProfileReducer from '../modules/profile/reducer'
 import singlePostReducer from '../modules/post/reducer'
+import usersReducer from '../modules/discover/reducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
 
@@ -12,7 +13,8 @@ const store = createStore(
 		auth: AuthReducer,
 		posts: FeedReducer,
 		profile: ProfileReducer,
-		singlePost: singlePostReducer
+		singlePost: singlePostReducer,
+		users: usersReducer
 	}),
 	composeEnhancers(applyMiddleware(thunk))
 )
