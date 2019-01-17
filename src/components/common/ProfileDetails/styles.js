@@ -44,11 +44,13 @@ export const Avatar = styled.a`
 `
 
 export const Details = styled.div`
-  padding-right: 1rem;
+  max-width: 75%;
+  width: 100%;
 
   @media (max-width: 680px) {
-   order: 2;
-   text-align: center;
+    width: 100%;
+   	order: 2;
+   	text-align: center;
   }
 
   h2 {
@@ -62,5 +64,6 @@ export const Details = styled.div`
 
   p {
     color: #565656;
+		line-height: 1.6;
   }
 `
