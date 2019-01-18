@@ -16,7 +16,11 @@ export const Wrapper = styled.div`
 export const Overlay = styled.div`
 	align-self: center;
 	text-align: center;
-	width: 70%;
+	width: 40%;
+
+	@media (max-width: 1200px) {
+		width: 70%;
+	}
 
 	@media (max-width: 960px) {
 		width: 90%;
