@@ -47,14 +47,43 @@ export const Details = styled.div`
   max-width: 75%;
   width: 100%;
 
+  img {
+    cursor: pointer;
+  }
+  
+  .jAfIlk {
+    font-size: 10pt;
+    font-weight: normal;
+    white-space: nowrap;
+    border-radius: 3px;
+  }
+
   @media (max-width: 680px) {
     width: 100%;
    	order: 2;
    	text-align: center;
+
+    .daZGjV {
+      align-self: center;
+    }
   }
 
   h2 {
     margin-bottom: .2rem;
+
+    span {
+      margin-right: .5rem;
+    }
+    
+    @media (max-width: 680px) {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        order: 2;
+        margin-right: unset;
+      }
+    }
   }
 
   h4 {

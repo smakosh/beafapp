@@ -26,6 +26,7 @@ const Profile = ({
 				lastName={auth.user.lastName}
 				username={auth.user.username}
 				bio={auth.user.bio}
+				isVerified={auth.user.isVerified}
 			/>
 			{data.length > 0 ? (
 				<Posts

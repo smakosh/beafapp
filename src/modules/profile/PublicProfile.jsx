@@ -34,6 +34,7 @@ const PublicProfile = ({
 				lastName={profile.lastName}
 				username={profile.username}
 				bio={profile.bio}
+				isVerified={profile.isVerified}
 			/>
 			{data.length > 0 ? (
 				<Posts
