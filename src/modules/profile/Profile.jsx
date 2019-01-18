@@ -15,6 +15,7 @@ const Profile = ({
 			url="/profile"
 			title={auth.user.username}
 			description={auth.user.bio}
+			cover={auth.user.avatar}
 		/>
 		<Wrapper>
 			<ProfileDetails

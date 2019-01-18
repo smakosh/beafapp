@@ -25,7 +25,7 @@ const SEO = ({
 			<meta property="og:description" content={description || 'description'} />
 			<meta property="og:url" content={`${REACT_APP_URL}/${url}`} />
 			<meta name="twitter:url" content={`${REACT_APP_URL}/${url}`} />
-			<meta name="twitter:title" content={title || 'Clean hajj'} />
+			<meta name="twitter:title" content={title || 'Beaf'} />
 			<meta name="twitter:description" content={description || 'description'} />
 			<meta name="image" content={cover || defaultCover} />
 			<meta property="og:image" content={cover || defaultCover} />
