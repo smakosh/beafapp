@@ -34,6 +34,7 @@ const PostPage = ({
 					}}
 				>
 					<img src={backArrow} alt="Go Back" />
+					<span>Back to the feed</span>
 				</button>
 			</Left>
 			<Post

@@ -1,16 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.88);
-	display: flex;
-	justify-content: center;
-	z-index: 5;
+	padding: 3rem 0;
 `
 
 export const Overlay = styled.div`
@@ -35,5 +26,15 @@ export const Left = styled.div`
 		background: none;
 		border: none;
 		cursor: pointer;
+		display: flex;
+		align-items: center;
+
+		span {
+			font-size: 12pt;
+		}
+
+		img {
+			margin-right: .5rem;
+		}
 	}
 `

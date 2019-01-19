@@ -10,11 +10,12 @@ const Posts = ({
 	isLoggedIn,
 	postNewComment,
 	deleteComment,
-	deletePost
+	deletePost,
+	title
 }) => (
 	<Wrapper>
 		<Content>
-			<h2>Recent posts</h2>
+			<h2>{title}</h2>
 			{posts.map(post => (
 				<Post
 					{...post}

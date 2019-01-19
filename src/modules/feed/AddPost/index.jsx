@@ -61,11 +61,11 @@ const AddPost = ({
 						</Label>
 					</Item>
 				</Flex>
-				<InputField label="Title">
+				<InputField label="Title*">
 					<Field type="text" name="title" />
 					<ErrorMessage component={Error} name="title" />
 				</InputField>
-				<InputField label="Category">
+				<InputField label="Category*">
 					<CustomSelect
 						as={Field}
 						component={Select}
@@ -173,8 +173,7 @@ const enhance = compose(
 				.required(),
 			description: Yup.string()
 				.min(2, 'Description has to be longer than 2 characters!')
-				.max(120, 'Description has to be less than 120 characters!')
-				.required(),
+				.max(120, 'Description has to be less than 120 characters!'),
 			category: Yup.string().required('You must select a category'),
 			private: Yup.bool().required('Required field')
 		}),

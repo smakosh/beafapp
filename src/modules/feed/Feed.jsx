@@ -36,6 +36,7 @@ const Feed = ({
 		/>
 		 {data.length > 0 ? (
 			<Posts
+				title="Recent posts"
 				posts={data}
 				user={auth.user}
 				isLoggedIn={auth.isLoggedIn}

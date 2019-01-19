@@ -84,7 +84,6 @@ export const login = (payload, setErrors, setSubmitting, resetForm) => async dis
 			})
 		}
 		setSubmitting(false)
-		resetForm(false)
 		dispatch(authFailed(err.response.data))
 	}
 }

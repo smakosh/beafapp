@@ -10,7 +10,7 @@ import Empty from '../feed/components/Empty'
 import { Wrapper } from './styles'
 
 const Category = ({
-	match,
+	match: { params: { category } },
 	auth,
 	posts: { data },
 	voteBefore,
@@ -22,12 +22,13 @@ const Category = ({
 }) => (
 	<Wrapper as={Container}>
 		<SEO
-			url={`/category/${match.params.category}`}
-			title={match.params.category}
-			description="Category"
+			url={`/category/${category}`}
+			title={category}
+			description={category}
 		/>
 		{data.length > 0 ? (
 			<Posts
+				title={category}
 				posts={data}
 				user={auth.user}
 				isLoggedIn={auth.isLoggedIn}

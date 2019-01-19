@@ -51,15 +51,23 @@ export const Flex = styled.div`
   display: flex;
   align-items: flex-start;
 
-  a {
-    font-weight: 600;
-    font-size: 10pt;
-  }
-
   p {
     margin: 0 0 0 .5rem;
     font-size: 10pt;
     color: #202020;
+    word-break: break-all;
+  }
+`
+
+export const SubFlex = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+   a {
+    font-weight: 600;
+    font-size: 10pt;
+    margin-bottom: .2rem;
   }
 `
 

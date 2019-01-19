@@ -4,7 +4,7 @@ import en from 'javascript-time-ago/locale/en'
 import { withStateHandlers, compose, withProps } from 'recompose'
 import { Link } from 'react-router-dom'
 import { Modal } from '../../../Modal'
-import { Wrapper, SingleComment, Flex, More, CommentDetails, Delete, DeleteBtn } from './styles'
+import { Wrapper, SingleComment, Flex, More, CommentDetails, Delete, DeleteBtn, SubFlex } from './styles'
 import deleteIcon from '../../assets/delete.svg'
 
 TimeAgo.addLocale(en)
@@ -33,10 +33,12 @@ const Comments = ({
 						<SingleComment key={_id}>
 							<CommentDetails>
 								<Flex>
-									<Link to={`/profile/${creator_id}`}>{creator_username}</Link>
+									<SubFlex>
+										<Link to={`/profile/${creator_id}`}>{creator_username}</Link>
+										<i>{timeAgo.format(Date.parse(date))}</i>
+									</SubFlex>
 									<p>{comment}</p>
 								</Flex>
-								<i>{timeAgo.format(Date.parse(date))}</i>
 							</CommentDetails>
 							{userId === creator_id && (
 								<Delete>
