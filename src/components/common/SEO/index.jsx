@@ -5,7 +5,7 @@ import defaultCover from './assets/cover.png'
 
 const { REACT_APP_URL, REACT_APP_NAME } = process.env
 
-const SEO = ({
+export const SEO = ({
 	url,
 	title,
 	description,
@@ -20,6 +20,7 @@ const SEO = ({
 		<Helmet>
 			{/* TODO: Add structured data <script type="application/ld+json">{structuredData}</script> */}
 			{title && <title>{REACT_APP_NAME} | {title}</title>}
+			<meta name="google-site-verification" content="EwOXGnyH4R4ynZcvOXmrcUBbLGXrsEnw0KDwpe9Dgrk" />
 			<meta name="description" content={description || 'description'} />
 			<meta property="og:title" content={title || REACT_APP_NAME} />
 			<meta property="og:description" content={description || 'description'} />
@@ -33,5 +34,3 @@ const SEO = ({
 		</Helmet>
 	)
 }
-
-export { SEO }
