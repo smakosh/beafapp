@@ -1,11 +1,25 @@
 import React from 'react'
 import Tooltip from 'react-simple-tooltip'
 import { Link } from 'react-router-dom'
-import { Wrapper, Flex, Avatar, Details } from './styles'
+import { Wrapper, Flex, Avatar, Details, UnFollowBtn } from './styles'
 import { Button } from '../../common'
 import verifiedIcon from './assets/verified.svg'
 
-export const ProfileDetails = ({ loggedIn, profileId, userId, avatar, isVerified, firstName, lastName, username, bio = '404 Bio not found!' }) => (
+export const ProfileDetails = ({
+	loggedIn,
+	profileId,
+	userId,
+	avatar,
+	isVerified,
+	firstName,
+	lastName,
+	username,
+	bio = '404 Bio not found!',
+	followers,
+	// following,
+	unFollowUser,
+	followUser
+}) => (
 	<Wrapper>
 		<Flex>
 			<Details>
@@ -25,8 +39,19 @@ export const ProfileDetails = ({ loggedIn, profileId, userId, avatar, isVerified
 				avatar={avatar}
 			/>
 		</Flex>
-		{loggedIn && userId === profileId && (
-			<Button as={Link} to="/profile/edit">Edit Profile</Button>
+		{loggedIn && (
+			 userId === profileId ? (
+				<Button as={Link} to="/profile/edit">Edit Profile</Button>
+			) : followers.find(user => user._id === userId)
+				? (
+					<UnFollowBtn as={Button} onClick={() => unFollowUser(profileId, userId, true)} type="button" outlined="true">
+						<span>Following</span>
+					</UnFollowBtn>
+				) : (
+					<Button onClick={() => followUser(profileId, userId, true)} type="button">
+						Follow
+					</Button>
+				)
 		)}
 	</Wrapper>
 )

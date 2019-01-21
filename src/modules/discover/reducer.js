@@ -18,9 +18,9 @@ export default (state = { loading: false }, action) => {
 			data: state.data.map(item => item._id === action.payload.user_id ? (
 				{
 					...item,
-					followers: item.followers.includes(action.payload.user_id)
-						? item.followers.filter(user => user._id !== action.payload.user_id)
-						: [...item.followers, action.payload.user_id]
+					followers: item.followers.find(user => user._id === action.payload.myId)
+						? item.followers.filter(user => user._id !== action.payload.myId)
+						: [...item.followers, { _id: action.payload.myId }]
 				}
 			) : item)
 		}

@@ -9,10 +9,8 @@ import {
 	deleteComment,
 	deletePost
 } from './actions'
-import { 	getUsers } from '../discover/actions'
-import { Loading, Container, SEO } from '../../components/common'
+import { Loading, Container, SEO, Empty } from '../../components/common'
 import Posts from './components/Posts'
-import Empty from './components/Empty'
 import Discover from './components/Discover'
 import { Wrapper } from './styles'
 
@@ -23,10 +21,7 @@ const Feed = ({
 	voteAfter,
 	postNewComment,
 	deleteComment,
-	deletePost,
-	users,
-	// followUser,
-	// unFollowUser
+	deletePost
 }) => (
 	<Wrapper as={Container}>
 		<SEO
@@ -48,18 +43,14 @@ const Feed = ({
 			/>
 		) : <Empty />}
 		 <Discover
-		 	users={users.data}
-			// followUser={followUser}
-			// unFollowUser={unFollowUser}
-			// following={auth.user.following}
+			myId={auth.user && auth.user._id}
 		 />
 	</Wrapper>
 )
 
-const mapStateToProps = ({ posts, auth, users }) => ({
+const mapStateToProps = ({ posts, auth }) => ({
 	posts,
-	auth,
-	users
+	auth
 })
 
 const enhance = compose(
@@ -70,19 +61,16 @@ const enhance = compose(
 			voteAfter,
 			postNewComment,
 			deleteComment,
-			deletePost,
-			getUsers
+			deletePost
 		}
 	),
 	lifecycle({
-		async componentDidMount() {
-			await this.props.getPosts()
-			this.props.getUsers()
+		componentDidMount() {
+			this.props.getPosts()
 		}
 	}),
 	branch(
-		({ posts, auth, users }) => !auth || !posts
-		|| !posts.data || posts.loading || !users || !users.data,
+		({ posts, auth }) => !auth || !posts || !posts.data || posts.loading,
 		renderComponent(Loading)
 	)
 )

@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch, lifecycle } from 'recompose'
-import { Container, Loading, SEO, ProfileDetails } from '../../components/common'
+import { Container, Loading, SEO, ProfileDetails, Empty } from '../../components/common'
 import { StyledContainer, Wrapper } from './styles'
 import { getPostsByUserId, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from '../feed/actions'
+import { followUser, unFollowUser } from '../discover/actions'
 import { getUserById } from './actions'
 import Posts from './components/Posts'
-import Empty from '../feed/components/Empty'
 
 const PublicProfile = ({
 	profile: { profile },
@@ -16,7 +16,9 @@ const PublicProfile = ({
 	voteAfter,
 	deleteComment,
 	postNewComment,
-	deletePost
+	deletePost,
+	unFollowUser,
+	followUser
 }) => (
 	<StyledContainer as={Container}>
 		<SEO
@@ -35,6 +37,10 @@ const PublicProfile = ({
 				username={profile.username}
 				bio={profile.bio}
 				isVerified={profile.isVerified}
+				followers={profile.followers}
+				following={profile.following}
+				unFollowUser={unFollowUser}
+				followUser={followUser}
 			/>
 			{data.length > 0 ? (
 				<Posts
@@ -47,7 +53,7 @@ const PublicProfile = ({
 					deleteComment={deleteComment}
 					deletePost={deletePost}
 				/>
-			) : <Empty />}
+			) : <Empty profile="true" />}
 		</Wrapper>
 	</StyledContainer>
 )
@@ -66,7 +72,9 @@ const enhance = compose(
 		voteAfter,
 		postNewComment,
 		deleteComment,
-		deletePost
+		deletePost,
+		unFollowUser,
+		followUser
 	}),
 	lifecycle({
 		async componentWillMount() {

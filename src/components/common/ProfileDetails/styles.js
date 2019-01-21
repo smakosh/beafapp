@@ -96,3 +96,14 @@ export const Details = styled.div`
 		line-height: 1.6;
   }
 `
+
+export const UnFollowBtn = styled.button`
+  &:hover {
+    span {
+      display: none;
+    }
+  }
+  &:hover:before {
+    content: 'UNFOLLOW';
+  }
+`

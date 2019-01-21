@@ -6,6 +6,16 @@ export default (state = { loading: false }, action) => {
 			profile: action.payload,
 			loading: false
 		}
+	case 'FOLLOW_PROFILE':
+		return {
+			...state,
+			profile: {
+				...state.profile,
+				followers: state.profile.followers.find(user => user._id === action.payload.myId)
+					? state.profile.followers.filter(user => user._id !== action.payload.myId)
+					: [...state.profile.followers, { _id: action.payload.myId }]
+			}
+		}
 	case 'FAILED_TO_GET_PROFILE':
 		return {
 			errors: action.payload,

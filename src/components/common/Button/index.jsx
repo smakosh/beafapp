@@ -15,6 +15,12 @@ const Button = styled.button`
         background-color: #2291cc;
     `}
 
+    ${({ outlined }) => outlined && `
+        background: transparent;
+        border: 1px solid #191847;
+        color: #191847;
+    `}
+
     ${({ cancel }) => cancel && `
         border: none;
         color: gray;

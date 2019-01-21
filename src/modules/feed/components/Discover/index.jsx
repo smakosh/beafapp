@@ -1,15 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Wrapper, Fixed, Block, User, Avatar, Details } from './styles'
-// import { Button } from '../../../../components/common'
+import { connect } from 'react-redux'
+import { compose, lifecycle, renderComponent, branch } from 'recompose'
+import { Wrapper, Fixed, Block, User, Avatar, Details, UnFollowBtn } from './styles'
+import { getUsers, followUser, unFollowUser } from '../../../discover/actions'
+import { Button, Loading } from '../../../../components/common'
 
-export default ({ users /* , followUser, unFollowUser, following */ }) => (
+const Discover = ({ users, followUser, unFollowUser, myId }) => (
 	<Wrapper>
 		<Fixed>
 			<h2>Discover people</h2>
 			<Block>
-				{users.map(({
-					_id, firstName, lastName, username, avatar,
+				{users.data.map(({
+					_id, firstName, lastName, username, avatar, followers
 				}) => (
 					<User key={_id}>
 						<Link to={`/profile/${_id}`}>
@@ -20,17 +23,18 @@ export default ({ users /* , followUser, unFollowUser, following */ }) => (
 								<h4>{`${firstName} ${lastName}`}</h4>
 								<p>{`@${username}`}</p>
 							</Link>
-							{/* following.includes(_id)
-								? (
-									<Button onClick={() => unFollowUser(_id)} type="button">
-                Unfollow
-									</Button>
-								) : (
-									<Button onClick={() => followUser(_id)} type="button">
-                  Follow
-									</Button>
-								)
-							 */}
+							{myId && (
+								followers.find(user => user._id === myId)
+									? (
+										<UnFollowBtn as={Button} onClick={() => unFollowUser(_id, myId)} type="button" outlined="true">
+                			<span>Following</span>
+										</UnFollowBtn>
+									) : (
+										<Button onClick={() => followUser(_id, myId)} type="button">
+                  		Follow
+										</Button>
+									)
+							)}
 						</Details>
 					</User>
 				))}
@@ -39,3 +43,24 @@ export default ({ users /* , followUser, unFollowUser, following */ }) => (
 		</Fixed>
 	</Wrapper>
 )
+
+const mapStateToProps = ({ users }) => ({ users })
+
+const enhance = compose(
+	connect(mapStateToProps, {
+		getUsers,
+		followUser,
+		unFollowUser
+	}),
+	lifecycle({
+		componentDidMount() {
+			this.props.getUsers()
+		},
+	}),
+	branch(
+		({ users }) => !users || !users.data || users.loading,
+		renderComponent(Loading)
+	)
+)
+
+export default enhance(Discover)

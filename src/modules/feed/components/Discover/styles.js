@@ -74,3 +74,14 @@ export const Details = styled.div`
     margin-top: .5rem;
   }
 `
+
+export const UnFollowBtn = styled.button`
+  &:hover {
+    span {
+      display: none;
+    }
+  }
+  &:hover:before {
+    content: 'UNFOLLOW';
+  }
+`

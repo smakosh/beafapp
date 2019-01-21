@@ -22,20 +22,28 @@ export const getUsers = () => async dispatch => {
 	}
 }
 
-export const followUser = id => async dispatch => {
+export const followUser = (id, myId, profile) => async dispatch => {
 	try {
 		await axios.patch(`${REACT_APP_PROD_API}/api/user/follow/${id}`)
-		dispatch({ type: 'FOLLOW', payload: { user_id: id } })
+		if (profile) {
+			dispatch({ type: 'FOLLOW_PROFILE', payload: { user_id: id, myId } })
+		} else {
+			dispatch({ type: 'FOLLOW', payload: { user_id: id, myId } })
+		}
 	} catch (err) {
 		console.log(err)
 		dispatch(failedToGetUsers(err.response.data.error))
 	}
 }
 
-export const unFollowUser = id => async dispatch => {
+export const unFollowUser = (id, myId, profile) => async dispatch => {
 	try {
 		await axios.patch(`${REACT_APP_PROD_API}/api/user/unfollow/${id}`)
-		dispatch({ type: 'FOLLOW', payload: { user_id: id } })
+		if (profile) {
+			dispatch({ type: 'FOLLOW_PROFILE', payload: { user_id: id, myId } })
+		} else {
+			dispatch({ type: 'FOLLOW', payload: { user_id: id, myId } })
+		}
 	} catch (err) {
 		console.log(err)
 		dispatch(failedToGetUsers(err.response.data.error))

@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose, renderComponent, branch, lifecycle } from 'recompose'
-import { Container, Loading, SEO, ProfileDetails } from '../../components/common'
+import { Container, Loading, SEO, ProfileDetails, Empty } from '../../components/common'
 import { Wrapper, StyledContainer } from './styles'
 import { getMyPosts, voteBefore, voteAfter, postNewComment, deleteComment, deletePost } from '../feed/actions'
 import Posts from './components/Posts'
-import Empty from '../feed/components/Empty'
 
 const Profile = ({
 	auth, posts: { data }, voteBefore, voteAfter, deleteComment, postNewComment, deletePost
@@ -40,7 +39,7 @@ const Profile = ({
 					deleteComment={deleteComment}
 					deletePost={deletePost}
 				/>
-			) : <Empty />}
+			) : <Empty profile="true" />}
 		</Wrapper>
 	</StyledContainer>
 )
