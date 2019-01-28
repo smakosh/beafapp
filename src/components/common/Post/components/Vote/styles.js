@@ -17,16 +17,18 @@ export const Btn = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
-  
+
   .jAfIlk {
     border-radius: 10px;
   }
 
   p {
-    margin: 0 0 0 .5rem;
+    margin: 0 0 0 0.5rem;
   }
 
-  ${({ before }) => before && `
+  ${({ before }) =>
+    before &&
+    `
     align-self: flex-end;
     display: flex;
     align-items: center;
@@ -48,18 +50,26 @@ export const Floating = styled.button`
   cursor: pointer;
   transition: .3s;
 
-  ${({ islink }) => islink && `
+  ${({ islink }) =>
+    islink &&
+    `
     display: flex;
     justify-content: center;
   `}
 
-  ${({ voted, before }) => voted && !before && `
+  ${({ voted, before }) =>
+    voted &&
+    !before &&
+    `
     box-shadow: 0 5px 10px 0 #536DFE;
     transform: scale(1.1);
     transition: .3s;
   `}
 
-  ${({ voted, before }) => voted && before && `
+  ${({ voted, before }) =>
+    voted &&
+    before &&
+    `
     box-shadow: 0 5px 10px 0 #FF6347;
     transform: scale(1.1);
     transition: .3s;
@@ -79,12 +89,16 @@ export const Floating = styled.button`
     transform: scale(1.1);
     transition: .3s;
 
-    ${({ before }) => before && `
+    ${({ before }) =>
+      before &&
+      `
       box-shadow: 0 5px 10px 0 #FF6347;
     `}
   }
 
-  ${({ before }) => before && `
+  ${({ before }) =>
+    before &&
+    `
     background: #FF6347;
   `}
 `

@@ -5,21 +5,25 @@ import EmptyImg from './empty.svg'
 import { Button } from '../Button'
 
 export const Empty = ({ profile }) => (
-	<Wrapper profile={profile}>
-		<Content>
-			<h2>No posts are available</h2>
-			<Center>
-				<Button as={Link} to="/add-post">ADD A NEW POST</Button>
-			</Center>
-			<img src={EmptyImg} alt="empty" />
-		</Content>
-	</Wrapper>
+  <Wrapper profile={profile}>
+    <Content>
+      <h2>No posts are available</h2>
+      <Center>
+        <Button as={Link} to="/add-post">
+          ADD A NEW POST
+        </Button>
+      </Center>
+      <img src={EmptyImg} alt="empty" />
+    </Content>
+  </Wrapper>
 )
 
 const Wrapper = styled.div`
   padding: 1rem 0;
-  
-  ${({ profile }) => !profile && `
+
+  ${({ profile }) =>
+    !profile &&
+    `
     width: 100%;
     max-width: 68%;
 

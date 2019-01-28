@@ -38,7 +38,7 @@ export const InputField = styled.div`
 
 export const Button = styled.button`
   color: #fff;
-  background: #FF6347;
+  background: #ff6347;
   text-transform: uppercase;
   border-radius: 0.3rem;
   border: none;

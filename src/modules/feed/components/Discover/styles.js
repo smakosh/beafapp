@@ -22,13 +22,13 @@ export const Fixed = styled.div`
 
 export const Block = styled.div`
   background: #fff;
-  padding: .5rem;
+  padding: 0.5rem;
 `
 
 export const User = styled.div`
   display: flex;
   align-items: center;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   border-bottom: 1px solid #eee;
 
   &:last-child {
@@ -37,7 +37,7 @@ export const User = styled.div`
 `
 
 export const Avatar = styled.img`
-  margin-right: .8rem;
+  margin-right: 0.8rem;
   border: 1px solid #eee;
   border-radius: 50%;
   width: 48px;
@@ -49,12 +49,12 @@ export const Details = styled.div`
   a {
     display: flex;
     flex-direction: column;
-    
+
     h4 {
       word-break: break-all;
       color: #000;
       font-weight: bold;
-      margin: 0 0 .2rem 0;
+      margin: 0 0 0.2rem 0;
     }
 
     p {
@@ -69,9 +69,9 @@ export const Details = styled.div`
   }
 
   button {
-    padding: .4rem .9rem;
+    padding: 0.4rem 0.9rem;
     font-size: 10pt;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 `
 

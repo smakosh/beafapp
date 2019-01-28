@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-	padding: 4rem 0;
+  padding: 4rem 0;
 
   @media (max-width: 960px) {
     padding: 2rem 0;
@@ -13,43 +13,45 @@ export const Center = styled.div`
 `
 
 export const Card = styled.div`
-	padding: 2rem;
-	box-shadow: 3px 0px 20px 0 rgba(0, 0, 0, 0.1);
-	align-self: center;
+  padding: 2rem;
+  box-shadow: 3px 0px 20px 0 rgba(0, 0, 0, 0.1);
+  align-self: center;
 
-	${({ register }) => register && `
+  ${({ register }) =>
+    register &&
+    `
 			width: 60%;
 	`}
 `
 
 export const Flex = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-	@media (max-width: 680px) {
-		flex-direction: column;	
-	}
+  @media (max-width: 680px) {
+    flex-direction: column;
+  }
 `
 
 export const Item = styled.div`
-	width: 100%;
-	max-width: 48%;
+  width: 100%;
+  max-width: 48%;
 
-	@media (max-width: 680px) {
-		max-width: 100%;
-		&:first-child {
-			margin-bottom: 1rem;
-		}	
-	}
+  @media (max-width: 680px) {
+    max-width: 100%;
+    &:first-child {
+      margin-bottom: 1rem;
+    }
+  }
 
-	input[type=file] {
-		display: none;
-	}
+  input[type='file'] {
+    display: none;
+  }
 
-	img {
-		width: 100%;
-	}
+  img {
+    width: 100%;
+  }
 `
 
 export const Label = styled.label`
@@ -81,11 +83,16 @@ export const Label = styled.label`
 		}
   }
 
-  ${({ bg }) => bg && `
+  ${({ bg }) =>
+    bg &&
+    `
     background-image: url(${bg});
   `}
 
-	${({ label, preview_1 }) => label === '1' && preview_1 && `
+	${({ label, preview_1 }) =>
+    label === '1' &&
+    preview_1 &&
+    `
 		background: unset;
 		content: 'Edit';
 		height: 50px;
@@ -102,7 +109,10 @@ export const Label = styled.label`
 		}
 	`}
 
-	${({ label, preview_2 }) => label === '2' && preview_2 && `
+	${({ label, preview_2 }) =>
+    label === '2' &&
+    preview_2 &&
+    `
 		background: unset;
 		content: 'Edit';
 		height: 50px;
@@ -121,14 +131,14 @@ export const Label = styled.label`
 `
 
 export const CustomSelect = styled.div`
-	margin-top: 1rem;
+  margin-top: 1rem;
 `
 
 export const CustomSwitch = styled.div`
-	vertical-align: middle;
+  vertical-align: middle;
   margin-left: 4px;
 `
 
 export const MacroWrapper = styled.div`
-	margin-top: 1rem;
+  margin-top: 1rem;
 `

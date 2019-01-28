@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 
 export const SingleComment = styled.div`
   border-bottom: 1px solid #eee;
-  padding: .8rem 0;
+  padding: 0.8rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -42,7 +42,9 @@ export const DeleteBtn = styled.div`
   border: none;
   cursor: pointer;
 
-  ${({ right }) => right && `
+  ${({ right }) =>
+    right &&
+    `
     text-align: right;
   `}
 `
@@ -52,7 +54,7 @@ export const Flex = styled.div`
   align-items: flex-start;
 
   p {
-    margin: 0 0 0 .5rem;
+    margin: 0 0 0 0.5rem;
     font-size: 10pt;
     color: #202020;
     word-break: break-all;
@@ -64,10 +66,10 @@ export const SubFlex = styled.div`
   align-items: flex-start;
   flex-direction: column;
 
-   a {
+  a {
     font-weight: 600;
     font-size: 10pt;
-    margin-bottom: .2rem;
+    margin-bottom: 0.2rem;
   }
 `
 
@@ -75,6 +77,6 @@ export const More = styled.div`
   padding: 1rem 0;
 
   a {
-    color: #03A9F4;
+    color: #03a9f4;
   }
 `

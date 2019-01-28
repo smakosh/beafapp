@@ -14,10 +14,10 @@ export const Wrapper = styled.div`
     margin-bottom: 0.5rem;
     font-size: 14pt;
   }
-  
+
   p {
     margin: 0;
-    color: #A7A6A6;
+    color: #a7a6a6;
     font-size: 10pt;
   }
 `

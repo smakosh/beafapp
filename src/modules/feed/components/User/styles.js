@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 `
 
 export const Center = styled.div`
-    text-align: center;
+  text-align: center;
 `
 
 export const Content = styled.div`

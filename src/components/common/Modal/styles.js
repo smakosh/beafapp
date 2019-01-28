@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
   align-self: center;
 
   @media (max-width: 980px) {
-    width: 90%;  
+    width: 90%;
   }
 `
 
@@ -30,14 +30,14 @@ export const Content = styled.div`
   background: #fff;
 
   @media screen {
-    padding: .5rem;
+    padding: 0.5rem;
   }
 `
 
 export const Actions = styled.div`
   display: flex;
   align-items: center;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   border-top: 1px solid #eee;
   flex-direction: row-reverse;
 

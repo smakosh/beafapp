@@ -23,36 +23,36 @@ import { NotFound } from './components/common'
 export const history = createHistory()
 
 try {
-	if (localStorage.jwtToken) {
-		store.dispatch(verifyToken(localStorage.jwtToken))
-	}
+  if (localStorage.jwtToken) {
+    store.dispatch(verifyToken(localStorage.jwtToken))
+  }
 } catch (e) {
-	if (history.location.pathname !== '/') {
-		history.push('/login')
-	}
+  if (history.location.pathname !== '/') {
+    history.push('/login')
+  }
 }
 
 const AppRoutes = () => (
-	<Provider store={store}>
-		<Router history={history}>
-			<>
-				<GlobalStyle />
-				<Header history={history} />
-				<Switch>
-					<Route path="/" exact component={Feed} />
-					<Route path="/category/:category" component={Category} />
-					<Public path="/login" component={Login} />
-					<Public path="/register" component={Register} />
-					<Private path="/profile" exact component={Profile} />
-					<Private path="/profile/edit" exact component={EditProfile} />
-					<Route path="/profile/:user_id" component={PublicProfile} />
-					<Route path="/post/:post_id" component={PostPage} />
-					<Private path="/add-post" component={AddPost} />
-					<Route component={NotFound} />
-				</Switch>
-			</>
-		</Router>
-	</Provider>
+  <Provider store={store}>
+    <Router history={history}>
+      <>
+        <GlobalStyle />
+        <Header history={history} />
+        <Switch>
+          <Route path="/" exact component={Feed} />
+          <Route path="/category/:category" component={Category} />
+          <Public path="/login" component={Login} />
+          <Public path="/register" component={Register} />
+          <Private path="/profile" exact component={Profile} />
+          <Private path="/profile/edit" exact component={EditProfile} />
+          <Route path="/profile/:user_id" component={PublicProfile} />
+          <Route path="/post/:post_id" component={PostPage} />
+          <Private path="/add-post" component={AddPost} />
+          <Route component={NotFound} />
+        </Switch>
+      </>
+    </Router>
+  </Provider>
 )
 
 export default AppRoutes
