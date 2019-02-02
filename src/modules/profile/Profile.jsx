@@ -46,6 +46,8 @@ const Profile = ({
         username={auth.user.username}
         bio={auth.user.bio}
         isVerified={auth.user.isVerified}
+        followers={auth.user.followers}
+        following={auth.user.following}
       />
       {data.length > 0 ? (
         <Posts

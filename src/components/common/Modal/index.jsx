@@ -1,9 +1,17 @@
 import React from 'react'
-import { Overlay, Wrapper, Content, Actions, Message } from './styles'
+import {
+  Overlay,
+  Wrapper,
+  Content,
+  Actions,
+  Message,
+  SubOverlay,
+} from './styles'
 import { Button } from '../../common'
 
 export const Modal = ({ title, description, action, onPress, cancel }) => (
   <Overlay>
+    <SubOverlay onClick={cancel} />
     <Wrapper>
       <Content>
         <Message>

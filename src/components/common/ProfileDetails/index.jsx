@@ -1,11 +1,16 @@
 import React from 'react'
 import Tooltip from 'react-simple-tooltip'
+import { compose, withStateHandlers } from 'recompose'
 import { Link } from 'react-router-dom'
+import Modal from './Modal'
 import { Wrapper, Flex, Avatar, Details, UnFollowBtn } from './styles'
-import { Button } from '../../common'
+import { Button, DefaultBtn } from '../../common'
 import verifiedIcon from './assets/verified.svg'
 
-export const ProfileDetails = ({
+const ProfileWrapper = ({
+  isVisible,
+  toggleModal,
+  modalContent,
   loggedIn,
   profileId,
   userId,
@@ -16,7 +21,7 @@ export const ProfileDetails = ({
   username,
   bio = '404 Bio not found!',
   followers,
-  // following,
+  following,
   unFollowUser,
   followUser,
 }) => (
@@ -39,6 +44,26 @@ export const ProfileDetails = ({
         </h2>
         <h4>@{username}</h4>
         <p>{bio}</p>
+        <DefaultBtn
+          type="button"
+          disabled={followers.length < 1}
+          onClick={() => {
+            if (followers) toggleModal(true, followers)
+            else alert(`You don't seem to have any followers yet!`)
+          }}
+        >
+          {followers.length} Followers
+        </DefaultBtn>
+        <DefaultBtn
+          type="button"
+          disabled={following.length < 1}
+          onClick={() => {
+            if (following) toggleModal(true, following)
+            else alert(`Start following someone to help them make decisions!`)
+          }}
+        >
+          {following.length} Following
+        </DefaultBtn>
       </Details>
       <Avatar href={avatar} target="_blank" avatar={avatar} />
     </Flex>
@@ -64,5 +89,23 @@ export const ProfileDetails = ({
           Follow
         </Button>
       ))}
+    {isVisible && <Modal toggleModal={toggleModal} content={modalContent} />}
   </Wrapper>
 )
+
+const enhance = compose(
+  withStateHandlers(
+    ({ followers }) => ({
+      isVisible: false,
+      modalContent: followers,
+    }),
+    {
+      toggleModal: () => (value, content) => ({
+        isVisible: value,
+        modalContent: content,
+      }),
+    }
+  )
+)
+
+export const ProfileDetails = enhance(ProfileWrapper)
