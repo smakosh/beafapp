@@ -102,7 +102,7 @@ const enhance = compose(
     }
   ),
   lifecycle({
-    async componentWillMount() {
+    async componentDidMount() {
       await this.props.getUserById(this.props.match.params.user_id)
       this.props.getPostsByUserId(this.props.match.params.user_id)
     },

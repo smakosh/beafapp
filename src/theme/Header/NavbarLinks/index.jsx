@@ -25,8 +25,7 @@ const NavbarLinks = ({ desktop, logout, auth, history }) => (
     {auth && auth.isLoggedIn && (
       <Avatar
         as={NavLink}
-        to={`/profile/${auth.user._id}`}
-        onClick={() => history.push(`/profile/${auth.user._id}`)}
+        to="/profile"
         exact
         activeStyle={{ borderColor: '#FF6347' }}
       >
