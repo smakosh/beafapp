@@ -1,29 +1,40 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Container } from '../../../common'
-import { Wrapper, Overlay, Card, Item, SubOverlay } from './styles'
+import { Container, SingleUser, CancelMark } from '../../../common'
+import {
+  Wrapper,
+  Overlay,
+  Content,
+  SubOverlay,
+  Scrollable,
+  Card,
+} from './styles'
 
-export default ({ toggleModal, content, history }) => (
+export default ({ toggleModal, contentTitle, content, myId, history }) => (
   <Wrapper>
     <SubOverlay onClick={() => toggleModal(false)} />
     <Overlay as={Container}>
       <Card>
-        {content.map(({ _id, username }) => (
-          <Item key={_id}>
-            <Link
-              to={`/profile/${_id}`}
-              onClick={() => {
-                toggleModal(false)
-                history.push(`/profile/${_id}`)
-              }}
-            >
-              {username}
-            </Link>
-          </Item>
-        ))}
-        <button type="button" onClick={() => toggleModal(false)}>
-          close
-        </button>
+        <CancelMark
+          toggle={() => toggleModal(false)}
+          alt="close modal"
+          align="right"
+        />
+        <h2>{contentTitle}</h2>
+        <Scrollable>
+          <Content>
+            {content &&
+              content.map(content => (
+                <SingleUser
+                  key={content._id}
+                  {...content}
+                  myId={myId}
+                  toggleModal={toggleModal}
+                  history={history}
+                  modal
+                />
+              ))}
+          </Content>
+        </Scrollable>
       </Card>
     </Overlay>
   </Wrapper>

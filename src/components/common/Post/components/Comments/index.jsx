@@ -4,17 +4,15 @@ import en from 'javascript-time-ago/locale/en'
 import { withStateHandlers, compose, withProps } from 'recompose'
 import { Link } from 'react-router-dom'
 import { Modal } from '../../../Modal'
+import { CancelMark } from '../../../../common'
 import {
   Wrapper,
   SingleComment,
   Flex,
   More,
   CommentDetails,
-  Delete,
-  DeleteBtn,
   SubFlex,
 } from './styles'
-import deleteIcon from '../../assets/delete.svg'
 
 TimeAgo.addLocale(en)
 
@@ -52,14 +50,11 @@ const Comments = ({
                 </Flex>
               </CommentDetails>
               {userId === creator_id && (
-                <Delete>
-                  <DeleteBtn
-                    type="button"
-                    onClick={() => setComment(post_id, _id)}
-                  >
-                    <img src={deleteIcon} alt="delete post" />
-                  </DeleteBtn>
-                </Delete>
+                <CancelMark
+                  toggle={() => setComment(post_id, _id)}
+                  alt="close modal"
+                  flex
+                />
               )}
             </SingleComment>
           ))}

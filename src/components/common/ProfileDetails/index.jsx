@@ -24,6 +24,7 @@ const ProfileWrapper = ({
   following,
   unFollowUser,
   followUser,
+  contentTitle,
 }) => (
   <Wrapper>
     <Flex>
@@ -48,7 +49,7 @@ const ProfileWrapper = ({
           type="button"
           disabled={followers.length < 1}
           onClick={() => {
-            if (followers) toggleModal(true, followers)
+            if (followers) toggleModal(true, followers, 'Followers')
             else alert(`You don't seem to have any followers yet!`)
           }}
         >
@@ -58,7 +59,7 @@ const ProfileWrapper = ({
           type="button"
           disabled={following.length < 1}
           onClick={() => {
-            if (following) toggleModal(true, following)
+            if (following) toggleModal(true, following, 'Following')
             else alert(`Start following someone to help them make decisions!`)
           }}
         >
@@ -89,7 +90,16 @@ const ProfileWrapper = ({
           Follow
         </Button>
       ))}
-    {isVisible && <Modal toggleModal={toggleModal} content={modalContent} />}
+    {isVisible && (
+      <Modal
+        contentTitle={contentTitle}
+        toggleModal={toggleModal}
+        content={modalContent}
+        followUser={followUser}
+        unFollowUser={unFollowUser}
+        myId={userId}
+      />
+    )}
   </Wrapper>
 )
 
@@ -98,11 +108,13 @@ const enhance = compose(
     ({ followers }) => ({
       isVisible: false,
       modalContent: followers,
+      contentTitle: 'Followers',
     }),
     {
-      toggleModal: () => (value, content) => ({
+      toggleModal: () => (value, content, contentTitle) => ({
         isVisible: value,
         modalContent: content,
+        contentTitle,
       }),
     }
   )

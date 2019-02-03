@@ -4,9 +4,8 @@ import en from 'javascript-time-ago/locale/en'
 import { Link } from 'react-router-dom'
 import { withStateHandlers, compose } from 'recompose'
 import { Modal } from '../../../Modal'
+import { CancelMark } from '../../../../common'
 import { UserInfo, Wrapper } from './styles'
-import { Delete, DeleteBtn } from '../Comments/styles'
-import deleteIcon from '../../assets/delete.svg'
 
 TimeAgo.addLocale(en)
 
@@ -35,11 +34,11 @@ const PostHeader = ({
         </Link>
       </Wrapper>
       {userId === _creator && (
-        <Delete>
-          <DeleteBtn right type="button" onClick={() => setPost(post_id)}>
-            <img src={deleteIcon} alt="delete post" />
-          </DeleteBtn>
-        </Delete>
+        <CancelMark
+          toggle={() => setPost(post_id)}
+          alt="close modal"
+          align="right"
+        />
       )}
     </UserInfo>
     {isVisible && (

@@ -38,7 +38,7 @@ const Feed = ({
         deletePost={deletePost}
       />
     ) : (
-      <Empty />
+      <Empty follow />
     )}
     <Discover myId={auth.user && auth.user._id} />
   </Wrapper>

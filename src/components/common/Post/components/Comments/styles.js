@@ -30,25 +30,6 @@ export const CommentDetails = styled.div`
   max-width: 88%;
 `
 
-export const Delete = styled.div`
-  flex: 1 auto;
-  width: 100%;
-  max-width: 10%;
-`
-
-export const DeleteBtn = styled.div`
-  border-radius: 50%;
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  ${({ right }) =>
-    right &&
-    `
-    text-align: right;
-  `}
-`
-
 export const Flex = styled.div`
   display: flex;
   align-items: flex-start;
