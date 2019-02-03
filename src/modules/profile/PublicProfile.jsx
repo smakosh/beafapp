@@ -67,7 +67,10 @@ const PublicProfile = ({
           deletePost={deletePost}
         />
       ) : (
-        <Empty profile="true" />
+        <Empty
+          profile="true"
+          publicProfile={isLoggedIn && user && user._id !== profile._id}
+        />
       )}
     </Wrapper>
   </StyledContainer>
