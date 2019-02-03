@@ -11,7 +11,7 @@ export default (state = { loading: false }, action) => {
         ...state,
         profile: {
           ...state.profile,
-          follow: state.profile.followers.find(
+          followers: state.profile.followers.find(
             user => user._id === action.payload.myId
           )
             ? state.profile.followers.filter(
