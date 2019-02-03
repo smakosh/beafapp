@@ -25,6 +25,10 @@ const ProfileWrapper = ({
   unFollowUser,
   followUser,
   contentTitle,
+  myAvatar,
+  myFirstName,
+  myLastName,
+  myUsername,
 }) => (
   <Wrapper>
     <Flex>
@@ -87,10 +91,10 @@ const ProfileWrapper = ({
           onClick={() =>
             followUser(
               profileId,
-              avatar,
-              firstName,
-              lastName,
-              username,
+              myAvatar,
+              myFirstName,
+              myLastName,
+              myUsername,
               userId,
               true
             )

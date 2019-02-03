@@ -54,6 +54,10 @@ const PublicProfile = ({
         following={profile.following}
         unFollowUser={unFollowUser}
         followUser={followUser}
+        myAvatar={user && user.avatar}
+        myFirstName={user && user.firstName}
+        myLastName={user && user.lastName}
+        myUsername={user && user.username}
       />
       {data.length > 0 ? (
         <Posts
