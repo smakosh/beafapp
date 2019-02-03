@@ -25,7 +25,16 @@ export default (state = { loading: false }, action) => {
                   ? item.followers.filter(
                       user => user._id !== action.payload.myId
                     )
-                  : [...item.followers, { _id: action.payload.myId }],
+                  : [
+                      ...item.followers,
+                      {
+                        _id: action.payload.myId,
+                        avatar: action.payload.avatar,
+                        firstName: action.payload.firstName,
+                        lastName: action.payload.lastName,
+                        username: action.payload.username,
+                      },
+                    ],
               }
             : item
         ),

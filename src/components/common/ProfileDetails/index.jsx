@@ -84,7 +84,17 @@ const ProfileWrapper = ({
         </UnFollowBtn>
       ) : (
         <Button
-          onClick={() => followUser(profileId, userId, true)}
+          onClick={() =>
+            followUser(
+              profileId,
+              avatar,
+              firstName,
+              lastName,
+              username,
+              userId,
+              true
+            )
+          }
           type="button"
         >
           Follow

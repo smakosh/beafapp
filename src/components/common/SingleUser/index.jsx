@@ -52,7 +52,12 @@ export const SingleUser = ({
               <span>Following</span>
             </UnFollowBtn>
           ) : (
-            <Button onClick={() => followUser(_id, myId)} type="button">
+            <Button
+              onClick={() =>
+                followUser(_id, avatar, firstName, lastName, username, myId)
+              }
+              type="button"
+            >
               Follow
             </Button>
           ))}

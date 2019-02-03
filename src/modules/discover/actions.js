@@ -22,13 +22,27 @@ export const getUsers = () => async dispatch => {
   }
 }
 
-export const followUser = (id, myId, profile) => async dispatch => {
+export const followUser = (
+  id,
+  avatar,
+  firstName,
+  lastName,
+  username,
+  myId,
+  profile
+) => async dispatch => {
   try {
     await axios.patch(`${REACT_APP_PROD_API}/api/user/follow/${id}`)
     if (profile) {
-      dispatch({ type: 'FOLLOW_PROFILE', payload: { user_id: id, myId } })
+      dispatch({
+        type: 'FOLLOW_PROFILE',
+        payload: { user_id: id, avatar, firstName, lastName, username, myId },
+      })
     } else {
-      dispatch({ type: 'FOLLOW', payload: { user_id: id, myId } })
+      dispatch({
+        type: 'FOLLOW',
+        payload: { user_id: id, avatar, firstName, lastName, username, myId },
+      })
     }
   } catch (err) {
     console.log(err)

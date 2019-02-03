@@ -20,7 +20,16 @@ export default (state = { loading: false }, action) => {
             ? state.user.following.filter(
                 user => user._id !== action.payload.user_id
               )
-            : [...state.user.following, { _id: action.payload.user_id }],
+            : [
+                ...state.user.following,
+                {
+                  _id: action.payload.user_id,
+                  avatar: action.payload.avatar,
+                  firstName: action.payload.firstName,
+                  lastName: action.payload.lastName,
+                  username: action.payload.username,
+                },
+              ],
         },
       }
     case 'FOLLOW_PROFILE':
@@ -34,7 +43,16 @@ export default (state = { loading: false }, action) => {
             ? state.user.following.filter(
                 user => user._id !== action.payload.user_id
               )
-            : [...state.user.following, { _id: action.payload.user_id }],
+            : [
+                ...state.user.following,
+                {
+                  _id: action.payload.user_id,
+                  avatar: action.payload.avatar,
+                  firstName: action.payload.firstName,
+                  lastName: action.payload.lastName,
+                  username: action.payload.username,
+                },
+              ],
         },
       }
     case 'AUTH_FAILED':
