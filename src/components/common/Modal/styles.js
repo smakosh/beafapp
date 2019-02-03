@@ -21,23 +21,29 @@ export const Wrapper = styled.div`
   align-self: center;
 
   @media (max-width: 980px) {
-    width: 90%;  
+    width: 90%;
   }
 `
 
-export const Content = styled.div`
-  padding: 2rem;
-  background: #fff;
+export const SubOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`
 
-  @media screen {
-    padding: .5rem;
-  }
+export const Content = styled.div`
+  padding: 0.5rem;
+  background: #fff;
+  z-index: 1;
+  position: relative;
 `
 
 export const Actions = styled.div`
   display: flex;
   align-items: center;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   border-top: 1px solid #eee;
   flex-direction: row-reverse;
 

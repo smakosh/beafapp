@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 export const Links = styled.div`
-	${({ desktop }) => (desktop ? `
+  ${({ desktop }) =>
+    desktop
+      ? `
 		display: flex;
 		align-items: center;
 
@@ -21,7 +23,8 @@ export const Links = styled.div`
 						margin-right: unset;
 				}
 		}
-	` : `
+	`
+      : `
 		padding: 3rem;
 		display: flex;
 		flex-direction: column;
@@ -38,20 +41,20 @@ export const Links = styled.div`
 						margin-bottom: unset;
 				}
 		}
-	`)}
+	`}
 `
 
 export const Avatar = styled.a`
-	border: 2px solid #eee;
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	overflow: hidden;
+  border: 2px solid #eee;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
 
-	img {
-		width: 40px;
-		height: 40px;
-		object-fit: contain;
-		border-radius: 50%;
-	}
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
 `

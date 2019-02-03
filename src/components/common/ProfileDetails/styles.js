@@ -4,13 +4,15 @@ export const Wrapper = styled.div`
   padding: 1rem 0;
   width: 70%;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 
   @media (max-width: 960px) {
     width: 90%;
   }
 
   @media (max-width: 680px) {
-   text-align: center;
+    text-align: center;
   }
 `
 
@@ -18,27 +20,29 @@ export const Flex = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
   @media (max-width: 680px) {
-   flex-direction: column; 
+    flex-direction: column;
   }
 `
 
 export const Avatar = styled.a`
-	border: 1px solid #eee;
-	border-radius: 50%;
-	width: 100px;
-	height: 100px;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 
   @media (max-width: 680px) {
-   order: 1;
+    order: 1;
   }
-  
-  ${({ avatar }) => avatar && `
+
+  ${({ avatar }) =>
+    avatar &&
+    `
     background-image: url('${avatar}');
   `}
 `
@@ -50,7 +54,7 @@ export const Details = styled.div`
   img {
     cursor: pointer;
   }
-  
+
   .jAfIlk {
     font-size: 10pt;
     font-weight: normal;
@@ -60,8 +64,8 @@ export const Details = styled.div`
 
   @media (max-width: 680px) {
     width: 100%;
-   	order: 2;
-   	text-align: center;
+    order: 2;
+    text-align: center;
 
     .daZGjV {
       align-self: center;
@@ -69,12 +73,12 @@ export const Details = styled.div`
   }
 
   h2 {
-    margin-bottom: .2rem;
+    margin-bottom: 0.2rem;
 
     span {
-      margin-right: .5rem;
+      margin-right: 0.5rem;
     }
-    
+
     @media (max-width: 680px) {
       display: flex;
       flex-direction: column;
@@ -87,12 +91,23 @@ export const Details = styled.div`
   }
 
   h4 {
-    margin: .2rem 0 1rem 0;
+    margin: 0.2rem 0 1rem 0;
     color: #848484;
   }
 
   p {
     color: #565656;
-		line-height: 1.6;
+    line-height: 1.6;
+  }
+`
+
+export const UnFollowBtn = styled.button`
+  &:hover {
+    span {
+      display: none;
+    }
+  }
+  &:hover:before {
+    content: 'UNFOLLOW';
   }
 `
