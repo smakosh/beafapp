@@ -23,6 +23,7 @@ import {
   CustomSelect,
   CustomSwitch,
   MacroWrapper,
+  Info,
 } from './styles'
 import UploadIcon from '../assets/upload.svg'
 import categories from './categories.json'
@@ -111,6 +112,25 @@ const AddPost = ({
           </MacroWrapper>
           <ErrorMessage component={Error} name="private" />
         </InputField>
+        <InputField label={!values.unbiased ? 'Biased' : 'Unbiased'}>
+          <MacroWrapper>
+            <CustomSwitch
+              as={Field}
+              component={Switch}
+              onChange={() => setFieldValue('unbiased', !values.unbiased)}
+              onBlur={() => setFieldTouched('unbiased')}
+              name="unbiased"
+              uncheckedIcon={false}
+              checkedIcon={false}
+              checked={values.unbiased}
+              id="normal-switch"
+            />
+          </MacroWrapper>
+          <ErrorMessage component={Error} name="unbiased" />
+        </InputField>
+        <Info href="https://beafapp.com/unbiased-posts">
+          Learn more about Unbiased posts
+        </Info>
         <Center>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
@@ -182,6 +202,7 @@ const enhance = compose(
       description: '',
       category: '',
       private: false,
+      unbiased: false,
     }),
     validationSchema: () =>
       Yup.object().shape({
@@ -194,6 +215,7 @@ const enhance = compose(
           .max(120, 'Description has to be less than 120 characters!'),
         category: Yup.string().required('You must select a category'),
         private: Yup.bool().required('Required field'),
+        unbiased: Yup.bool().required('Required field'),
       }),
     handleSubmit: (
       values,

@@ -142,3 +142,7 @@ export const CustomSwitch = styled.div`
 export const MacroWrapper = styled.div`
   margin-top: 1rem;
 `
+
+export const Info = styled.a`
+  color: #2196f3;
+`

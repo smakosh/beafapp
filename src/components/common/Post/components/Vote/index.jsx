@@ -13,6 +13,7 @@ export const Vote = ({
   after_votes,
   voteBefore,
   voteAfter,
+  unbiased,
 }) => (
   <Wrapper>
     <Btn before>
@@ -31,7 +32,9 @@ export const Vote = ({
           </Floating>
         )}
       </Tooltip>
-      <p>{before_votes.length}</p>
+      {(!unbiased ||
+        before_votes.includes(userId) ||
+        after_votes.includes(userId)) && <p>{before_votes.length}</p>}
     </Btn>
     <Btn>
       <Tooltip content="Vote!">
@@ -48,7 +51,9 @@ export const Vote = ({
           </Floating>
         )}
       </Tooltip>
-      <p>{after_votes.length}</p>
+      {(!unbiased ||
+        after_votes.includes(userId) ||
+        before_votes.includes(userId)) && <p>{after_votes.length}</p>}
     </Btn>
   </Wrapper>
 )

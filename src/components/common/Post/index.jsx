@@ -27,6 +27,7 @@ export const Post = ({
   deletePost,
   flex,
   profile,
+  unbiased,
 }) => (
   <Wrapper flex={flex}>
     <PostHeader
@@ -48,6 +49,7 @@ export const Post = ({
         before_votes={before_votes}
         after_votes={after_votes}
         isLoggedIn={isLoggedIn}
+        unbiased={unbiased}
       />
     )}
     {!profile && (

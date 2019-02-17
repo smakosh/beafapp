@@ -20,6 +20,7 @@ const Posts = ({
         <Post
           {...post}
           key={post._id}
+          unbiased={post.unbiased}
           userId={user && user._id}
           userName={user && user.username}
           isLoggedIn={isLoggedIn}
