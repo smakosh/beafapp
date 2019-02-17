@@ -25,7 +25,7 @@ const Login = ({
   values,
   setFieldValue,
 }) => (
-  <Container vertical>
+  <Container>
     <SEO url="/login" title="Login" description="Login" />
     <Card login="true">
       <Item>
