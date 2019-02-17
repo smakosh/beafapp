@@ -1,15 +1,23 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
-	color: #fff;
 	text-decoration: none;
-	padding: 0.9rem 2.5rem;
+	padding: 0.7rem 2rem;
+	color: #fff;
 	background: #191847;
+	border: 1px solid transparent;
 	text-transform: uppercase;
 	border-radius: 0.3rem;
-	border: none;
 	cursor: pointer;
 	font-size: 12pt;
+	transition: .3s;
+
+	&:hover {
+		background: transparent;
+		border: 1px solid #191847;
+		color: #191847;
+		transition: .3s;
+	}
 
 	${({ confirm }) =>
     confirm &&
@@ -23,6 +31,12 @@ export const Button = styled.button`
 			background: transparent;
 			border: 1px solid #191847;
 			color: #191847;
+
+			&:hover {
+				color: #fff;
+				background: #191847;
+				border: 1px solid transparent;
+			}
 	`}
 
 	${({ cancel }) =>

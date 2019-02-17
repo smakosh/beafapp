@@ -1,9 +1,10 @@
 import React from 'react'
 import Tooltip from 'react-simple-tooltip'
+import ImageZoom from 'react-medium-image-zoom'
 import { compose, withStateHandlers } from 'recompose'
 import { Link } from 'react-router-dom'
 import Modal from './Modal'
-import { Wrapper, Flex, Avatar, Details, UnFollowBtn } from './styles'
+import { Wrapper, Flex, Details, UnFollowBtn } from './styles'
 import { Button, DefaultBtn } from '../../common'
 import verifiedIcon from './assets/verified.svg'
 
@@ -70,7 +71,13 @@ const ProfileWrapper = ({
           {following.length} Following
         </DefaultBtn>
       </Details>
-      <Avatar href={avatar} target="_blank" avatar={avatar} />
+      <ImageZoom
+        image={{
+          src: avatar,
+          alt: username,
+          className: 'avatar',
+        }}
+      />
     </Flex>
     {loggedIn &&
       (userId === profileId ? (

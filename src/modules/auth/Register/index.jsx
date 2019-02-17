@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose, lifecycle, withState } from 'recompose'
 import * as Yup from 'yup'
-import { withFormik, Form, Field } from 'formik'
+import { withFormik, Form, Field, ErrorMessage } from 'formik'
 import Recaptcha from 'react-google-recaptcha'
 import { register } from '../actions'
 import {
@@ -39,9 +39,7 @@ const Register = ({
             placeholder="First name"
             name="firstName"
           />
-          {errors.firstName && touched.firstName && (
-            <Error>{errors.firstName}</Error>
-          )}
+          <ErrorMessage component={Error} name="firstName" />
         </InputField>
         <InputField error={errors.lastName && touched.lastName} label="Surname">
           <Field
@@ -50,9 +48,7 @@ const Register = ({
             placeholder="Last name"
             name="lastName"
           />
-          {errors.lastName && touched.lastName && (
-            <Error>{errors.lastName}</Error>
-          )}
+          <ErrorMessage component={Error} name="lastName" />
         </InputField>
         <InputField
           error={errors.username && touched.username}
@@ -64,9 +60,7 @@ const Register = ({
             placeholder="Username"
             name="username"
           />
-          {errors.username && touched.username && (
-            <Error>{errors.username}</Error>
-          )}
+          <ErrorMessage component={Error} name="username" />
         </InputField>
         <InputField error={errors.email && touched.email} label="Email address">
           <Field
@@ -76,7 +70,7 @@ const Register = ({
             type="email"
             name="email"
           />
-          {errors.email && touched.email && <Error>{errors.email}</Error>}
+          <ErrorMessage component={Error} name="email" />
         </InputField>
         <InputField
           relative
@@ -94,9 +88,7 @@ const Register = ({
             placeholder="Password must contain more than 6 characters"
             name="password"
           />
-          {errors.password && touched.password && (
-            <Error>{errors.password}</Error>
-          )}
+          <ErrorMessage component={Error} name="password" />
         </InputField>
         <InputField>
           <Field
@@ -105,9 +97,7 @@ const Register = ({
             name="recaptcha"
             onChange={value => setFieldValue('recaptcha', value)}
           />
-          {errors.recaptcha && touched.recaptcha && (
-            <Error>{errors.recaptcha}</Error>
-          )}
+          <ErrorMessage component={Error} name="recaptcha" />
         </InputField>
         <Center>
           <Button type="submit" disabled={isSubmitting}>

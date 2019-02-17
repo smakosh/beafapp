@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { compose, withState } from 'recompose'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
-import { withFormik, Form, Field } from 'formik'
+import { withFormik, Form, Field, ErrorMessage } from 'formik'
 import Recaptcha from 'react-google-recaptcha'
 import { login } from '../actions'
 import {
@@ -14,7 +14,7 @@ import {
   Error,
   SEO,
 } from '../../../components/common'
-import { Card, Center, Show } from '../styles'
+import { Card, Center, Show, Item, Img, FormWrapper } from '../styles'
 
 const Login = ({
   errors,
@@ -27,63 +27,67 @@ const Login = ({
 }) => (
   <Container vertical>
     <SEO url="/login" title="Login" description="Login" />
-    <Card>
-      <Form>
-        <InputField label="Email" error={errors.email && touched.email}>
-          <Field type="email" name="email" placeholder="Email" />
-          {errors.email && touched.email && <Error>{errors.email}</Error>}
-        </InputField>
-        <InputField
-          relative
-          label="Password"
-          error={errors.password && touched.password}
-        >
-          {values.password.length > 2 && (
-            <Show type="button" onClick={() => showPassword(!visible)}>
-              Show
-            </Show>
-          )}
-          <Field
-            type={visible ? 'text' : 'password'}
-            name="password"
-            placeholder="Password"
-          />
-          {errors.password && touched.password && (
-            <Error>{errors.password}</Error>
-          )}
-        </InputField>
-        <InputField>
-          <Field
-            component={Recaptcha}
-            sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
-            name="recaptcha"
-            onChange={value => setFieldValue('recaptcha', value)}
-          />
-          {errors.recaptcha && touched.recaptcha && (
-            <Error>{errors.recaptcha}</Error>
-          )}
-        </InputField>
-        <Center>
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? (
-              <Spinner name="circle" color="white" />
-            ) : (
-              <span>Login</span>
-            )}
-          </Button>
-        </Center>
-      </Form>
-      <Center>
-        <p>
-          Don't have an account? no worries!{' '}
-          <Link
-            style={{ color: '#2B85FF', textDecoration: 'underline' }}
-            to="/register"
-          >
-            Create one
-          </Link>
-        </p>
-      </Center>
+    <Card login="true">
+      <Item>
+        <Img src="https://res.cloudinary.com/dj8equdxc/image/upload/v1550419341/beaf/ola-mishchenko-600004-unsplash_1.jpg" />
+        <Img src="https://res.cloudinary.com/dj8equdxc/image/upload/v1550419339/beaf/charles-1334258-unsplash.jpg" />
+      </Item>
+      <Item>
+        <FormWrapper>
+          <Form>
+            <InputField label="Email" error={errors.email && touched.email}>
+              <Field type="email" name="email" placeholder="Email" />
+              <ErrorMessage component={Error} name="email" />
+            </InputField>
+            <InputField
+              relative
+              label="Password"
+              error={errors.password && touched.password}
+            >
+              {values.password.length > 2 && (
+                <Show type="button" onClick={() => showPassword(!visible)}>
+                  Show
+                </Show>
+              )}
+              <Field
+                type={visible ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+              />
+              <ErrorMessage component={Error} name="password" />
+            </InputField>
+            <InputField>
+              <Field
+                component={Recaptcha}
+                sitekey="6Lcs6lQUAAAAAEwhNH2IsobIe2csdda4TU3efpMN"
+                name="recaptcha"
+                onChange={value => setFieldValue('recaptcha', value)}
+              />
+              <ErrorMessage component={Error} name="recaptcha" />
+            </InputField>
+            <Center>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <Spinner name="circle" color="white" />
+                ) : (
+                  <span>Login</span>
+                )}
+              </Button>
+            </Center>
+          </Form>
+          <Center>
+            <p>
+              Don't have an account? no worries!{' '}
+              <Link
+                style={{ color: '#2B85FF', textDecoration: 'underline' }}
+                to="/register"
+              >
+                Create one
+              </Link>
+            </p>
+          </Center>
+        </FormWrapper>
+      </Item>
     </Card>
   </Container>
 )

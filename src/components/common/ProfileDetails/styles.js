@@ -25,26 +25,17 @@ export const Flex = styled.div`
   @media (max-width: 680px) {
     flex-direction: column;
   }
-`
 
-export const Avatar = styled.a`
-  border: 1px solid #eee;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  .avatar {
+    border: 1px solid #eee;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
 
-  @media (max-width: 680px) {
-    order: 1;
+    @media (max-width: 680px) {
+      order: 1;
+    }
   }
-
-  ${({ avatar }) =>
-    avatar &&
-    `
-    background-image: url('${avatar}');
-  `}
 `
 
 export const Details = styled.div`

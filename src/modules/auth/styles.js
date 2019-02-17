@@ -14,6 +14,18 @@ export const Card = styled.div`
 		width: 60%;
 	`}
 
+  ${({ login }) =>
+    login &&
+    `
+			padding: unset;
+			display: flex;
+			algin-items: flex-start;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			border-radius: 3px;
+			overflow: hidden;
+	`}
+
   @media (max-width: 960px) {
     width: 80%;
     box-sizing: border-box;
@@ -23,6 +35,43 @@ export const Card = styled.div`
     width: 100%;
     box-sizing: border-box;
   }
+`
+
+export const Item = styled.div`
+  width: 100%;
+  max-width: 50%;
+
+  &:first-child {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  @media (max-width: 960px) {
+    max-width: 100%;
+  }
+`
+
+export const Img = styled.div`
+  width: 100%;
+  height: 100%;
+
+  @media (max-width: 960px) {
+    height: 200px;
+  }
+
+  ${({ src }) =>
+    src &&
+    `
+		background-image: url(${src});
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+	`}
+`
+
+export const FormWrapper = styled.div`
+  padding: 2rem;
 `
 
 export const Center = styled.div`

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
+import { ScrollContext } from 'react-router-scroll-4'
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import store from './store'
@@ -35,22 +36,24 @@ try {
 const AppRoutes = () => (
   <Provider store={store}>
     <Router history={history}>
-      <>
-        <GlobalStyle />
-        <Header history={history} />
-        <Switch>
-          <Route path="/" exact component={Feed} />
-          <Route path="/category/:category" component={Category} />
-          <Public path="/login" component={Login} />
-          <Public path="/register" component={Register} />
-          <Private path="/profile" exact component={Profile} />
-          <Private path="/profile/edit" exact component={EditProfile} />
-          <Route path="/profile/:user_id" component={PublicProfile} />
-          <Route path="/post/:post_id" component={PostPage} />
-          <Private path="/add-post" component={AddPost} />
-          <Route component={NotFound} />
-        </Switch>
-      </>
+      <ScrollContext>
+        <>
+          <GlobalStyle />
+          <Header history={history} />
+          <Switch>
+            <Route path="/" exact component={Feed} />
+            <Route path="/category/:category" component={Category} />
+            <Public path="/login" component={Login} />
+            <Public path="/register" component={Register} />
+            <Private path="/profile" exact component={Profile} />
+            <Private path="/profile/edit" exact component={EditProfile} />
+            <Route path="/profile/:user_id" component={PublicProfile} />
+            <Route path="/post/:post_id" component={PostPage} />
+            <Private path="/add-post" component={AddPost} />
+            <Route component={NotFound} />
+          </Switch>
+        </>
+      </ScrollContext>
     </Router>
   </Provider>
 )

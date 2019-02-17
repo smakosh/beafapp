@@ -37,9 +37,14 @@ const NavbarLinks = ({ desktop, logout, auth, history }) => (
         Logout
       </Button>
     ) : (
-      <Button as={Link} to="/login">
-        Login
-      </Button>
+      <>
+        <Button as={Link} to="/login">
+          Login
+        </Button>
+        <Button as={Link} to="/register" outlined="true">
+          Register
+        </Button>
+      </>
     )}
   </Links>
 )

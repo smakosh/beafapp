@@ -4,6 +4,8 @@ export const StyledHeader = styled.div`
   background: #fff;
   width: 100%;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+	position: relative;
+	z-index: 2;
 `
 
 export const Overlay = styled.div`
