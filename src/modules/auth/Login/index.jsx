@@ -14,7 +14,7 @@ import {
   Error,
   SEO,
 } from '../../../components/common'
-import { Card, Center, Show, Item, Img, FormWrapper } from '../styles'
+import { Card, Center, Show, Item, Img, FormWrapper, LoginWrapper } from '../styles'
 
 const Login = ({
   errors,
@@ -25,7 +25,7 @@ const Login = ({
   values,
   setFieldValue,
 }) => (
-  <Container>
+  <LoginWrapper as={Container}>
     <SEO url="/login" title="Login" description="Login" />
     <Card login="true">
       <Item>
@@ -89,7 +89,7 @@ const Login = ({
         </FormWrapper>
       </Item>
     </Card>
-  </Container>
+  </LoginWrapper>
 )
 
 const enhance = compose(

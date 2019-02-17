@@ -1,5 +1,13 @@
 import styled from 'styled-components'
 
+export const LoginWrapper = styled.div`
+	padding: 4rem 0;
+	
+	@media (max-width: 960px) {
+		padding: 4rem 0;
+	}
+`
+
 export const Card = styled.div`
   padding: 2rem;
   box-shadow: 3px 0px 20px 0 rgba(0, 0, 0, 0.1);
