@@ -4,8 +4,6 @@ export const Wrapper = styled.div`
   padding: 1rem 0;
   width: 70%;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
 
   @media (max-width: 960px) {
     width: 90%;

@@ -49,6 +49,7 @@ export const Card = styled.div`
   padding: 2rem;
   box-shadow: 3px 0px 20px 0 rgba(0, 0, 0, 0.1);
   align-self: center;
+  background: #fff;
 
   ${({ register }) =>
     register &&

@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   left: 0;
   display: flex;
   justify-content: center;
+  z-index: 3;
 `
 
 export const Overlay = styled.div`

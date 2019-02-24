@@ -128,7 +128,7 @@ const AddPost = ({
           </MacroWrapper>
           <ErrorMessage component={Error} name="unbiased" />
         </InputField>
-        <Info href="https://beafapp.com/unbiased-posts">
+        <Info href="https://beafapp.com/unbiased-posts" target="__blank">
           Learn more about Unbiased posts
         </Info>
         <Center>
