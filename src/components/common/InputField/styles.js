@@ -17,10 +17,10 @@ export const Wrapper = styled.div`
     text-align: left;
     -webkit-appearance: none;
     transition: all 0.2s ease 0s;
-    border-width: 2px;
+    border-width: 1px;
     border-color: #191847;
     border-style: solid;
-    border-radius: 7px;
+    border-radius: 2px;
     padding: 0.9rem 1rem;
     font-size: 12pt;
     resize: unset;

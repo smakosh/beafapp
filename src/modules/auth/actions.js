@@ -11,7 +11,7 @@ const authFailed = error => ({
 
 export const verifyToken = token => async dispatch => {
   try {
-    dispatch({ type: 'LOADING_USER' })
+    await dispatch({ type: 'LOADING_USER' })
 
     const res = await axios({
       method: 'GET',
@@ -22,10 +22,10 @@ export const verifyToken = token => async dispatch => {
       },
     })
 
-    setAuthToken(token)
+    await setAuthToken(token)
     await dispatch({ type: 'SAVE_USER', payload: res.data })
     if (
-      history.location.pathname === '/' ||
+      history.location.pathname === '/login' ||
       history.location.pathname === '/register'
     ) {
       history.push('/')
@@ -33,11 +33,83 @@ export const verifyToken = token => async dispatch => {
   } catch (err) {
     dispatch({ type: 'SAVE_USER', payload: {} })
     if (
-      history.location.pathname !== '/' ||
+      history.location.pathname !== '/login' ||
       history.location.pathname !== '/register'
     ) {
       history.push('/')
     }
+  }
+}
+
+export const verifyEmail = token => async dispatch => {
+  try {
+    await axios({
+      method: 'PATCH',
+      url: `${REACT_APP_PROD_API}/api/user/email/confirm`,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth': token,
+      },
+    })
+
+    setAuthToken(token)
+  } catch (err) {
+    dispatch({ type: 'SAVE_USER', payload: {} })
+    dispatch(authFailed(err.response.data))
+  }
+}
+
+export const forgottenPassword = (
+  payload,
+  setErrors,
+  setSubmitting,
+  resetForm
+) => async dispatch => {
+  try {
+    await axios.post(
+      `${REACT_APP_PROD_API}/api/user/forgotten/password`,
+      payload
+    )
+    setSubmitting(false)
+    resetForm()
+    history.push('/')
+  } catch (err) {
+    setErrors({
+      email: err.response.data.error,
+    })
+    setSubmitting(false)
+    dispatch(authFailed(err.response.data))
+  }
+}
+
+export const resetPassword = (
+  payload,
+  setErrors,
+  setSubmitting,
+  resetForm,
+  token
+) => async dispatch => {
+  try {
+    await axios({
+      method: 'PATCH',
+      url: `${REACT_APP_PROD_API}/api/user/reset/password`,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth': token,
+      },
+      data: payload,
+    })
+
+    await setAuthToken(token)
+    history.push('/login')
+    setSubmitting(false)
+    resetForm()
+  } catch (err) {
+    setErrors({
+      password: err.response.data.error,
+    })
+    setSubmitting(false)
+    dispatch(authFailed(err.response.data))
   }
 }
 
@@ -120,6 +192,6 @@ export const logout = () => async dispatch => {
     dispatch({ type: 'SAVE_USER', payload: {} })
     history.push('/login')
   } catch (err) {
-    console.log(err)
+    console.log('something went wrong')
   }
 }

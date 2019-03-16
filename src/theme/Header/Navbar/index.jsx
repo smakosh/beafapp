@@ -2,15 +2,25 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../../../components/common'
 import NavbarLinks from '../NavbarLinks'
-import { Brand, Wrapper } from './styles'
+import { Brand, Wrapper, Banner } from './styles'
 
-const Navbar = ({ logout, auth, history }) => (
-  <Wrapper as={Container} newUser={auth && auth.loggedIn ? 0 : 1}>
-    <Brand as={Link} to="/">
-      BE<span>AF</span>
-    </Brand>
-    <NavbarLinks history={history} auth={auth} logout={logout} desktop />
-  </Wrapper>
+export default ({ logout, auth, history }) => (
+  <>
+    {auth && auth.isLoggedIn && !auth.user.hasEmailVerified && (
+      <Banner>
+        <Container>
+          <span>
+            Please verify your email through the link we sent you via your inbox
+            (you might want to check the spam folder)
+          </span>
+        </Container>
+      </Banner>
+    )}
+    <Wrapper as={Container} newUser={auth && auth.isLoggedIn ? 0 : 1}>
+      <Brand as={Link} to="/">
+        BE<span>AF</span>
+      </Brand>
+      <NavbarLinks history={history} auth={auth} logout={logout} desktop />
+    </Wrapper>
+  </>
 )
-
-export default Navbar

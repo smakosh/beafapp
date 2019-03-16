@@ -22,6 +22,17 @@ export const Wrapper = styled.div`
   ${({ newUser }) =>
     newUser &&
     `
-        padding: 1.5rem 0;
-    `}
+		padding: 1.5rem 0;
+	`}
+`
+
+export const Banner = styled.div`
+  padding: 1rem 0;
+  text-align: center;
+  background: rgb(63, 70, 173);
+  color: #fff;
+
+  span {
+    line-height: 1.6;
+  }
 `

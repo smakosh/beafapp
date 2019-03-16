@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  max-width: 960px;
+  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  @media (max-width: 980px) {
+
+  @media (max-width: 1400px) {
     width: 90%;
   }
+
   ${({ vertical }) =>
     vertical &&
     `

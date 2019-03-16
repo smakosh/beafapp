@@ -14,7 +14,16 @@ import {
   Error,
   SEO,
 } from '../../../components/common'
-import { Card, Center, Show, Item, Img, FormWrapper, LoginWrapper } from '../styles'
+import {
+  Card,
+  Center,
+  Show,
+  Item,
+  Img,
+  FormWrapper,
+  LoginWrapper,
+} from '../styles'
+import choicePill from '../assets/choice.png'
 
 const Login = ({
   errors,
@@ -29,8 +38,7 @@ const Login = ({
     <SEO url="/login" title="Login" description="Login" />
     <Card login="true">
       <Item>
-        <Img src="https://res.cloudinary.com/dj8equdxc/image/upload/v1550419341/beaf/ola-mishchenko-600004-unsplash_1.jpg" />
-        <Img src="https://res.cloudinary.com/dj8equdxc/image/upload/v1550419339/beaf/charles-1334258-unsplash.jpg" />
+        <Img src={choicePill} alt="make a choice" />
       </Item>
       <Item>
         <FormWrapper>
@@ -56,6 +64,7 @@ const Login = ({
               />
               <ErrorMessage component={Error} name="password" />
             </InputField>
+            <Link to="/forgotten/password">Forgotten password?</Link>
             <InputField>
               <Field
                 component={Recaptcha}
@@ -78,12 +87,7 @@ const Login = ({
           <Center>
             <p>
               Don't have an account? no worries!{' '}
-              <Link
-                style={{ color: '#2B85FF', textDecoration: 'underline' }}
-                to="/register"
-              >
-                Create one
-              </Link>
+              <Link to="/register">Create one</Link>
             </p>
           </Center>
         </FormWrapper>

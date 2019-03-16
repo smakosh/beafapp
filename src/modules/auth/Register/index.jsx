@@ -111,13 +111,7 @@ const Register = ({
       </Form>
       <Center>
         <p>
-          Already registered?{' '}
-          <Link
-            style={{ color: '#2B85FF', textDecoration: 'underline' }}
-            to="/login"
-          >
-            Login
-          </Link>
+          Already a member? <Link to="/login">Login</Link>
         </p>
       </Center>
     </Card>

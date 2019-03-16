@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const HamburgerIcon = styled.div`
+export const Wrapper = styled.div`
   z-index: 5;
   top: 1.85rem;
   right: 1.8rem;
@@ -13,18 +13,31 @@ export const HamburgerIcon = styled.div`
     display: block;
   }
 
+  ${({ banner }) =>
+    banner &&
+    `
+		@media (max-width: 960px) {
+			top: 7.1rem;
+		}
+
+		@media (max-width: 680px) {
+			top: 8.1rem;
+		}
+	`}
+
   ${({ sidebar }) =>
     sidebar &&
     `
 		right: 18%;
-		top: 1.1rem;
 	
 		@media (max-width: 960px) {
 			right: 35%;
+			top: 1.1rem;
 		}
 	
 		@media (max-width: 600px) {
 			right: 66%;
+			top: 1.1rem;
 		}
 	`}
 `
