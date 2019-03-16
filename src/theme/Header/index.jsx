@@ -11,7 +11,7 @@ const Header = ({ sidebar, toggle, logout, auth, history }) => (
   <StyledHeader>
     <Overlay sidebar={sidebar} onClick={toggle} />
     <Navbar history={history} auth={auth} logout={logout} />
-    <Hamburger sidebar={sidebar} toggle={toggle} />
+    <Hamburger sidebar={sidebar} auth={auth} toggle={toggle} />
     <Sidebar
       history={history}
       auth={auth}

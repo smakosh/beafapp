@@ -1,11 +1,16 @@
 import styled from 'styled-components'
 
 export const LoginWrapper = styled.div`
-	padding: 4rem 0;
-	
-	@media (max-width: 960px) {
-		padding: 4rem 0;
-	}
+  padding: 4rem 0;
+
+  @media (max-width: 960px) {
+    padding: 4rem 0;
+  }
+
+  a {
+    color: #2b85ff;
+    text-decoration: underline;
+  }
 `
 
 export const Card = styled.div`
@@ -84,6 +89,11 @@ export const FormWrapper = styled.div`
 
 export const Center = styled.div`
   text-align: center;
+
+  a {
+    color: #2b85ff;
+    text-decoration: underline;
+  }
 `
 
 export const Wrapper = styled.div`
@@ -96,4 +106,13 @@ export const Show = styled.span`
   color: rgb(43, 133, 255);
   position: absolute;
   right: 0;
+`
+
+export const ImgWrapper = styled.div`
+  width: 200px;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+  }
 `

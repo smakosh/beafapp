@@ -12,6 +12,9 @@ import Header from './theme/Header'
 import { GlobalStyle } from './theme/global-styles'
 import Login from './modules/auth/Login'
 import Register from './modules/auth/Register'
+import ForgottenPassword from './modules/auth/ForgottenPassword'
+import ResetPassword from './modules/auth/ResetPassword'
+import VerifyEmail from './modules/auth/VerifyEmail'
 import Profile from './modules/profile/Profile'
 import PublicProfile from './modules/profile/PublicProfile'
 import EditProfile from './modules/profile/EditProfile'
@@ -24,7 +27,7 @@ import { NotFound } from './components/common'
 export const history = createHistory()
 
 try {
-  if (localStorage.jwtToken) {
+  if (localStorage.jwtToken && history.location.pathname !== '/email/confirm') {
     store.dispatch(verifyToken(localStorage.jwtToken))
   }
 } catch (e) {
@@ -45,6 +48,9 @@ const AppRoutes = () => (
             <Route path="/category/:category" component={Category} />
             <Public path="/login" component={Login} />
             <Public path="/register" component={Register} />
+            <Public path="/forgotten/password" component={ForgottenPassword} />
+            <Route path="/reset/password" component={ResetPassword} />
+            <Route path="/email/confirm" component={VerifyEmail} />
             <Private path="/profile" exact component={Profile} />
             <Private path="/profile/edit" exact component={EditProfile} />
             <Route path="/profile/:user_id" component={PublicProfile} />

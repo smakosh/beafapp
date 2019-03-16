@@ -1,12 +1,14 @@
 import React from 'react'
-import { HamburgerIcon, Bar } from './styles'
+import { Wrapper, Bar } from './styles'
 
-const Hamburger = ({ sidebar, toggle }) => (
-  <HamburgerIcon sidebar={sidebar} onClick={toggle}>
+export default ({ sidebar, toggle, auth }) => (
+  <Wrapper
+    sidebar={sidebar}
+    onClick={toggle}
+    banner={auth && auth.isLoggedIn && !auth.user.hasEmailVerified}
+  >
     <Bar top sidebar={sidebar} />
     <Bar mid sidebar={sidebar} />
     <Bar bottom sidebar={sidebar} />
-  </HamburgerIcon>
+  </Wrapper>
 )
-
-export default Hamburger
