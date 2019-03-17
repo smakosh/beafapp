@@ -2,17 +2,20 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../../../components/common'
 import NavbarLinks from '../NavbarLinks'
-import { Brand, Wrapper, Banner } from './styles'
+import { Brand, Wrapper, Banner, FlatBtn } from './styles'
 
-export default ({ logout, auth, history }) => (
+export default ({ logout, auth, history, resendEmail, banner }) => (
   <>
-    {auth && auth.isLoggedIn && !auth.user.hasEmailVerified && (
+    {banner && auth && auth.isLoggedIn && !auth.user.hasEmailVerified && (
       <Banner>
         <Container>
           <span>
             Please verify your email through the link we sent you via your inbox
             (you might want to check the spam folder)
           </span>
+          <FlatBtn type="button" onClick={resendEmail}>
+            Resend email
+          </FlatBtn>
         </Container>
       </Banner>
     )}

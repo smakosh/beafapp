@@ -34,5 +34,17 @@ export const Banner = styled.div`
 
   span {
     line-height: 1.6;
+    margin-right: 1rem;
   }
+`
+
+export const FlatBtn = styled.button`
+  background: #fff;
+  padding: 0.4rem 0.3rem;
+  color: black;
+  border-radius: 0.2rem;
+  border: none;
+  font-size: 12pt;
+  font-weight: 500;
+  cursor: pointer;
 `

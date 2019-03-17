@@ -2,12 +2,12 @@ import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
 import { ScrollContext } from 'react-router-scroll-4'
 import { Provider } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
 import createHistory from 'history/createBrowserHistory'
 import store from './store'
 import Private from './Routes/Private'
 import Public from './Routes/Public'
 import { verifyToken } from './modules/auth/actions'
-
 import Header from './theme/Header'
 import { GlobalStyle } from './theme/global-styles'
 import Login from './modules/auth/Login'
@@ -23,6 +23,7 @@ import Category from './modules/category/Category'
 import PostPage from './modules/post/PostPage'
 import AddPost from './modules/feed/AddPost'
 import { NotFound } from './components/common'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const history = createHistory()
 
@@ -43,6 +44,7 @@ const AppRoutes = () => (
         <>
           <GlobalStyle />
           <Header history={history} />
+          <ToastContainer />
           <Switch>
             <Route path="/" exact component={Feed} />
             <Route path="/category/:category" component={Category} />
