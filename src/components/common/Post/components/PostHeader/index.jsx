@@ -63,9 +63,8 @@ const enhance = compose(
         isVisible: true,
         state_post_id: post_id,
       }),
-      confirm: (_state, { deletePost }) => async (post_id, callback) => {
-        await deletePost(post_id)
-        callback()
+      confirm: (_state, { deletePost }) => (post_id, callback) => {
+        deletePost(post_id, callback)
       },
       showModal: ({ isVisible }) => () => ({
         isVisible: !isVisible,

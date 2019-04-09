@@ -2,7 +2,7 @@ import React from 'react'
 import Spinner from 'react-spinkit'
 import * as Yup from 'yup'
 import { Field, Form, withFormik, ErrorMessage } from 'formik'
-import { compose, withStateHandlers } from 'recompose'
+import { compose, withStateHandlers, withState } from 'recompose'
 import { connect } from 'react-redux'
 import Select from 'react-select'
 import Switch from 'react-switch'
@@ -24,6 +24,7 @@ import {
   CustomSwitch,
   MacroWrapper,
   Info,
+  ProgressBar,
 } from './styles'
 import UploadIcon from '../assets/upload.svg'
 import categories from './categories.json'
@@ -37,8 +38,10 @@ const AddPost = ({
   preview_2,
   setFieldValue,
   setFieldTouched,
+  progress,
 }) => (
   <Wrapper as={Container}>
+    <ProgressBar progress={progress > 0 && progress} />
     <Card>
       <Form>
         <Flex>
@@ -150,6 +153,8 @@ const enhance = compose(
     null,
     { addPost }
   ),
+  withState('progress', 'setProgress', 0),
+  withState('intervalId', 'setIntervalId', null),
   withStateHandlers(
     {
       img: '',
@@ -158,6 +163,25 @@ const enhance = compose(
       preview_2: '',
     },
     {
+      setIntervalId: () => value => ({ intervalID: value }),
+      startProgress: (
+        _state,
+        { progress, setProgress, setIntervalId }
+      ) => () => {
+        const aye = setInterval(() => {
+          if (progress > 100) {
+            return clearInterval(aye)
+          }
+          return setProgress(progress++)
+        }, 500)
+        setIntervalId(aye)
+      },
+      stopProgress: (_state, { intervalId }) => () => {
+        clearInterval(intervalId)
+        return {
+          progress: 100,
+        }
+      },
       uploadFileBefore: () => e => {
         const { files } = e.target
         const file = files[0]
@@ -219,9 +243,23 @@ const enhance = compose(
       }),
     handleSubmit: (
       values,
-      { props: { addPost, img, img_2 }, setErrors, setSubmitting, resetForm }
+      {
+        props: { addPost, img, img_2, startProgress, stopProgress },
+        setErrors,
+        setSubmitting,
+        resetForm,
+      }
     ) => {
-      addPost(img, img_2, values, setErrors, setSubmitting, resetForm)
+      startProgress()
+      addPost(
+        img,
+        img_2,
+        values,
+        setErrors,
+        setSubmitting,
+        resetForm,
+        stopProgress
+      )
     },
   })
 )

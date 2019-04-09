@@ -55,7 +55,7 @@ const enhance = compose(
     }
   ),
   lifecycle({
-    componentWillMount() {
+    componentDidMount() {
       const url = new URL(window.location.href)
       const token = url.searchParams.get('token')
 

@@ -87,7 +87,7 @@ const enhance = compose(
     }
   ),
   lifecycle({
-    componentWillMount() {
+    componentDidMount() {
       this.props.getPostById(this.props.match.params.post_id)
     },
     componentWillReceiveProps(nextProps) {

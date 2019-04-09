@@ -69,7 +69,7 @@ const enhance = compose(
     }
   ),
   lifecycle({
-    componentWillMount() {
+    componentDidMount() {
       this.props.getPostsByCategory(this.props.match.params.category)
     },
     componentWillReceiveProps(nextProps) {

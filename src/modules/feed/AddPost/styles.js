@@ -12,6 +12,21 @@ export const Center = styled.div`
   text-align: center;
 `
 
+export const ProgressBar = styled.div`
+  height: 10px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  background: #000;
+  width: 0%;
+  transition: 0.3s all;
+
+  ${({ progress }) =>
+    progress &&
+    `
+			width: ${progress}%;
+		`}
+`
+
 export const Card = styled.div`
   padding: 2rem;
   box-shadow: 3px 0px 20px 0 rgba(0, 0, 0, 0.1);

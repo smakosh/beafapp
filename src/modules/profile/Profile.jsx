@@ -85,7 +85,7 @@ const enhance = compose(
     }
   ),
   lifecycle({
-    componentWillMount() {
+    componentDidMount() {
       this.props.getMyPosts()
     },
   }),

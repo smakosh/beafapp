@@ -88,7 +88,7 @@ const enhance = compose(
   withState('loading', 'setLoading', true),
   withState('visible', 'showPassword', false),
   lifecycle({
-    componentWillMount() {
+    componentDidMount() {
       const url = new URL(window.location.href)
       const token = url.searchParams.get('token')
 

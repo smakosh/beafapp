@@ -1,5 +1,6 @@
 import axios from 'axios'
 import uuidv1 from 'uuid/v1'
+import moment from 'moment'
 import { history } from '../../App'
 import setAuthToken from '../../utils/setAuthToken'
 
@@ -40,9 +41,10 @@ export const getPostsByCategory = category => async dispatch => {
   }
 }
 
-export const deletePost = id => async dispatch => {
+export const deletePost = (id, callback) => async dispatch => {
   try {
     await axios.delete(`${REACT_APP_PROD_API}/api/post/${id}`)
+    callback()
     dispatch({ type: 'DELETE_POST', payload: { post_id: id } })
   } catch (err) {
     dispatch(failedToGetPosts(err.response.data.error))
@@ -81,7 +83,8 @@ export const addPost = (
   payload,
   setErrors,
   setSubmitting,
-  resetForm
+  resetForm,
+  stopProgress
 ) => async dispatch => {
   try {
     await dispatch({ type: 'LOADING_POSTS' })
@@ -136,10 +139,14 @@ export const addPost = (
       before_img,
       after_img,
     })
-    resetForm()
-    setSubmitting(false)
-    history.push('/')
+    stopProgress()
+    setTimeout(() => {
+      resetForm()
+      setSubmitting(false)
+      history.push('/')
+    }, 500)
   } catch (err) {
+    stopProgress()
     setSubmitting(false)
     if (err.response.data.error.message) {
       setErrors({
@@ -182,7 +189,7 @@ export const postNewComment = (
   setSubmitting
 ) => async dispatch => {
   try {
-    const today = new Date()
+    const today = moment().utc()
     const generatedID = uuidv1()
 
     await axios.post(`${REACT_APP_PROD_API}/api/post/comment/${id}`, {
