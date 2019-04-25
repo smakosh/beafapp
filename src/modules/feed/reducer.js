@@ -6,6 +6,12 @@ export default (state = { loading: false }, action) => {
         data: action.payload,
         loading: false,
       }
+    case 'GET_MORE_POSTS':
+      return {
+        ...state,
+        data: state.data.concat(action.payload),
+        loading: false,
+      }
     case 'FAILED_TO_GET_POSTS':
       return {
         ...state,
@@ -77,6 +83,7 @@ export default (state = { loading: false }, action) => {
       }
     case 'LOADING_POSTS':
       return {
+        ...state,
         loading: true,
       }
     default:

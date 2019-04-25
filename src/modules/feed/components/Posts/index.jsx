@@ -12,6 +12,7 @@ const Posts = ({
   deleteComment,
   deletePost,
   title,
+  loadMorePosts,
 }) => (
   <Wrapper>
     <Content>
@@ -31,6 +32,7 @@ const Posts = ({
           deletePost={deletePost}
         />
       ))}
+      <button onClick={() => loadMorePosts(2)}>Load more</button>
     </Content>
   </Wrapper>
 )

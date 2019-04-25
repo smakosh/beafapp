@@ -18,10 +18,26 @@ export const getPosts = () => async dispatch => {
     if (localStorage.jwtToken) {
       axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
     }
-    const res = await axios.post(`${REACT_APP_PROD_API}/api/post/all`)
-    dispatch({ type: 'GET_POSTS', payload: res.data })
+    const res = await axios.post(`${REACT_APP_PROD_API}/api/post/all/1`)
+    dispatch({ type: 'GET_POSTS', payload: res.data.posts })
   } catch (err) {
     dispatch(failedToGetPosts(err.response.data.error))
+  }
+}
+
+export const loadMorePosts = page => async dispatch => {
+  try {
+    dispatch({ type: 'LOADING_POSTS' })
+
+    if (localStorage.jwtToken) {
+      axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
+    }
+    const res = await axios.post(`${REACT_APP_PROD_API}/api/post/all/${page}`)
+    dispatch({ type: 'GET_MORE_POSTS', payload: res.data.posts })
+  } catch (err) {
+    if (err.response && err.response.data) {
+      dispatch(failedToGetPosts(err.response.data.error))
+    }
   }
 }
 
