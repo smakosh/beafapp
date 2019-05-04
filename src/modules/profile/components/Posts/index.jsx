@@ -1,11 +1,22 @@
 import React from 'react'
-import { Post } from '../../../../components/common'
+import InfiniteScroll from 'react-infinite-scroller'
+import { Post, Loading } from '../../../../components/common'
 import { Wrapper, Flex } from './styles'
 
-const Posts = ({ posts, isLoggedIn, user }) => (
+const Posts = ({ posts, isLoggedIn, user, getPosts, page, pages }) => (
   <Wrapper>
     <h2>Posts</h2>
-    <Flex>
+    <Flex
+      as={InfiniteScroll}
+      pageStart={1}
+      loadMore={getPosts}
+      hasMore={page < pages}
+      loader={
+        <div key="loader" style={{ textAlign: 'center', width: '100%' }}>
+          <Loading />
+        </div>
+      }
+    >
       {posts.map(post => (
         <Post
           flex

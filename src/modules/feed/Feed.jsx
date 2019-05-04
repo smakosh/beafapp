@@ -16,12 +16,13 @@ import { Wrapper } from './styles'
 
 const Feed = ({
   auth,
-  posts: { data },
+  posts: { data, page, pages },
   voteBefore,
   voteAfter,
   postNewComment,
   deleteComment,
   deletePost,
+  getPosts,
 }) => (
   <Wrapper as={Container}>
     <SEO url="/" title="Feed" description="Feed" />
@@ -36,6 +37,9 @@ const Feed = ({
         postNewComment={postNewComment}
         deleteComment={deleteComment}
         deletePost={deletePost}
+        page={page}
+        pages={pages}
+        getPosts={() => getPosts(page + 1)}
       />
     ) : (
       <Empty follow />

@@ -19,12 +19,13 @@ const Category = ({
     params: { category },
   },
   auth,
-  posts: { data },
+  posts: { data, page, pages },
   voteBefore,
   voteAfter,
   postNewComment,
   deleteComment,
   deletePost,
+  getPostsByCategory,
 }) => (
   <Wrapper as={Container}>
     <SEO
@@ -43,6 +44,9 @@ const Category = ({
         postNewComment={postNewComment}
         deleteComment={deleteComment}
         deletePost={deletePost}
+        getPosts={() => getPostsByCategory(category, page + 1)}
+        page={page}
+        pages={pages}
       />
     ) : (
       <Empty />

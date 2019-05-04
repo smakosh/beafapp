@@ -21,12 +21,13 @@ import Posts from './components/Posts'
 
 const Profile = ({
   auth,
-  posts: { data },
+  posts: { data, page, pages },
   voteBefore,
   voteAfter,
   deleteComment,
   postNewComment,
   deletePost,
+  getMyPosts,
 }) => (
   <StyledContainer as={Container}>
     <SEO
@@ -59,6 +60,9 @@ const Profile = ({
           postNewComment={postNewComment}
           deleteComment={deleteComment}
           deletePost={deletePost}
+          page={page}
+          pages={pages}
+          getPosts={() => getMyPosts(page + 1)}
         />
       ) : (
         <Empty profile="true" />

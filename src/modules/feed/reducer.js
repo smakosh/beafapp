@@ -1,9 +1,13 @@
-export default (state = { loading: false }, action) => {
+export default (state = { loading: false, data: [] }, action) => {
   switch (action.type) {
     case 'GET_POSTS':
       return {
-        ...state,
-        data: action.payload,
+        data:
+          action.page === 1
+            ? action.payload
+            : state.data.concat(action.payload),
+        page: action.page,
+        pages: action.pages,
         loading: false,
       }
     case 'FAILED_TO_GET_POSTS':
@@ -77,6 +81,7 @@ export default (state = { loading: false }, action) => {
       }
     case 'LOADING_POSTS':
       return {
+        ...state,
         loading: true,
       }
     default:

@@ -24,7 +24,7 @@ import Posts from './components/Posts'
 const PublicProfile = ({
   profile: { profile },
   auth: { user, isLoggedIn },
-  posts: { data },
+  posts: { data, page, pages },
   voteBefore,
   voteAfter,
   deleteComment,
@@ -32,6 +32,7 @@ const PublicProfile = ({
   deletePost,
   unFollowUser,
   followUser,
+  getPostsByUserId,
 }) => (
   <StyledContainer as={Container}>
     <SEO
@@ -69,6 +70,9 @@ const PublicProfile = ({
           postNewComment={postNewComment}
           deleteComment={deleteComment}
           deletePost={deletePost}
+          page={page}
+          pages={pages}
+          getPosts={() => getPostsByUserId(profile._id, page + 1)}
         />
       ) : (
         <Empty
