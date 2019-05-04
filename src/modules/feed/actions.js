@@ -61,18 +61,25 @@ export const deletePost = (id, callback) => async dispatch => {
   }
 }
 
-export const getMyPosts = () => async dispatch => {
+export const getMyPosts = (page = 1) => async dispatch => {
   try {
     await dispatch({ type: 'LOADING_POSTS' })
 
-    const res = await axios.post(`${REACT_APP_PROD_API}/api/post/personal`)
-    dispatch({ type: 'GET_POSTS', payload: res.data })
+    const res = await axios.post(
+      `${REACT_APP_PROD_API}/api/post/personal/${page}`
+    )
+    dispatch({
+      type: 'GET_POSTS',
+      payload: res.data.posts,
+      pages: res.data.pages,
+      page: parseInt(res.data.page, 10),
+    })
   } catch (err) {
     dispatch(failedToGetPosts(err.response.data.error))
   }
 }
 
-export const getPostsByUserId = id => async dispatch => {
+export const getPostsByUserId = (id, page = 1) => async dispatch => {
   try {
     await dispatch({ type: 'LOADING_POSTS' })
 
@@ -80,8 +87,15 @@ export const getPostsByUserId = id => async dispatch => {
       axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
     }
 
-    const res = await axios.post(`${REACT_APP_PROD_API}/api/post/user/${id}`)
-    dispatch({ type: 'GET_POSTS', payload: res.data })
+    const res = await axios.post(
+      `${REACT_APP_PROD_API}/api/post/user/${id}/${page}`
+    )
+    dispatch({
+      type: 'GET_POSTS',
+      payload: res.data.posts,
+      pages: res.data.pages,
+      page: parseInt(res.data.page, 10),
+    })
   } catch (err) {
     dispatch(failedToGetPosts(err.response.data.error))
   }
@@ -176,7 +190,6 @@ export const voteBefore = (id, user_id) => async dispatch => {
     await axios.patch(`${REACT_APP_PROD_API}/api/post/vote/before/${id}`)
     await dispatch({ type: 'BEFORE_VOTE', payload: { post_id: id, user_id } })
   } catch (err) {
-    console.log(err)
     dispatch(failedToGetPosts(err.response.data.error))
   }
 }
