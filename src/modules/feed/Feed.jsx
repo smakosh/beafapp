@@ -3,7 +3,6 @@ import { compose, branch, renderComponent, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
 import {
   getPosts,
-  loadMorePosts,
   voteBefore,
   voteAfter,
   postNewComment,
@@ -17,13 +16,13 @@ import { Wrapper } from './styles'
 
 const Feed = ({
   auth,
-  posts: { data },
+  posts: { data, page, pages },
   voteBefore,
   voteAfter,
   postNewComment,
   deleteComment,
   deletePost,
-  loadMorePosts,
+  getPosts,
 }) => (
   <Wrapper as={Container}>
     <SEO url="/" title="Feed" description="Feed" />
@@ -38,7 +37,9 @@ const Feed = ({
         postNewComment={postNewComment}
         deleteComment={deleteComment}
         deletePost={deletePost}
-        loadMorePosts={loadMorePosts}
+        page={page}
+        pages={pages}
+        getPosts={() => getPosts(page + 1)}
       />
     ) : (
       <Empty follow />
@@ -57,7 +58,6 @@ const enhance = compose(
     mapStateToProps,
     {
       getPosts,
-      loadMorePosts,
       voteBefore,
       voteAfter,
       postNewComment,

@@ -11,21 +11,7 @@ const failedToGetPosts = error => ({
   payload: error,
 })
 
-export const getPosts = () => async dispatch => {
-  try {
-    dispatch({ type: 'LOADING_POSTS' })
-
-    if (localStorage.jwtToken) {
-      axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
-    }
-    const res = await axios.post(`${REACT_APP_PROD_API}/api/post/all/1`)
-    dispatch({ type: 'GET_POSTS', payload: res.data.posts })
-  } catch (err) {
-    dispatch(failedToGetPosts(err.response.data.error))
-  }
-}
-
-export const loadMorePosts = page => async dispatch => {
+export const getPosts = (page = 1) => async dispatch => {
   try {
     dispatch({ type: 'LOADING_POSTS' })
 
@@ -33,15 +19,18 @@ export const loadMorePosts = page => async dispatch => {
       axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
     }
     const res = await axios.post(`${REACT_APP_PROD_API}/api/post/all/${page}`)
-    dispatch({ type: 'GET_MORE_POSTS', payload: res.data.posts })
+    dispatch({
+      type: 'GET_POSTS',
+      payload: res.data.posts,
+      pages: res.data.pages,
+      page: parseInt(res.data.page, 10),
+    })
   } catch (err) {
-    if (err.response && err.response.data) {
-      dispatch(failedToGetPosts(err.response.data.error))
-    }
+    dispatch(failedToGetPosts(err.response.data.error))
   }
 }
 
-export const getPostsByCategory = category => async dispatch => {
+export const getPostsByCategory = (category, page = 1) => async dispatch => {
   try {
     dispatch({ type: 'LOADING_POSTS' })
 
@@ -49,9 +38,14 @@ export const getPostsByCategory = category => async dispatch => {
       axios.defaults.headers.common['x-auth'] = localStorage.jwtToken
     }
     const res = await axios.post(
-      `${REACT_APP_PROD_API}/api/post/category/${category}`
+      `${REACT_APP_PROD_API}/api/post/category/${category}/${page}`
     )
-    dispatch({ type: 'GET_POSTS', payload: res.data })
+    dispatch({
+      type: 'GET_POSTS',
+      payload: res.data.posts,
+      pages: res.data.pages,
+      page: parseInt(res.data.page, 10),
+    })
   } catch (err) {
     dispatch(failedToGetPosts(err.response.data.error))
   }
@@ -160,7 +154,7 @@ export const addPost = (
       resetForm()
       setSubmitting(false)
       history.push('/')
-    }, 500)
+    }, 1000)
   } catch (err) {
     stopProgress()
     setSubmitting(false)

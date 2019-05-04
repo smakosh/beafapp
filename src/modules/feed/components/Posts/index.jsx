@@ -1,5 +1,6 @@
 import React from 'react'
-import { Post } from '../../../../components/common'
+import InfiniteScroll from 'react-infinite-scroller'
+import { Post, Loading } from '../../../../components/common'
 import { Wrapper, Content } from './styles'
 
 const Posts = ({
@@ -12,27 +13,35 @@ const Posts = ({
   deleteComment,
   deletePost,
   title,
-  loadMorePosts,
+  getPosts,
+  page,
+  pages,
 }) => (
   <Wrapper>
     <Content>
       <h2>{title}</h2>
-      {posts.map(post => (
-        <Post
-          {...post}
-          key={post._id}
-          unbiased={post.unbiased}
-          userId={user && user._id}
-          userName={user && user.username}
-          isLoggedIn={isLoggedIn}
-          voteBefore={voteBefore}
-          voteAfter={voteAfter}
-          postNewComment={postNewComment}
-          deleteComment={deleteComment}
-          deletePost={deletePost}
-        />
-      ))}
-      <button onClick={() => loadMorePosts(2)}>Load more</button>
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={getPosts}
+        hasMore={page < pages}
+        loader={<Loading key="loader" />}
+      >
+        {posts.map(post => (
+          <Post
+            {...post}
+            key={post._id}
+            unbiased={post.unbiased}
+            userId={user && user._id}
+            userName={user && user.username}
+            isLoggedIn={isLoggedIn}
+            voteBefore={voteBefore}
+            voteAfter={voteAfter}
+            postNewComment={postNewComment}
+            deleteComment={deleteComment}
+            deletePost={deletePost}
+          />
+        ))}
+      </InfiniteScroll>
     </Content>
   </Wrapper>
 )
