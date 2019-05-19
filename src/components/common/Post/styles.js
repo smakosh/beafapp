@@ -18,3 +18,16 @@ export const Wrapper = styled.div`
     }
   `}
 `
+
+export const UnbiasedBadge = styled.div`
+  max-width: 100%;
+  padding: 0.6rem 1rem;
+  box-sizing: border-box;
+`
+
+export const Badge = styled.span`
+  background: rgb(24, 23, 71);
+  padding: 0.3rem 1rem;
+  border-radius: 40px;
+  color: #fff;
+`
