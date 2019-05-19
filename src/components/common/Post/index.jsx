@@ -1,5 +1,5 @@
 import React from 'react'
-import { Wrapper } from './styles'
+import { Wrapper, UnbiasedBadge, Badge } from './styles'
 import { Pictures, Content, Vote, AddComment } from './components'
 import Comments from './components/Comments'
 import PostHeader from './components/PostHeader'
@@ -38,6 +38,11 @@ export const Post = ({
       _creator_username={_creator_username}
       deletePost={deletePost}
     />
+    {unbiased && (
+      <UnbiasedBadge>
+        <Badge>Unbiased</Badge>
+      </UnbiasedBadge>
+    )}
     <Pictures before_img={before_img} after_img={after_img} title={title} />
     <Content title={title} description={description} />
     {!profile && (
